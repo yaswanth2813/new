@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yash</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { background-color: #f0f4f8; }
+    .card {
+      transition: transform 0.3s, box-shadow 0.3s;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+    .poster-img {
+      width: 100%;
+      height: 220px;  /* fixed height for all cards */
+      object-fit: cover;  /* cover entire area */
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      display: block;
+    }
+    .card-body {
+      padding: 20px;
+      flex-grow: 1;
+    }
+    footer {
+      background: linear-gradient(to right, #4a90e2, #50e3c2);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <div class="container">
+      <a class="navbar-brand fs-4" href="#">Yash</a>
+    </div>
+  </nav>
+  <div class="container py-4">
+    <div class="row g-3" id="posts-container">
+      <!-- Posts will be added here in responsive columns -->
+    </div>
+  </div>
+  <footer>
+    <div class="container">
+      <p class="mb-0">© 2025 My Movies. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    const posts = [
+      {
+        id: 0,
+        heading: "WAR 2",
+        poster: "https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXZjWud3MeZb-ldWZXJNIQ2rkeQ46TVdeCPX1MDGOdr1Wj1S-uti4_DwLnKLrcImrAV6VQBcymRD5PFt-7EqbQ9hAA_46Pp37dSb.jpg?r=4fd",
+        videoUrl: "https://www.youtube.com/embed/2Vv-BfVoq4g"
+      },
+      {
+        id: 1,
+        heading: "Mahavatar Narsimha",
+        poster: "https://m.media-amazon.com/images/M/MV5BM2RlOGE0YjAtZTRkYy00ZmM1LWJlM2QtNjQ5OWViZDM4OWZhXkEyXkFqcGc@._V1_FMjpg_UY3000_.jpg",
+        videoUrl: "https://cdn.telugudub.store/Mahavatar_Narsimha_(2025)_Telugu_HQ_HD_1080p.mkv"
+      },
+      {
+        id: 2,
+        heading: "Mirai",
+        poster: "https://assets-in.bmscdn.com/discovery-catalog/events/et00395402-tjxxemhclp-landscape.jpg",
+        videoUrl: "https://www.youtube.com/embed/o_O2e7kz1dU"
+      },
+      {
+        id:3,
+        heading:"Sammathame",
+        poster:"https://imgs.search.brave.com/Kjtli14ASachTNLwVkTyV3lgGkcKluzwcySX5Y7gptU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuZWVuYWR1Lm5l/dC9hcnRpY2xlX2lt/Zy8wNzA3MjItc2Ft/bWF0aGFtZS1JTi5q/cGc",
+        videoUrl:"https://cdn.telugudub.store/Sammathame_(2025)_Telugu_1080p.mkv"
+      }
+    ];
+
+    const container = document.getElementById("posts-container");
+
+    // Optional: Sort posts descending by id to show latest first
+    posts.sort((a, b) => b.id - a.id);
+
+    posts.forEach(post => {
+      const col = document.createElement("div");
+      col.className = "col-6 col-md-4 col-lg-3 d-flex"; 
+      /* col-6: 2 per row on mobile
+         col-md-4: 3 per row on tablets
+         col-lg-3: 4 per row on desktops */
+      const card = document.createElement("div");
+      card.className = "card shadow-sm";
+      card.innerHTML = `
+        <img src="${post.poster}" class="poster-img" alt="Poster" />
+        <div class="card-body">
+          <h5 class="card-title">${post.heading}</h5>
+        </div>`;
+      card.onclick = () => { window.open(`post.html?id=${post.id}`, "_blank"); };
+      col.appendChild(card);
+      container.appendChild(col);
+    });
+  </script>
+</body>
+</html>
