@@ -1,91 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yash - Admin Control</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <style>
-    body { background-color: #f0f4f8; }
-    .card {
-      transition: transform 0.3s, box-shadow 0.3s;
-      border-radius: 16px;
-      overflow: hidden;
-      cursor: pointer;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-    .card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-    }
-    .poster-img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
-      display: block;
-    }
-    .card-body { padding: 5px; flex-grow: 4; }
-    footer {
-      background: linear-gradient(to right, #4a90e2, #50e3c2);
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      margin-top: 50px;
-    }
-    .admin-controls {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      display: flex;
-      gap: 5px;
-    }
-  </style>
-</head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-    <div class="container d-flex justify-content-between align-items-center">
-      <a class="navbar-brand fs-4" href="#">Yash</a>
-      <div>
-        <a href="addpost.html" target="_blank" class="btn btn-sm btn-outline-primary me-2" id="addPostBtn" style="display:none;">Add New Post</a>
-        <button class="btn btn-sm btn-outline-success me-2" id="adminLoginBtn">Admin Login</button>
-        <button class="btn btn-sm btn-outline-danger" id="adminLogoutBtn" style="display:none;">Logout</button>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container py-4">
-    <input
-      type="text"
-      id="searchInput"
-      class="form-control mb-3"
-      placeholder="Search by heading..."
-    />
-    <div class="row g-3" id="posts-container"></div>
-  </div>
-
-  <footer>
-    <div class="container">
-      <p class="mb-0">© 2025 My Movies. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script>
+<script>
     const ADMIN_PASSWORD = "yash@999";
+    const POSTS_JSON_URL = "posts.json"; // URL to the centralized post list
     const addPostBtn = document.getElementById("addPostBtn");
     const adminLoginBtn = document.getElementById("adminLoginBtn");
     const adminLogoutBtn = document.getElementById("adminLogoutBtn");
     const searchInput = document.getElementById("searchInput");
     const container = document.getElementById("posts-container");
 
-    const defaultPosts = [
-      // FIX APPLIED HERE: These posts must be defined in index.html to be displayed.
-      
-    ];
+    let allPosts = []; // Global variable to store all loaded posts
 
     function isAdmin() {
       return localStorage.getItem("isAdmin") === "true";
@@ -121,9 +43,29 @@
       updateAdminUI();
     };
 
-    function loadPosts() {
-      const customPosts = JSON.parse(localStorage.getItem("customPosts") || "[]");
-      return [...customPosts, ...defaultPosts];
+    async function loadPosts() {
+      try {
+        // Fetch posts from the centralized JSON file
+        const response = await fetch(POSTS_JSON_URL);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const jsonPosts = await response.json();
+        
+        // Load custom posts from local storage (for posts added since last JSON update)
+        const customPosts = JSON.parse(localStorage.getItem("customPosts") || "[]");
+        
+        // Combine them, ensuring custom posts (newer) appear before the JSON posts
+        allPosts = [...customPosts, ...jsonPosts.filter(p => !customPosts.some(cp => cp.id === p.id))];
+        
+        return allPosts;
+
+      } catch (error) {
+        console.error("Could not fetch or parse JSON posts:", error);
+        // Fallback: If JSON fails, only load posts from local storage
+        allPosts = JSON.parse(localStorage.getItem("customPosts") || "[]");
+        return allPosts;
+      }
     }
 
     function renderPosts(list) {
@@ -143,13 +85,16 @@
         const card = document.createElement("div");
         card.className = "card shadow-sm";
 
+        // Check if the post is a 'custom post' to display admin controls
+        const isCustomPost = customPosts.some((p) => p.id === post.id);
+
         card.innerHTML = `
           <img src="${post.poster}" class="poster-img" alt="Poster" />
           <div class="card-body">
             <h5 class="card-title">${post.heading}</h5>
           </div>
           ${
-            admin && customPosts.some((p) => p.id === post.id)
+            admin && isCustomPost
               ? `<div class="admin-controls">
               <button class="btn btn-sm btn-outline-warning btn-edit" title="Edit">✏️</button>
               <button class="btn btn-sm btn-outline-danger btn-delete" title="Delete">🗑️</button>
@@ -167,7 +112,7 @@
         col.appendChild(card);
         container.appendChild(col);
 
-        if (admin && customPosts.some((p) => p.id === post.id)) {
+        if (admin && isCustomPost) {
           const editBtn = card.querySelector(".btn-edit");
           const deleteBtn = card.querySelector(".btn-delete");
 
@@ -185,9 +130,10 @@
     }
 
     function editPost(id) {
-      const customPosts = JSON.parse(localStorage.getItem("customPosts") || "[]");
+      // Find post in local storage
+      let customPosts = JSON.parse(localStorage.getItem("customPosts") || "[]");
       const post = customPosts.find((p) => p.id === id);
-      if (!post) return alert("Post not found or cannot edit default posts.");
+      if (!post) return alert("Cannot edit this post. It might be from the central JSON.");
 
       const newHeading = prompt("Edit heading:", post.heading);
       if (newHeading === null) return;
@@ -211,7 +157,7 @@
       if (!confirm("Are you sure you want to delete this post?")) return;
       let customPosts = JSON.parse(localStorage.getItem("customPosts") || "[]");
       const index = customPosts.findIndex((p) => p.id === id);
-      if (index === -1) return alert("Cannot delete this post.");
+      if (index === -1) return alert("Cannot delete this post. It might be from the central JSON.");
 
       customPosts.splice(index, 1);
       localStorage.setItem("customPosts", JSON.stringify(customPosts));
@@ -219,13 +165,15 @@
       alert("Post deleted.");
     }
 
-    function filterPosts() {
+    async function filterPosts() {
+      await loadPosts(); // Ensure posts are loaded before filtering
       const query = searchInput.value.toLowerCase();
-      let posts = loadPosts();
-      const filtered = posts.filter((p) => p.heading.toLowerCase().includes(query));
+      const filtered = allPosts.filter((p) => p.heading.toLowerCase().includes(query));
       filtered.sort((a, b) => b.id - a.id);
       renderPosts(filtered);
     }
+
+    searchInput.oninput = filterPosts;
 
     window.addEventListener("storage", (event) => {
       if (event.key === "customPosts") {
@@ -234,6 +182,5 @@
     });
 
     updateAdminUI();
+    filterPosts(); // Initial load
   </script>
-</body>
-</html>
