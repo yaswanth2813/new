@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yash</title>
+  <title>Yash - Admin Control</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     body { background-color: #f0f4f8; }
@@ -15,6 +15,7 @@
       height: 100%;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
     .card:hover {
       transform: translateY(-8px) scale(1.02);
@@ -22,16 +23,13 @@
     }
     .poster-img {
       width: 100%;
-      height:200px ;  /* fixed height for all cards */
-      object-fit:cover;  /* cover entire area */
+      height: 200px;
+      object-fit: cover;
       border-top-left-radius: 16px;
       border-top-right-radius: 16px;
       display: block;
     }
-    .card-body {
-      padding: 5px;
-      flex-grow: 4;
-    }
+    .card-body { padding: 5px; flex-grow: 4; }
     footer {
       background: linear-gradient(to right, #4a90e2, #50e3c2);
       color: #fff;
@@ -39,80 +37,203 @@
       padding: 20px;
       margin-top: 50px;
     }
+    .admin-controls {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      display: flex;
+      gap: 5px;
+    }
   </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-    <div class="container">
+    <div class="container d-flex justify-content-between align-items-center">
       <a class="navbar-brand fs-4" href="#">Yash</a>
+      <div>
+        <a href="addpost.html" target="_blank" class="btn btn-sm btn-outline-primary me-2" id="addPostBtn" style="display:none;">Add New Post</a>
+        <button class="btn btn-sm btn-outline-success me-2" id="adminLoginBtn">Admin Login</button>
+        <button class="btn btn-sm btn-outline-danger" id="adminLogoutBtn" style="display:none;">Logout</button>
+      </div>
     </div>
   </nav>
+
   <div class="container py-4">
-    <div class="row g-3" id="posts-container">
-      <!-- Posts will be added here in responsive columns -->
-    </div>
+    <input
+      type="text"
+      id="searchInput"
+      class="form-control mb-3"
+      placeholder="Search by heading..."
+    />
+    <div class="row g-3" id="posts-container"></div>
   </div>
+
   <footer>
     <div class="container">
       <p class="mb-0">© 2025 My Movies. All rights reserved.</p>
     </div>
   </footer>
-  <script>
-    const posts = [
-      {
-        id: 0,
-        heading: "WAR 2",
-        poster: "https://occ-0-8407-90.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXZjWud3MeZb-ldWZXJNIQ2rkeQ46TVdeCPX1MDGOdr1Wj1S-uti4_DwLnKLrcImrAV6VQBcymRD5PFt-7EqbQ9hAA_46Pp37dSb.jpg?r=4fd",
-        videoUrl: "https://www.youtube.com/embed/2Vv-BfVoq4g"
-      },
-      {
-        id: 1,
-        heading: "Mahavatar Narsimha",
-        poster: "https://m.media-amazon.com/images/M/MV5BM2RlOGE0YjAtZTRkYy00ZmM1LWJlM2QtNjQ5OWViZDM4OWZhXkEyXkFqcGc@._V1_FMjpg_UY3000_.jpg",
-        videoUrl: "https://cdn.telugudub.store/Mahavatar_Narsimha_(2025)_Telugu_HQ_HD_1080p.mkv"
-      },
-      {
-        id: 2,
-        heading: "Mirai",
-        poster: "https://assets-in.bmscdn.com/discovery-catalog/events/et00395402-tjxxemhclp-landscape.jpg",
-        videoUrl: "https://www.youtube.com/embed/o_O2e7kz1dU"
-      },
-      {
-        id:3,
-        heading:"Sammathame",
-        poster:"https://imgs.search.brave.com/Kjtli14ASachTNLwVkTyV3lgGkcKluzwcySX5Y7gptU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuZWVuYWR1Lm5l/dC9hcnRpY2xlX2lt/Zy8wNzA3MjItc2Ft/bWF0aGFtZS1JTi5q/cGc",
-        videoUrl:"https://cdn.telugudub.store/Sammathame_(2025)_Telugu_1080p.mkv"
-      },
-      {
-        id:4,
-        heading:"SR Kalyanamandapam",
-        poster:"https://i.ytimg.com/vi/dMZiJPXVF_0/maxresdefault.jpg",
-        videoUrl:"https://cdn.telugudub.store/SR_Kalyanamandapam_(2021)_1080p.mkv"
-      }
-    ];
 
+  <script>
+    const ADMIN_PASSWORD = "yash@999";
+    const addPostBtn = document.getElementById("addPostBtn");
+    const adminLoginBtn = document.getElementById("adminLoginBtn");
+    const adminLogoutBtn = document.getElementById("adminLogoutBtn");
+    const searchInput = document.getElementById("searchInput");
     const container = document.getElementById("posts-container");
 
-    // Optional: Sort posts descending by id to show latest first
-    posts.sort((a, b) => b.id - a.id);
+    const defaultPosts = [
+      // FIX APPLIED HERE: These posts must be defined in index.html to be displayed.
+      
+    ];
 
-    posts.forEach(post => {
-      const col = document.createElement("div");
-      col.className = "col-6 col-md-4 col-lg-3 d-flex"; 
-      /* col-6: 2 per row on mobile
-         col-md-4: 3 per row on tablets
-         col-lg-3: 4 per row on desktops */
-      const card = document.createElement("div");
-      card.className = "card shadow-sm";
-      card.innerHTML = `
-        <img src="${post.poster}" class="poster-img" alt="Poster" />
-        <div class="card-body">
-          <h5 class="card-title">${post.heading}</h5>
-        </div>`;
-      card.onclick = () => { window.open(`post.html?id=${post.id}`, "_blank"); };
-      col.appendChild(card);
-      container.appendChild(col);
+    function isAdmin() {
+      return localStorage.getItem("isAdmin") === "true";
+    }
+
+    function updateAdminUI() {
+      if (isAdmin()) {
+        addPostBtn.style.display = "inline-block";
+        adminLoginBtn.style.display = "none";
+        adminLogoutBtn.style.display = "inline-block";
+      } else {
+        addPostBtn.style.display = "none";
+        adminLoginBtn.style.display = "inline-block";
+        adminLogoutBtn.style.display = "none";
+      }
+      filterPosts();
+    }
+
+    adminLoginBtn.onclick = () => {
+      const input = prompt("Enter admin password:");
+      if (input === ADMIN_PASSWORD) {
+        localStorage.setItem("isAdmin", "true");
+        alert("Admin mode enabled.");
+        updateAdminUI();
+      } else if (input !== null) {
+        alert("Incorrect password.");
+      }
+    };
+
+    adminLogoutBtn.onclick = () => {
+      localStorage.removeItem("isAdmin");
+      alert("Logged out from admin mode.");
+      updateAdminUI();
+    };
+
+    function loadPosts() {
+      const customPosts = JSON.parse(localStorage.getItem("customPosts") || "[]");
+      return [...customPosts, ...defaultPosts];
+    }
+
+    function renderPosts(list) {
+      container.innerHTML = "";
+      if (list.length === 0) {
+        container.innerHTML = "<p class='text-center text-muted'>No posts found.</p>";
+        return;
+      }
+
+      const admin = isAdmin();
+      const customPosts = JSON.parse(localStorage.getItem("customPosts") || "[]");
+
+      list.forEach((post) => {
+        const col = document.createElement("div");
+        col.className = "col-6 col-md-4 col-lg-3 d-flex";
+
+        const card = document.createElement("div");
+        card.className = "card shadow-sm";
+
+        card.innerHTML = `
+          <img src="${post.poster}" class="poster-img" alt="Poster" />
+          <div class="card-body">
+            <h5 class="card-title">${post.heading}</h5>
+          </div>
+          ${
+            admin && customPosts.some((p) => p.id === post.id)
+              ? `<div class="admin-controls">
+              <button class="btn btn-sm btn-outline-warning btn-edit" title="Edit">✏️</button>
+              <button class="btn btn-sm btn-outline-danger btn-delete" title="Delete">🗑️</button>
+            </div>`
+              : ``
+          }
+        `;
+
+        card.onclick = (e) => {
+          if (!e.target.classList.contains("btn-edit") && !e.target.classList.contains("btn-delete")) {
+            window.open(`post.html?id=${post.id}`, "_blank");
+          }
+        };
+
+        col.appendChild(card);
+        container.appendChild(col);
+
+        if (admin && customPosts.some((p) => p.id === post.id)) {
+          const editBtn = card.querySelector(".btn-edit");
+          const deleteBtn = card.querySelector(".btn-delete");
+
+          editBtn.onclick = (e) => {
+            e.stopPropagation();
+            editPost(post.id);
+          };
+
+          deleteBtn.onclick = (e) => {
+            e.stopPropagation();
+            deletePost(post.id);
+          };
+        }
+      });
+    }
+
+    function editPost(id) {
+      const customPosts = JSON.parse(localStorage.getItem("customPosts") || "[]");
+      const post = customPosts.find((p) => p.id === id);
+      if (!post) return alert("Post not found or cannot edit default posts.");
+
+      const newHeading = prompt("Edit heading:", post.heading);
+      if (newHeading === null) return;
+
+      const newPoster = prompt("Edit poster URL:", post.poster);
+      if (newPoster === null) return;
+
+      const newVideoUrl = prompt("Edit video URL:", post.videoUrl);
+      if (newVideoUrl === null) return;
+
+      post.heading = newHeading.trim() || post.heading;
+      post.poster = newPoster.trim() || post.poster;
+      post.videoUrl = newVideoUrl.trim() || post.videoUrl;
+
+      localStorage.setItem("customPosts", JSON.stringify(customPosts));
+      updateAdminUI();
+      alert("Post updated.");
+    }
+
+    function deletePost(id) {
+      if (!confirm("Are you sure you want to delete this post?")) return;
+      let customPosts = JSON.parse(localStorage.getItem("customPosts") || "[]");
+      const index = customPosts.findIndex((p) => p.id === id);
+      if (index === -1) return alert("Cannot delete this post.");
+
+      customPosts.splice(index, 1);
+      localStorage.setItem("customPosts", JSON.stringify(customPosts));
+      updateAdminUI();
+      alert("Post deleted.");
+    }
+
+    function filterPosts() {
+      const query = searchInput.value.toLowerCase();
+      let posts = loadPosts();
+      const filtered = posts.filter((p) => p.heading.toLowerCase().includes(query));
+      filtered.sort((a, b) => b.id - a.id);
+      renderPosts(filtered);
+    }
+
+    window.addEventListener("storage", (event) => {
+      if (event.key === "customPosts") {
+        filterPosts();
+      }
     });
+
+    updateAdminUI();
   </script>
 </body>
 </html>
