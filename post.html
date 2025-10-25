@@ -3,109 +3,156 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Video Post Details</title>
+  <title>Movie Details</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css" />
-
   <style>
     body { background-color: #f0f4f8; }
-    .poster-img {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-    .embed-responsive {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
-    .embed-responsive video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      border-radius: 10px;
-    }
-    .container {
-      max-width: 750px;
-      margin-top: 30px;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    .container { margin-top: 30px; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .poster-img { width: 100%; max-width: 300px; border-radius: 10px; }
+    .video-container { width: 100%; max-width: 800px; margin-bottom: 20px; }
+    video { width: 100%; border-radius: 10px; }
+    .info-section { margin-top: 20px; }
+    .info-section p { margin-bottom: 10px; }
+    @media(min-width: 768px) { 
+      .content-flex { display: flex; gap: 20px; }
+      .video-container { flex: 1; }
+      .info-section { flex: 1; }
     }
   </style>
 </head>
 <body>
-  <div class="container" id="post-details"></div>
+  <div class="container">
+    <div id="movie-container">
+      <div class="text-center">
+        <p>Loading movie details...</p>
+      </div>
+    </div>
+  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.min.js"></script>
+  <footer class="text-center mt-4 mb-3 text-muted">Data provided by YASH</footer>
+
   <script>
-    const SKIP_SECONDS = 10;
-    const POSTS_JSON_URL = "posts.json"; 
+    const OMDB_KEY = "1f818a3f";
+    const POSTS_JSON_URL = "posts.json";
 
-    async function loadAllPosts() {
-        try {
-            const response = await fetch(POSTS_JSON_URL);
-            if (!response.ok) throw new Error("Failed to fetch posts");
-            let jsonPosts = await response.json();
-            return jsonPosts.map(p => ({
-                ...p,
-                id: parseInt(p.id)
-            }));
-        } catch (error) {
-            console.error("Could not fetch JSON posts:", error);
-            return [];
-        }
-    }
-    
-    (async function() {
-        const posts = await loadAllPosts();
-        
-        const urlParams = new URLSearchParams(window.location.search);
-        const idParam = urlParams.get('id');
-        
-        // Convert the ID from the URL (a string) into a number for matching
-        const id = idParam ? parseInt(idParam) : null; 
-        
-        const container = document.getElementById("post-details");
-    
-        // Find the post using a strict number-to-number comparison
-        const post = posts.find(p => p.id === id); 
-        let player; 
-    
-        if(!post) {
-            container.innerHTML = `<p>Post not found.</p><a href="index.html" class="btn btn-secondary mt-3">Back</a>`;
+    async function fetchMovieData(title) {
+      try {
+        const res = await fetch(`https://www.omdbapi.com/?apikey=${OMDB_KEY}&t=${encodeURIComponent(title)}&plot=full`);
+        const data = await res.json();
+        if (data.Response === "True") {
+          return data;
         } else {
-            container.innerHTML = `
-                <h1 class="mb-3">${post.heading}</h1>
-                <img src="${post.poster}" class="poster-img" alt="Poster" />
-                <div class="embed-responsive mb-4">
-                  <video id="player" playsinline controls style="border-radius: 10px;">
-                    <source src="${post.videoUrl}" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-
-               
-
-                <a href="${post.videoUrl}" target="_blank" class="btn btn-outline-primary mt-3">Download (FAST server)</a> 
-                <a href="index.html" class="btn btn-primary mt-3 ms-2">Back to list</a>
-            `;
-    
-            
-            
+          console.log('OMDb response:', data.Error);
+          return null;
         }
-    })();
-  </script>    <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.min.js"></script>
+      } catch (err) {
+        console.error('OMDb error:', err);
+        return null;
+      }
+    }
 
+    async function loadPosts() {
+      try {
+        const res = await fetch(POSTS_JSON_URL);
+        const posts = await res.json();
+        return posts.map(p => ({...p, id: parseInt(p.id)}));
+      } catch (err) {
+        console.error('Error loading posts:', err);
+        return [];
+      }
+    }
+
+    (async function init() {
+      try {
+        const posts = await loadPosts();
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = parseInt(urlParams.get("id"));
+        const post = posts.find(p => p.id === id);
+        const container = document.getElementById("movie-container");
+
+        if (!post) {
+          container.innerHTML = "<p class='text-center'>Movie not found.</p>";
+          return;
+        }
+
+        // Show basic info immediately with JSON poster
+        container.innerHTML = `
+          <h2 class="mb-3">${post.heading}</h2>
+         
+            <div class="info-section">
+              <img src="${post.poster}" class="poster-img mb-3" alt="${post.heading} Poster" id="main-poster" onerror="this.style.display='none'" />
+              <p><strong>Wait!! Yash entering ${post.heading} movie Data</strong></p>
+            </div>
+          </div>
+          <div class="mt-3">
+            <a href="${post.videoUrl}" target="_blank" class="btn btn-outline-primary">Download</a>
+            <a href="index.html" class="btn btn-primary ms-2">Back to Gallery</a>
+          </div>
+        `;
+
+        // Fetch OMDb data and update
+        const omdb = await fetchMovieData(post.heading);
+        
+        // Use JSON poster first, OMDb poster only as fallback
+        let finalPoster = post.poster;
+        if (omdb && omdb.Poster && omdb.Poster !== "N/A") {
+          const posterImg = document.getElementById('main-poster');
+          if (posterImg && posterImg.style.display === 'none') {
+            // If JSON poster failed, use OMDb poster
+            finalPoster = omdb.Poster;
+          }
+        }
+        
+        if (omdb) {
+          const rating = omdb.imdbRating !== "N/A" ? `⭐ ${omdb.imdbRating}/10 (IMDb)` : "N/A";
+          const overview = omdb.Plot || "No overview available.";
+          const genres = omdb.Genre || "Unknown";
+          const release = omdb.Released || "N/A";
+          const runtime = omdb.Runtime || "N/A";
+          const cast = omdb.Actors || "N/A";
+          const director = omdb.Director || "N/A";
+          const year = omdb.Year || "N/A";
+
+          // Update with full info, keeping JSON poster
+          container.innerHTML = `
+            <h2 class="mb-3">${post.heading} (${year})</h2>
+
+
+             <div class="info-section">
+                <img src="${finalPoster}" class="poster-img mb-3" alt="${post.heading} Poster" onerror="this.style.display='none'" />
+                <p><strong>Rating:</strong> ${rating}</p>
+                <p><strong>Genres:</strong> ${genres}</p>
+                <p><strong>Release Date:</strong> ${release}</p>
+                <p><strong>Runtime:</strong> ${runtime}</p>
+                <p><strong>Director:</strong> ${director}</p>
+                <p><strong>Cast:</strong> ${cast}</p>
+                <p><strong>Plot:</strong> ${overview}</p>
+              </div>
+            </div>
+
+             <div class="content-flex">
+            <div class="video-container">
+              <video controls controlsList="nodownload">
+                <source src="${post.videoUrl}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+             
+            <div class="mt-3">
+              <a href="${post.videoUrl}" target="_blank" class="btn btn-outline-primary">Download</a>
+              <a href="index.html" class="btn btn-primary ms-2">Back to list</a>
+            </div>
+          `;
+        }
+      } catch (err) {
+        console.error('Initialization error:', err);
+        document.getElementById("movie-container").innerHTML = 
+          `<p class="text-center text-danger">Error loading movie details. Please try again.</p>
+           <div class="text-center mt-3">
+             <a href="index.html" class="btn btn-primary">Back to list</a>
+           </div>`;
+      }
+    })();
+  </script>
 </body>
 </html>
