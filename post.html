@@ -93,7 +93,9 @@
     const OMDB_KEY = "1f818a3f";
     const urlParams = new URLSearchParams(window.location.search);
     const src = urlParams.get("src");
-    const POSTS_JSON_URL = src === "mb" ? "mb/mb.json" : "posts.json";
+    let POSTS_JSON_URL = "posts.json";
+    if (src === "mb") POSTS_JSON_URL = "/mb/mb.json";
+    else if (src === "pb") POSTS_JSON_URL = "/pb/pb.json";
 
 
     async function fetchMovieData(title) {
