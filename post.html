@@ -18,69 +18,24 @@
       .video-container { flex: 1; }
       .info-section { flex: 1; }
     }
-    .bg-pic{
-      background-image: linear-gradient(to top, #ace0f9 0%, #c9ffbf 100%);
-    }
-    p{
-      color: #D7DDE8;
-      font-family: cursive;
-    }
-    a {
-        text-decoration: none;
-        color: black;
-      }
+    .bg-pic{ background-image: linear-gradient(to top, #ace0f9 0%, #c9ffbf 100%); }
+    p{ color: #D7DDE8; font-family: cursive; }
+    a { text-decoration: none; color: black; }
     .post-bg {
-              background: #606c88;  /* fallback for old browsers */
-              background: -webkit-linear-gradient(to right, #3f4c6b, #606c88);  /* Chrome 10-25, Safari 5.1-6 */
-              background: linear-gradient(to right, #3f4c6b, #606c88); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-              }
-    
-      .btn-grad {background-image: linear-gradient(to right, #abbaab 0%, #ffffff  51%, #abbaab  100%)}
-         .btn-grad {
-            margin: 10px;
-            padding: 15px 45px;
-            text-align: center;
-            text-transform: uppercase;
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: white;            
-            box-shadow: 0 0 20px #eee;
-            border-radius: 10px;
-            display: block;
-          }
-
-          .btn-grad:hover {
-            background-position: right center; /* change the direction of the change here */
-            color: #fff;
-            text-decoration: none;
-          }
-         
-    .btn-grad {background-image: linear-gradient(to right, #757F9A 0%, #D7DDE8  51%, #757F9A  100%)}
-         .btn-grad {
-            margin: 10px;
-            padding: 15px 45px;
-            text-align: center;
-            text-transform: uppercase;
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: white;            
-            box-shadow: 0 0 20px #eee;
-            border-radius: 10px;
-            display: block;
-          }
-
-          .btn-grad:hover {
-            background-position: right center; /* change the direction of the change here */
-            color: #fff;
-            text-decoration: none;
-          }
-         
+      background: linear-gradient(to right, #3f4c6b, #606c88);
+    }
+    .btn-grad {
+      background-image: linear-gradient(to right, #757F9A 0%, #D7DDE8 51%, #757F9A 100%);
+      margin: 10px; padding: 15px 45px; text-align: center; text-transform: uppercase;
+      transition: 0.5s; background-size: 200% auto; color: white;
+      box-shadow: 0 0 20px #eee; border-radius: 10px; display: inline-block;
+    }
+    .btn-grad:hover { background-position: right center; color: #fff; text-decoration: none; }
   </style>
 </head>
 <body>
-  <div class=" container">
-    <div id="movie-container"class="bg-pic  rounded shadow-lg">
+  <div class="container">
+    <div id="movie-container" class="bg-pic rounded shadow-lg">
       <div class="bg-pic text-center">
         <p>Loading movie details...</p>
       </div>
@@ -94,22 +49,18 @@
     const urlParams = new URLSearchParams(window.location.search);
     const src = urlParams.get("src");
     let POSTS_JSON_URL = "posts.json";
-    if (src === "mb") POSTS_JSON_URL = "/mb/mb.json";
-    else if (src === "pb") POSTS_JSON_URL = "/pb/pb.json";
 
+    // ✅ Auto-detect correct JSON file based on "src" (future-proof)
+    if (src) POSTS_JSON_URL = `${src}/${src}.json`;
 
     async function fetchMovieData(title) {
       try {
         const res = await fetch(`https://www.omdbapi.com/?apikey=${OMDB_KEY}&t=${encodeURIComponent(title)}&plot=full`);
         const data = await res.json();
-        if (data.Response === "True") {
-          return data;
-        } else {
-          console.log('OMDb response:', data.Error);
-          return null;
-        }
+        if (data.Response === "True") return data;
+        else return null;
       } catch (err) {
-        console.error('OMDb error:', err);
+        console.error("OMDb error:", err);
         return null;
       }
     }
@@ -120,7 +71,7 @@
         const posts = await res.json();
         return posts.map(p => ({...p, id: parseInt(p.id)}));
       } catch (err) {
-        console.error('Error loading posts:', err);
+        console.error("Error loading posts:", err);
         return [];
       }
     }
@@ -128,7 +79,6 @@
     (async function init() {
       try {
         const posts = await loadPosts();
-        const urlParams = new URLSearchParams(window.location.search);
         const id = parseInt(urlParams.get("id"));
         const post = posts.find(p => p.id === id);
         const container = document.getElementById("movie-container");
@@ -138,40 +88,33 @@
           return;
         }
 
-        // Show basic info immediately with JSON poster
+        // Show JSON info first
         container.innerHTML = `
-          <h2 class="mb-3 ">${post.heading}</h2>
-         
-            <div class="info-section rounded">
-              <img src="${post.poster}" class="poster-img mb-3 " alt="${post.heading} Poster" id="main-poster" onerror="this.style.display='none'" />
-              <p><strong>Wait!! Yash entering ${post.heading} movie Data</strong></p>
-            </div>
+          <h2 class="mb-3">${post.heading}</h2>
+          <div class="info-section rounded">
+            <img src="${post.poster}" class="poster-img mb-3" alt="${post.heading}" id="main-poster" onerror="this.style.display='none'" />
+            <p><strong>Wait!! Yash entering ${post.heading} movie Data</strong></p>
           </div>
           <div class="video-container">
-              <video controls controlsList="nodownload">
-                <source src="${post.videoUrl}" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
+            <video controls controlsList="nodownload">
+              <source src="${post.videoUrl}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <div class="mt-3">
             <a href="${post.videoUrl}" target="_blank" class="btn-grad">Download</a>
             <a href="index.html" class="btn-grad ms-2">Back to List</a>
           </div>
         `;
 
-        // Fetch OMDb data and update
+        // Fetch OMDb info
         const omdb = await fetchMovieData(post.heading);
-        
-        // Use JSON poster first, OMDb poster only as fallback
         let finalPoster = post.poster;
-        if (omdb && omdb.Poster && omdb.Poster !== "N/A") {
-          const posterImg = document.getElementById('main-poster');
-          if (posterImg && posterImg.style.display === 'none') {
-            // If JSON poster failed, use OMDb poster
-            finalPoster = omdb.Poster;
-          }
+        const posterImg = document.getElementById("main-poster");
+        if (omdb && omdb.Poster && omdb.Poster !== "N/A" && posterImg.style.display === "none") {
+          finalPoster = omdb.Poster;
         }
-        
+
         if (omdb) {
           const rating = omdb.imdbRating !== "N/A" ? `⭐ ${omdb.imdbRating}/10 (IMDb)` : "N/A";
           const overview = omdb.Plot || "No overview available.";
@@ -182,49 +125,41 @@
           const director = omdb.Director || "N/A";
           const year = omdb.Year || "N/A";
 
-          // Update with full info, keeping JSON poster
           container.innerHTML = `
-            <h2 class="p-2 ">${post.heading} (${year})</h2>
-
-
-             <div class="info-section shadow-lg p-3">
-                <img src="${finalPoster}" class="poster-img mb-3" alt="${post.heading} Poster" onerror="this.style.display='none'" />
-                <div class="post-bg shadow border-left-0 mb-1 rounded p-3">
+            <h2 class="p-2">${post.heading} (${year})</h2>
+            <div class="info-section shadow-lg p-3">
+              <img src="${finalPoster}" class="poster-img mb-3" alt="${post.heading}" onerror="this.style.display='none'" />
+              <div class="post-bg shadow border-left-0 mb-1 rounded p-3">
                 <p><strong>Rating:</strong> ${rating}</p>
                 <p><strong>Genres:</strong> ${genres}</p>
                 <p><strong>Release Date:</strong> ${release}</p>
                 <p><strong>Runtime:</strong> ${runtime}</p>
                 <p><strong>Director:</strong> ${director}</p>
                 <p><strong>Cast:</strong> ${cast}</p>
-                </div>
-               
-                <p class="post-bg shadow-lg border border-light rounded p-3"><strong>Plot:</strong> ${overview}</p>
               </div>
+              <p class="post-bg shadow-lg border border-light rounded p-3"><strong>Plot:</strong> ${overview}</p>
             </div>
-
-             <div class="content-flex shadow p-2">
-            <div class="video-container">
-              <video controls controlsList="nodownload">
-                <source src="${post.videoUrl}" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-             
-
-            
-            <div class="mt-3">
-              <a href="${post.videoUrl}" target="_blank" class="btn-grad">Download</a>
-              <a href="index.html" class="btn-grad ms-2">Back to list</a>
+            <div class="content-flex shadow p-2">
+              <div class="video-container">
+                <video controls controlsList="nodownload">
+                  <source src="${post.videoUrl}" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div class="mt-3">
+                <a href="${post.videoUrl}" target="_blank" class="btn-grad">Download</a>
+                <a href="index.html" class="btn-grad ms-2">Back to List</a>
+              </div>
             </div>
           `;
         }
       } catch (err) {
-        console.error('Initialization error:', err);
-        document.getElementById("movie-container").innerHTML = 
-          `<p class="text-center text-danger">Error loading movie details. Please try again.</p>
-           <div class="text-center mt-3">
-             <a href="index.html" class="btn-grad">Back to list</a>
-           </div>`;
+        console.error("Initialization error:", err);
+        document.getElementById("movie-container").innerHTML = `
+          <p class="text-center text-danger">Error loading movie details. Please try again.</p>
+          <div class="text-center mt-3">
+            <a href="index.html" class="btn-grad">Back to list</a>
+          </div>`;
       }
     })();
   </script>
