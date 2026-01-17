@@ -15,6 +15,10 @@
     .card-body { padding: 10px; flex-grow: 1; }
     footer { background: linear-gradient(to right, #4a90e2, #50e3c2); color: #fff; text-align: center; padding: 20px; margin-top: 50px; }
     .actor{width:100px;height: 100%;}
+    .btn.active {
+  color: #fff !important;
+}
+
   </style>
 </head>
 <body>
@@ -37,6 +41,16 @@
     <a href="pb/pb.html"><img class="actor p-2 border border-2" src="https://m.sakshipost.com/sites/default/files/styles/storypage_main/public/gallery_images/2025/10/22/Prabhas4-1729598340.jpg?itok=Qt-M2ze6" /></a>
   </div>
 </div>
+<div class="mb-3 mt-3">
+  <select class="form-select" id="languageSelect">
+    <option value="All">All Languages</option>
+    <option value="Telugu">Telugu</option>
+    <option value="Hindi">Hindi</option>
+    <option value="English">English</option>
+    <option value="Requested">Requested</option>
+  </select>
+</div>
+
 
   <div class="fluid-container py-4">
     <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search by Movie..." />
@@ -48,6 +62,16 @@
       <p class="mb-0">© 2025 My Movies. Data provided by YASH.</p>
     </div>
   </footer>
+<script>
+ if (languageSelect) {
+  languageSelect.onchange = function () {
+    selectedLanguage = this.value;
+    filterAndRender();
+  };
+}
+
+  
+</script>
 
   <script>
     const OMDB_KEY = "1f818a3f";
@@ -55,6 +79,8 @@
     const searchInput = document.getElementById("searchInput");
     const container = document.getElementById("posts-container");
     let allPosts = [];
+    let selectedLanguage = "All";
+
     const omdbCache = {};
 
     async function fetchOMDbDetails(title) {
@@ -98,7 +124,10 @@
       card.innerHTML = `
         <img src="${post.poster}" class="poster-img" alt="Poster" onerror="this.src='https://via.placeholder.com/200x300?text=No+Image'" />
         <div class="card-body">
-          <h6 class="card-title">${post.heading}</h6>
+          <h6 class="card-title d-flex justify-content-between align-items-center">
+            <span>${post.heading}</span>
+            <span class="badge bg-success">${post.language}</span>
+          </h6>
           <p class="text-muted mb-0" id="rating-${post.id}"></p>
         </div>`;
       
@@ -149,17 +178,36 @@
     }
 
     function filterAndRender() {
-      const q = searchInput.value.toLowerCase();
-      const filtered = allPosts.filter(p => p.heading && p.heading.toLowerCase().includes(q));
-      filtered.sort((a,b) => b.id - a.id);
-      renderPosts(filtered);
-    }
+  const q = searchInput.value.toLowerCase();
+
+  let filtered = allPosts.filter(p => {
+    const matchText =
+      p.heading && p.heading.toLowerCase().includes(q);
+
+    const matchLang =
+      selectedLanguage === "All" || p.language === selectedLanguage;
+
+    return matchText && matchLang;
+  });
+
+  filtered.sort((a, b) => b.id - a.id);
+  renderPosts(filtered);
+}
+
 
     (async function init() {
       allPosts = await loadPosts();
       filterAndRender();
     })();
     searchInput.oninput = filterAndRender;
+    const languageSelect = document.getElementById("languageSelect");
+
+if (languageSelect) {
+  languageSelect.onchange = function () {
+    selectedLanguage = this.value;
+    filterAndRender();
+  };
+}
   </script>
 </body>
 </html>
