@@ -54,8 +54,8 @@
 {"id":53,"heading":"Raju weds Rambai","poster":"https://static.wixstatic.com/media/794122_a78ded59fbaa4dac8b64f4a5a91e4bdb~mv2.jpg/v1/fill/w_568,h_320,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/794122_a78ded59fbaa4dac8b64f4a5a91e4bdb~mv2.jpg","year":"","language":"Telugu","starring":"","director":"","videoUrl":"https://cdn.telugudub.store/Raju_Weds_Rambai_%282025%29_Telugu_1080p.mkv"},
 {"id":54,"heading":"SISU","poster":"https://m.imdb.com/title/tt31844586/mediaviewer/rm1172943874/?ref_=ttmi_mi_4_1","year":"","language":"English","starring":"","director":"","videoUrl":"https://cdn.telugudub.store/Sisu_Road_to_Revenge_(2025)_1080p_Tel_Tam_hin_Eng.mkv"},
 {"id":55,"heading":"Andhra King Taluka","poster":"https://www.ntvenglish.com/wp-content/uploads/2025/08/Andhra-King-Taluka.jpg","year":"","language":"Telugu","starring":"","director":"","videoUrl":"https://cdn.telugudub.store/Andhra_King_Taluka_%282025%29_Telugu_720p.mkv"},
-{"id":56,"heading":"GEMINI HD","poster":"https://sund-images.sunnxt.com/194392/1000x1000_GeminiTVHD_194392_0a146256-5869-40c5-89de-2fbb9ad6b0ce.png","year":"","language":"Telugu","starring":"","director":"","videoUrl":"https://livestream10.sunnxt.com/DolbyVision/GeminiTV_HDR/GeminiTV_HDR_Endpoints/GeminiTV-HDR10-IN-index.m3u8"},
-{"id":57,"heading":"Etv HD","poster":"https://jiotvimages.cdn.jio.com/dare_images/images/ETV_HD.png","year":"","language":"Telugu","starring":"","director":"","videoUrl":"https://d2z3q47xzd535o.cloudfront.net/v1/master/9d43eacaed199f8d5883927e7aef514a8a08e108/ETV_HD_H264-2_cloud_in/index.m3u8"},
+{"id":56,"heading":"GEMINI HD","poster":"https://sund-images.sunnxt.com/194392/1000x1000_GeminiTVHD_194392_0a146256-5869-40c5-89de-2fbb9ad6b0ce.png","year":"","language":"Live","starring":"","director":"","videoUrl":"https://livestream10.sunnxt.com/DolbyVision/GeminiTV_HDR/GeminiTV_HDR_Endpoints/GeminiTV-HDR10-IN-index.m3u8"},
+{"id":57,"heading":"Etv HD","poster":"https://jiotvimages.cdn.jio.com/dare_images/images/ETV_HD.png","year":"","language":"Live","starring":"","director":"","videoUrl":"https://d2z3q47xzd535o.cloudfront.net/v1/master/9d43eacaed199f8d5883927e7aef514a8a08e108/ETV_HD_H264-2_cloud_in/index.m3u8"},
 {"id":58,"heading":"Ayalaan","poster":"https://cdn.123telugu.com/content/wp-content/uploads/2025/12/Ayalaan.webp","year":"","language":"Telugu","starring":"","director":"","videoUrl":"https://cdn.telugudub.store/Ayalaan_%282024%29_telugu_1080p.mkv"},
 {"id":59,"heading":"Bahubali The Epic","poster":"https://akm-img-a-in.tosshub.com/indiatoday/images/story/202512/bahubali-the-epic-242628858-16x9_0.jpg?VersionId=BRCA8fQigQ5KYMN6ETJrJ0Jvjizg4JkO&size=690:388","year":"","language":"Telugu","starring":"","director":"","videoUrl":"https://cdn.telugudub.store/Baahubali_The_Epic_%282025%29_Telugu_1080p.mkv"},
 {"id":60,"heading":"Turbo","poster":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7riDg6WyWJjLZlOanPUyhJPhdcI3r-DUK6UIYxGGC9gu7GG42-9UOjNOB&s=10","year":"","language":"Telugu","starring":"","director":"","videoUrl":"https://cdn.telugudub.store/Turbo_%282024%29_Telugu_1080p.mkv"},
@@ -70,6 +70,7 @@
 {"id":69,"heading":"","poster":"","year":"","language":"Telugu","starring":"","director":"","videoUrl":""},
 {"id":70,"heading":"","poster":"","year":"","language":"Telugu","starring":"","director":"","videoUrl":""}
 ]
+
 
 
 
