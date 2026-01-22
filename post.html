@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OTT Movies</title>
+  <title>Movie Details</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -14,79 +14,112 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont;
     }
 
-    /* ===== HERO SECTION ===== */
-    .hero {
-      position: relative;
-      height: 55vh;
-      overflow: hidden;
-      border-radius: 18px;
-      margin-bottom: 30px;
+    .container {
+      margin-top: 30px;
     }
 
-    .hero-bg {
+    /* ===== AMBIENCE ===== */
+    .ambience-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+    }
+
+    .ambience-bg {
       position: absolute;
       inset: 0;
       background-size: cover;
       background-position: center;
-      filter: blur(22px) brightness(0.55);
-      transform: scale(1.2);
+      filter: blur(18px) brightness(0.55);
+      transform: scale(1.15);
       will-change: transform, filter;
+      z-index: 0;
     }
 
-    .hero::after {
-      content: "";
+    @media (max-width: 480px) {
+      .ambience-bg {
+        filter: brightness(0.5);
+        transform: scale(1.05);
+      }
+    }
+
+    /* ===== CINEMATIC VIGNETTE ===== */
+    .vignette {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.2),
-        rgba(0,0,0,0.9)
-      );
-    }
-
-    .hero-content {
-      position: relative;
+      pointer-events: none;
       z-index: 2;
-      padding: 40px;
-      max-width: 600px;
-    }
-
-    /* ===== MOVIE GRID ===== */
-    .movie-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 18px;
-    }
-
-    .movie-card {
-      cursor: pointer;
-      transition: transform .3s ease;
-    }
-
-    .movie-card:hover {
-      transform: scale(1.08);
-    }
-
-    .movie-card img {
-      width: 100%;
-      border-radius: 12px;
-    }
-
-    .movie-title {
-      margin-top: 6px;
-      font-size: 14px;
-      text-align: center;
-      color: #ccc;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(0,0,0,0) 40%,
+        rgba(0,0,0,0.65) 100%
+      );
     }
 
     /* ===== FADE IN ===== */
     .fade-in {
       opacity: 0;
-      animation: fadeIn .7s ease forwards;
+      animation: fadeInUp 0.8s ease-out forwards;
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .ambience-content {
+      position: relative;
+      z-index: 3;
+      padding: 24px;
+    }
+
+    .poster-img {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .info-box {
+      background: linear-gradient(to right, #3f4c6b, #606c88);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      color: #d7dde8;
+    }
+
+    .video-container {
+      max-width: 900px;
+      margin-bottom: 20px;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .btn-grad {
+      background-image: linear-gradient(to right, #757F9A 0%, #D7DDE8 51%, #757F9A 100%);
+      padding: 14px 40px;
+      margin-right: 10px;
+      text-transform: uppercase;
+      background-size: 200% auto;
+      transition: 0.5s;
+      border-radius: 10px;
+      color: #fff;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 0 20px #000;
+    }
+
+    .btn-grad:hover {
+      background-position: right center;
     }
 
     footer {
@@ -100,25 +133,11 @@
 
 <body>
 
-<div class="container mt-4">
-
-  <!-- HERO -->
-  <div class="hero fade-in" id="hero">
-    <div class="hero-bg" id="hero-bg"></div>
-    <div class="hero-content">
-      <h1 id="hero-title">Loading…</h1>
-      <p class="text-muted">Watch latest movies in HD</p>
-      <a href="#" id="hero-link" class="btn btn-light mt-2">Watch Now</a>
-    </div>
+<main class="container">
+  <div id="movie-container" class="text-center">
+    Loading movie details...
   </div>
-
-  <!-- MOVIE GRID -->
-  <h4 class="mb-3">Latest Movies</h4>
-  <div class="movie-grid fade-in" id="movie-grid">
-    Loading movies…
-  </div>
-
-</div>
+</main>
 
 <footer>Data provided by YASH</footer>
 
@@ -128,6 +147,7 @@
 ===================== */
 const CACHE_TTL = 24 * 60 * 60 * 1000;
 const params = new URLSearchParams(window.location.search);
+const id = parseInt(params.get("id"));
 const src = params.get("src");
 const POSTS_JSON_URL = src ? `${src}/${src}.json` : "posts.json";
 
@@ -138,7 +158,6 @@ function getCache(key) {
   try {
     const raw = localStorage.getItem(key);
     if (!raw) return null;
-
     const obj = JSON.parse(raw);
     if (Date.now() - obj.time > CACHE_TTL) {
       localStorage.removeItem(key);
@@ -160,7 +179,7 @@ function setCache(key, data) {
 }
 
 /* =====================
-   FETCH POSTS (NO OMDb)
+   FETCH POSTS (JSON FIRST)
 ===================== */
 async function fetchPosts() {
   const cacheKey = `posts_${POSTS_JSON_URL}`;
@@ -178,269 +197,82 @@ async function fetchPosts() {
 }
 
 /* =====================
+   OPTIONAL OMDB (SAFE)
+===================== */
+async function fetchOMDB(title) {
+  const cacheKey = `omdb_${title.toLowerCase().replace(/\s+/g, "_")}`;
+  const cached = getCache(cacheKey);
+  if (cached) return cached;
+
+  // API disabled or limit reached → skip safely
+  return null;
+}
+
+/* =====================
    INIT
 ===================== */
 (async function init() {
-  const heroBg = document.getElementById("hero-bg");
-  const heroTitle = document.getElementById("hero-title");
-  const heroLink = document.getElementById("hero-link");
-  const grid = document.getElementById("movie-grid");
+  const container = document.getElementById("movie-container");
 
-  const posts = await fetchPosts();
-
-  if (!posts.length) {
-    grid.innerHTML = "No movies available";
+  if (!id || isNaN(id)) {
+    container.innerHTML = "Invalid movie ID";
     return;
   }
 
-  /* HERO MOVIE */
-  const heroMovie = posts[0];
-  heroBg.style.backgroundImage = `url('${heroMovie.poster}')`;
-  heroTitle.textContent = heroMovie.heading;
-  heroLink.href = `movie.html?id=${heroMovie.id}${src ? `&src=${src}` : ""}`;
+  const posts = await fetchPosts();
+  const post = posts.find(p => parseInt(p.id) === id);
 
-  /* GRID */
-  grid.innerHTML = "";
-  posts.forEach(movie => {
-    const card = document.createElement("div");
-    card.className = "movie-card";
-    card.innerHTML = `
-      <img src="${movie.poster}" alt="${movie.heading}">
-      <div class="movie-title">${movie.heading}</div>
-    `;
-    card.onclick = () => {
-      window.location.href = `movie.html?id=${movie.id}${src ? `&src=${src}` : ""}`;
-    };
-    grid.appendChild(card);
-  });
-})();
-</script>
-
-</body>
-</html>      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .ambience-content {
-      position: relative;
-      z-index: 3;
-      color: #fff;
-    }
-
-    .poster-img {
-      max-width: 380px;
-      width: 100%;
-      border-radius: 12px;
-    }
-
-    .video-container {
-      max-width: 800px;
-    }
-
-    video {
-      width: 100%;
-      border-radius: 12px;
-    }
-
-    .post-bg {
-      background: linear-gradient(to right, #3f4c6b, #606c88);
-      color: #d7dde8;
-    }
-
-    .btn-grad {
-      background-image: linear-gradient(to right, #757F9A 0%, #D7DDE8 51%, #757F9A 100%);
-      padding: 14px 40px;
-      margin-right: 10px;
-      text-transform: uppercase;
-      background-size: 200% auto;
-      transition: 0.5s;
-      border-radius: 10px;
-      color: white;
-      text-decoration: none;
-      box-shadow: 0 0 20px #000;
-      display: inline-block;
-    }
-
-    .btn-grad:hover {
-      background-position: right center;
-      color: #fff;
-    }
-
-    footer {
-      text-align: center;
-      margin: 20px 0;
-      color: #777;
-    }
-  </style>
-</head>
-
-<body>
-
-<main class="container">
-  <div id="movie-container" class="text-center">
-    Loading movie details...
-  </div>
-</main>
-
-<footer>Data provided by YASH</footer>
-
-<script>
-  /* =========================
-     CONFIG
-     ========================= */
-  const OMDB_KEY = "1f818a3f";
-  const CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
-
-  const params = new URLSearchParams(window.location.search);
-  const id = parseInt(params.get("id"));
-  const src = params.get("src");
-  const POSTS_JSON_URL = src ? `${src}/${src}.json` : "posts.json";
-
-  /* =========================
-     LOCALSTORAGE CACHE UTILS
-     ========================= */
-  function getCache(key) {
-    try {
-      const raw = localStorage.getItem(key);
-      if (!raw) return null;
-
-      const cached = JSON.parse(raw);
-      if (Date.now() - cached.time > CACHE_TTL) {
-        localStorage.removeItem(key);
-        return null;
-      }
-      return cached.data;
-    } catch {
-      return null;
-    }
+  if (!post) {
+    container.innerHTML = "Movie not found";
+    return;
   }
 
-  function setCache(key, data) {
-    try {
-      localStorage.setItem(key, JSON.stringify({
-        time: Date.now(),
-        data
-      }));
-    } catch {
-      /* ignore storage errors */
-    }
-  }
+  // Base data from JSON (never fails)
+  const data = {
+    poster: post.poster,
+    year: post.year || "N/A",
+    rating: "N/A",
+    genre: "N/A",
+    release: "N/A",
+    runtime: "N/A",
+    director: post.director || "N/A",
+    cast: post.starring || "N/A",
+    plot: "No plot available"
+  };
 
-  /* =========================
-     FETCH POSTS (CACHED)
-     ========================= */
-  async function fetchPosts() {
-    const cacheKey = `posts_${POSTS_JSON_URL}`;
-    const cached = getCache(cacheKey);
-    if (cached) return cached;
+  const backLink = src ? `${src}/index.html` : "index.html";
 
-    try {
-      const res = await fetch(POSTS_JSON_URL);
-      const data = await res.json();
-      setCache(cacheKey, data);
-      return data;
-    } catch {
-      return [];
-    }
-  }
+  container.innerHTML = `
+    <div class="ambience-wrapper shadow-lg fade-in">
+      <div class="ambience-bg" style="background-image:url('${data.poster}')"></div>
+      <div class="vignette"></div>
 
-  /* =========================
-     FETCH OMDB (CACHED)
-     ========================= */
-  async function fetchOMDB(title) {
-    const cacheKey = `omdb_${title.toLowerCase().replace(/\s+/g, "_")}`;
-    const cached = getCache(cacheKey);
-    if (cached) return cached;
+      <div class="ambience-content">
+        <h2 class="mb-3">${post.heading} (${data.year})</h2>
 
-    try {
-      const res = await fetch(
-        `https://www.omdbapi.com/?apikey=${OMDB_KEY}&t=${encodeURIComponent(title)}&plot=full`
-      );
-      const data = await res.json();
+        <img src="${data.poster}" class="poster-img" alt="${post.heading}">
 
-      if (data.Response === "True") {
-        setCache(cacheKey, data);
-        return data;
-      }
-      return null;
-    } catch {
-      return null;
-    }
-  }
-
-  /* =========================
-     INIT
-     ========================= */
-  (async function init() {
-    const container = document.getElementById("movie-container");
-
-    if (!id || isNaN(id)) {
-      container.innerHTML = "Invalid movie ID";
-      return;
-    }
-
-    const posts = await fetchPosts();
-    const post = posts.find(p => parseInt(p.id) === id);
-
-    if (!post) {
-      container.innerHTML = "Movie not found";
-      return;
-    }
-
-    const omdb = await fetchOMDB(post.heading);
-
-    const data = {
-      poster: omdb?.Poster && omdb.Poster !== "N/A" ? omdb.Poster : post.poster,
-      year: omdb?.Year || post.year || "N/A",
-      rating: omdb?.imdbRating !== "N/A" ? `⭐ ${omdb.imdbRating}/10 IMDb` : "N/A",
-      genre: omdb?.Genre || "Unknown",
-      release: omdb?.Released || "N/A",
-      runtime: omdb?.Runtime || "N/A",
-      director: omdb?.Director || post.director || "N/A",
-      cast: omdb?.Actors || post.starring || "N/A",
-      plot: omdb?.Plot || "No plot available"
-    };
-
-    const backLink = src ? `${src}/index.html` : "index.html";
-
-    container.innerHTML = `
-      <div class="ambience-wrapper shadow-lg">
-        <div class="ambience-bg" style="background-image:url('${data.poster}')"></div>
-        <div class="vignette"></div>
-
-        <div class="ambience-content p-4 fade-in">
-          <h2 class="mb-3">${post.heading} (${data.year})</h2>
-
-          <img src="${data.poster}" class="poster-img mb-4" alt="${post.heading}">
-
-          <div class="post-bg rounded p-3 mb-3">
-            <p><strong>Rating:</strong> ${data.rating}</p>
-            <p><strong>Genre:</strong> ${data.genre}</p>
-            <p><strong>Release:</strong> ${data.release}</p>
-            <p><strong>Runtime:</strong> ${data.runtime}</p>
-            <p><strong>Director:</strong> ${data.director}</p>
-            <p><strong>Cast:</strong> ${data.cast}</p>
-          </div>
-
-          <div class="post-bg rounded p-3 mb-4">
-            <strong>Plot:</strong> ${data.plot}
-          </div>
-
-          <div class="video-container mb-4">
-            <video controls preload="metadata" controlsList="nodownload">
-              <source src="${post.videoUrl}" type="video/mp4">
-            </video>
-          </div>
-
-          <a href="${post.videoUrl}" target="_blank" class="btn-grad">Download</a>
-          <a href="${backLink}" class="btn-grad">Back to List</a>
+        <div class="info-box">
+          <p><strong>Director:</strong> ${data.director}</p>
+          <p><strong>Cast:</strong> ${data.cast}</p>
         </div>
+
+        <div class="info-box">
+          <strong>Plot:</strong> ${data.plot}
+        </div>
+
+        <div class="video-container">
+          <video controls preload="metadata" controlsList="nodownload">
+            <source src="${post.videoUrl}" type="video/mp4">
+          </video>
+        </div>
+
+        <a href="${post.videoUrl}" target="_blank" class="btn-grad">Download</a>
+        <a href="${backLink}" class="btn-grad">Back</a>
       </div>
-    `;
-  })();
+    </div>
+  `;
+})();
 </script>
 
 </body>
