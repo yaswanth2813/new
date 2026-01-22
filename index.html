@@ -13,28 +13,8 @@ body{
   color:#fff;
   font-family: system-ui, -apple-system, BlinkMacSystemFont;
 }
-grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
-  /* ===== VIEW ALL GRID (RESPONSIVE OTT STYLE) ===== */
-.view-all-grid{
-  display: grid;
-  gap: 18px;
-  padding: 20px;
-}
 
-/* 📱 Mobile: 2 cards per row */
-@media (max-width: 475px) {
-  .view-all-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* 📲 Tablet & Desktop: 3 cards per row */
-@media (min-width: 576px) {
-  .view-all-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-/* ===== HERO ===== */
+/* ================= HERO ================= */
 .hero{
   position:relative;
   height:60vh;
@@ -42,6 +22,7 @@ grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
   overflow:hidden;
   margin:20px;
 }
+
 .hero-bg{
   position:absolute;
   inset:0;
@@ -49,26 +30,60 @@ grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
   background-position:center;
   filter:blur(22px) brightness(.55);
   transform:scale(1.2);
+  z-index:0;
 }
+
+/* 🎨 Dynamic glow */
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  background:radial-gradient(
+    circle at center,
+    var(--hero-glow, rgba(0,0,0,.4)) 0%,
+    rgba(0,0,0,0) 70%
+  );
+  z-index:0;
+}
+
+/* 🎬 Hero video */
+#hero-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:opacity .6s ease;
+  z-index:1;
+}
+
+.hero.video-active #hero-video{
+  opacity:1;
+}
+
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
   background:linear-gradient(to bottom,rgba(0,0,0,.2),rgba(0,0,0,.95));
+  z-index:2;
 }
+
 .hero-content{
   position:relative;
-  z-index:2;
+  z-index:3;
   padding:40px;
   max-width:600px;
 }
 
-/* ===== SEARCH ===== */
+/* ================= SEARCH ================= */
 .search-wrap{
   position:relative;
   max-width:500px;
   margin:0 20px 30px;
 }
+
 .search-suggest{
   position:absolute;
   top:100%;
@@ -81,33 +96,36 @@ grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
   display:none;
   z-index:50;
 }
+
 .search-suggest div{
   padding:10px;
   cursor:pointer;
   border-bottom:1px solid #2a2e38;
 }
+
 .search-suggest div:hover{
   background:#2a2e38;
 }
 
-/* ===== ROW HEADER ===== */
+/* ================= ROWS ================= */
 .row-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   margin:20px 20px 10px;
 }
+
 .view-all{
   font-size:14px;
   color:#bbb;
   cursor:pointer;
 }
+
 .view-all:hover{
   color:#fff;
   text-decoration:underline;
 }
 
-/* ===== ROW ===== */
 .ott-row{
   display:flex;
   gap:14px;
@@ -115,6 +133,7 @@ grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
   padding:0 20px 10px;
   scroll-behavior:smooth;
 }
+
 .ott-row::-webkit-scrollbar{
   height:6px;
 }
@@ -123,12 +142,13 @@ grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
   border-radius:10px;
 }
 
-/* ===== VIDEO PREVIEW CARD ===== */
+/* ================= CARD + VIDEO HOVER ================= */
 .preview-card{
   position:relative;
   min-width:160px;
   cursor:pointer;
 }
+
 .preview-card img,
 .preview-card video{
   width:100%;
@@ -136,6 +156,7 @@ grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
   object-fit:cover;
   border-radius:14px;
 }
+
 .preview-card video{
   position:absolute;
   inset:0;
@@ -143,6 +164,7 @@ grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
   pointer-events:none;
   transition:opacity .3s ease;
 }
+
 .preview-card:hover video{ opacity:1; }
 .preview-card:hover img{ opacity:0; }
 
@@ -153,20 +175,26 @@ grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
   color:#ccc;
 }
 
-/* ===== VIEW ALL GRID ===== */
+/* ================= VIEW ALL GRID ================= */
 .view-all-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
   gap:18px;
   padding:20px;
 }
 
-/* ===== FADE ===== */
+@media (max-width:575px){
+  .view-all-grid{ grid-template-columns:repeat(2,1fr); }
+}
+@media (min-width:576px){
+  .view-all-grid{ grid-template-columns:repeat(3,1fr); }
+}
+
+/* ================= MISC ================= */
 .fade-in{
   opacity:0;
   animation:fade .6s ease forwards;
 }
-@keyframes fade{to{opacity:1}}
+@keyframes fade{ to{opacity:1} }
 
 footer{
   text-align:center;
@@ -183,6 +211,8 @@ footer{
   <!-- HERO -->
   <div class="hero fade-in">
     <div class="hero-bg" id="hero-bg"></div>
+    <video id="hero-video" muted loop playsinline></video>
+
     <div class="hero-content">
       <h1 id="hero-title">Loading…</h1>
       <p class="text-muted">Watch movies OTT style</p>
@@ -206,11 +236,11 @@ footer{
 <script>
 const POSTS_JSON_URL="posts.json";
 const CACHE_TTL=24*60*60*1000;
-const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+const isTouchDevice=('ontouchstart' in window)||navigator.maxTouchPoints>0;
 
 let allPosts=[];
 
-/* ===== CACHE ===== */
+/* ========== CACHE ========== */
 function getCache(k){
   try{
     const r=localStorage.getItem(k);
@@ -223,12 +253,10 @@ function getCache(k){
   }catch{return null}
 }
 function setCache(k,d){
-  try{
-    localStorage.setItem(k,JSON.stringify({time:Date.now(),data:d}));
-  }catch{}
+  try{ localStorage.setItem(k,JSON.stringify({time:Date.now(),data:d})); }catch{}
 }
 
-/* ===== LOAD POSTS ===== */
+/* ========== LOAD POSTS ========== */
 async function loadPosts(){
   const c=getCache("posts_cache");
   if(c) return c;
@@ -240,7 +268,48 @@ async function loadPosts(){
   }catch{return[]}
 }
 
-/* ===== VIEW ALL ===== */
+/* ========== HERO COLOR GLOW ========== */
+function applyHeroGlow(imgUrl){
+  const img=new Image();
+  img.crossOrigin="anonymous";
+  img.src=imgUrl;
+  img.onload=()=>{
+    const c=document.createElement("canvas");
+    const x=c.getContext("2d");
+    c.width=c.height=10;
+    x.drawImage(img,0,0,10,10);
+    const d=x.getImageData(0,0,10,10).data;
+    let r=0,g=0,b=0,n=0;
+    for(let i=0;i<d.length;i+=4){
+      r+=d[i]; g+=d[i+1]; b+=d[i+2]; n++;
+    }
+    r=Math.floor(r/n); g=Math.floor(g/n); b=Math.floor(b/n);
+    document.documentElement.style.setProperty(
+      "--hero-glow",`rgba(${r},${g},${b},0.45)`
+    );
+  };
+}
+
+/* ========== CARD HTML ========== */
+function cardHTML(p){
+  return `
+    <div class="preview-card"
+      onclick="location.href='post.html?id=${p.id}'"
+      ${!isTouchDevice?`
+      onmouseenter="let v=this.querySelector('video');if(v){v.currentTime=8;v.play();}"
+      onmouseleave="let v=this.querySelector('video');if(v){v.pause();}"`:""}
+    >
+      <img src="${p.poster}" onerror="this.src='https://via.placeholder.com/300x450'">
+      ${!isTouchDevice && p.videoUrl?`
+      <video muted loop preload="metadata">
+        <source src="${p.videoUrl}" type="video/mp4">
+      </video>`:""}
+      <div class="ott-title">${p.heading}</div>
+    </div>
+  `;
+}
+
+/* ========== VIEW ALL ========== */
 function showViewAll(title,list){
   const rows=document.getElementById("rows");
   rows.innerHTML=`
@@ -254,32 +323,13 @@ function showViewAll(title,list){
   `;
 }
 
-/* ===== CARD HTML ===== */
-function cardHTML(p){
-  return `
-    <div class="preview-card"
-      onclick="location.href='post.html?id=${p.id}'"
-      ${!isTouchDevice ? `
-      onmouseenter="let v=this.querySelector('video'); if(v){v.currentTime=10; v.play();}"
-      onmouseleave="let v=this.querySelector('video'); if(v){v.pause();}"` : ``}
-    >
-      <img src="${p.poster}" onerror="this.src='https://via.placeholder.com/300x450'">
-      ${!isTouchDevice ? `
-      <video muted loop preload="metadata">
-        <source src="${p.videoUrl}" type="video/mp4">
-      </video>` : ``}
-      <div class="ott-title">${p.heading}</div>
-    </div>
-  `;
-}
-
-/* ===== RENDER ROW ===== */
+/* ========== ROW ========== */
 function renderRow(title,list,key){
   if(!list.length) return "";
   return `
     <div class="row-header">
       <h4>${title}</h4>
-      <span class="view-all" onclick="showViewAll('${title}', window.rowData['${key}'])">
+      <span class="view-all" onclick="showViewAll('${title}',rowData['${key}'])">
         View All
       </span>
     </div>
@@ -289,69 +339,73 @@ function renderRow(title,list,key){
   `;
 }
 
-/* ===== SEARCH ===== */
+/* ========== SEARCH ========== */
 const searchInput=document.getElementById("searchInput");
 const suggestBox=document.getElementById("suggestBox");
 
 searchInput.oninput=function(){
   const q=this.value.toLowerCase();
-  if(!q){
-    suggestBox.style.display="none"; return;
-  }
+  if(!q){suggestBox.style.display="none";return;}
   const m=allPosts.filter(p=>p.heading.toLowerCase().includes(q)).slice(0,8);
-  if(!m.length){
-    suggestBox.style.display="none"; return;
-  }
+  if(!m.length){suggestBox.style.display="none";return;}
   suggestBox.innerHTML=m.map(p=>`
     <div onclick="location.href='post.html?id=${p.id}'">${p.heading}</div>
   `).join("");
   suggestBox.style.display="block";
 };
+
 document.onclick=e=>{
   if(!searchInput.contains(e.target)){
     suggestBox.style.display="none";
   }
 };
 
-/* ===== HOME ===== */
+/* ========== HOME ========== */
 function renderHome(){
   window.rowData={
-    latest: allPosts,
-    telugu: allPosts.filter(p=>p.language==="Telugu"),
-    hindi: allPosts.filter(p=>p.language==="Hindi"),
-    english: allPosts.filter(p=>p.language==="English")
+    latest:allPosts,
+    telugu:allPosts.filter(p=>p.language==="Telugu"),
+    hindi:allPosts.filter(p=>p.language==="Hindi"),
+    english:allPosts.filter(p=>p.language==="English")
   };
+
   const rows=document.getElementById("rows");
   rows.innerHTML=
-    renderRow("Latest Movies", rowData.latest, "latest") +
-    renderRow("Telugu Movies", rowData.telugu, "telugu") +
-    renderRow("Hindi Movies", rowData.hindi, "hindi") +
-    renderRow("English Movies", rowData.english, "english");
+    renderRow("Latest Movies",rowData.latest,"latest")+
+    renderRow("Telugu Movies",rowData.telugu,"telugu")+
+    renderRow("Hindi Movies",rowData.hindi,"hindi")+
+    renderRow("English Movies",rowData.english,"english");
 }
 
-/* ===== INIT ===== */
+/* ========== INIT ========== */
 (async function(){
   allPosts=await loadPosts();
 
   /* SORT ID BIG → SMALL */
   allPosts.sort((a,b)=>parseInt(b.id)-parseInt(a.id));
-
   if(!allPosts.length) return;
 
-  /* HERO */
-  /* ===== HERO (RANDOM MOVIE EACH REFRESH) ===== */
-const hero = allPosts[Math.floor(Math.random() * allPosts.length)];
+  /* RANDOM HERO */
+  const hero=allPosts[Math.floor(Math.random()*allPosts.length)];
 
-document.getElementById("hero-bg").style.backgroundImage =
-  `url('${hero.poster}')`;
+  const heroEl=document.querySelector(".hero");
+  const heroBg=document.getElementById("hero-bg");
+  const heroVideo=document.getElementById("hero-video");
 
-document.getElementById("hero-title").textContent = hero.heading;
+  heroBg.style.backgroundImage=`url('${hero.poster}')`;
+  applyHeroGlow(hero.poster);
 
-document.getElementById("hero-link").href =
-  `post.html?id=${hero.id}`;
-  document.getElementById("hero-bg").style.backgroundImage=`url('${hero.poster}')`;
   document.getElementById("hero-title").textContent=hero.heading;
   document.getElementById("hero-link").href=`post.html?id=${hero.id}`;
+
+  if(!isTouchDevice && hero.videoUrl){
+    heroVideo.src=hero.videoUrl;
+    heroVideo.onloadeddata=()=>{
+      heroVideo.currentTime=8;
+      heroVideo.play();
+      heroEl.classList.add("video-active");
+    };
+  }
 
   renderHome();
 })();
