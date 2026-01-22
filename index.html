@@ -20,7 +20,7 @@ body{
   height:60vh;
   border-radius:18px;
   overflow:hidden;
-  margin-bottom:30px;
+  margin:20px;
 }
 .hero-bg{
   position:absolute;
@@ -47,6 +47,7 @@ body{
 .search-wrap{
   position:relative;
   max-width:500px;
+  margin:0 20px 30px;
 }
 .search-suggest{
   position:absolute;
@@ -69,16 +70,33 @@ body{
   background:#2a2e38;
 }
 
-/* ===== ROWS ===== */
-.row-title{
-  margin:20px 0 10px;
+/* ===== ROW HEADER ===== */
+.row-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:20px 20px 10px;
+}
+.row-header h4{
+  margin:0;
   font-size:18px;
 }
+.view-all{
+  font-size:14px;
+  color:#bbb;
+  cursor:pointer;
+}
+.view-all:hover{
+  color:#fff;
+  text-decoration:underline;
+}
+
+/* ===== ROW ===== */
 .ott-row{
   display:flex;
   gap:14px;
   overflow-x:auto;
-  padding-bottom:10px;
+  padding:0 20px 10px;
   scroll-behavior:smooth;
 }
 .ott-row::-webkit-scrollbar{
@@ -111,6 +129,14 @@ body{
   color:#ccc;
 }
 
+/* ===== VIEW ALL GRID ===== */
+.view-all-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:18px;
+  padding:20px;
+}
+
 /* ===== FADE ===== */
 .fade-in{
   opacity:0;
@@ -128,7 +154,7 @@ footer{
 
 <body>
 
-<div class="container mt-4">
+<div class="container-fluid">
 
   <!-- HERO -->
   <div class="hero fade-in">
@@ -141,7 +167,7 @@ footer{
   </div>
 
   <!-- SEARCH -->
-  <div class="search-wrap mb-4">
+  <div class="search-wrap">
     <input id="searchInput" class="form-control" placeholder="Search movies…">
     <div class="search-suggest" id="suggestBox"></div>
   </div>
@@ -161,6 +187,7 @@ const POSTS_JSON_URL="posts.json";
 const CACHE_TTL=24*60*60*1000;
 
 let allPosts=[];
+let currentViewAll=null;
 
 /* =====================
    CACHE UTILS
@@ -197,14 +224,40 @@ async function loadPosts(){
 }
 
 /* =====================
+   VIEW ALL MODE
+===================== */
+function showViewAll(title,list){
+  const rows=document.getElementById("rows");
+  rows.innerHTML=`
+    <div class="row-header">
+      <h4>${title}</h4>
+      <span class="view-all" onclick="renderHome()">⬅ Back</span>
+    </div>
+    <div class="view-all-grid">
+      ${list.map(p=>`
+        <div class="ott-card" onclick="location.href='post.html?id=${p.id}'">
+          <img src="${p.poster}" onerror="this.src='https://via.placeholder.com/300x450'">
+          <div class="ott-title">${p.heading}</div>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+/* =====================
    RENDER ROW
 ===================== */
-function renderRow(title,list){
+function renderRow(title,list,key){
   if(!list.length) return "";
   return `
-    <div class="row-title">${title}</div>
+    <div class="row-header">
+      <h4>${title}</h4>
+      <span class="view-all" onclick="showViewAll('${title}', window.rowData['${key}'])">
+        View All
+      </span>
+    </div>
     <div class="ott-row">
-      ${list.map(p=>`
+      ${list.slice(0,15).map(p=>`
         <div class="ott-card" onclick="location.href='post.html?id=${p.id}'">
           <img src="${p.poster}" onerror="this.src='https://via.placeholder.com/300x450'">
           <div class="ott-title">${p.heading}</div>
@@ -226,10 +279,7 @@ searchInput.oninput=function(){
     suggestBox.style.display="none";
     return;
   }
-  const matches=allPosts
-    .filter(p=>p.heading.toLowerCase().includes(q))
-    .slice(0,8);
-
+  const matches=allPosts.filter(p=>p.heading.toLowerCase().includes(q)).slice(0,8);
   if(!matches.length){
     suggestBox.style.display="none";
     return;
@@ -247,29 +297,43 @@ document.onclick=e=>{
 };
 
 /* =====================
+   HOME RENDER
+===================== */
+function renderHome(){
+  const rows=document.getElementById("rows");
+
+  window.rowData={
+    latest: allPosts,
+    telugu: allPosts.filter(p=>p.language==="Telugu"),
+    hindi: allPosts.filter(p=>p.language==="Hindi"),
+    english: allPosts.filter(p=>p.language==="English")
+  };
+
+  rows.innerHTML=
+    renderRow("Latest Movies", rowData.latest, "latest") +
+    renderRow("Telugu Movies", rowData.telugu, "telugu") +
+    renderRow("Hindi Movies", rowData.hindi, "hindi") +
+    renderRow("English Movies", rowData.english, "english");
+}
+
+/* =====================
    INIT
 ===================== */
 (async function(){
   allPosts=await loadPosts();
 
-  /* 🔥 SORT BY ID DESC (BIG → SMALL) */
+  /* SORT BIG → SMALL */
   allPosts.sort((a,b)=>parseInt(b.id)-parseInt(a.id));
 
   if(!allPosts.length) return;
 
-  /* HERO = LATEST MOVIE */
+  /* HERO */
   const hero=allPosts[0];
   document.getElementById("hero-bg").style.backgroundImage=`url('${hero.poster}')`;
   document.getElementById("hero-title").textContent=hero.heading;
   document.getElementById("hero-link").href=`post.html?id=${hero.id}`;
 
-  /* ROWS */
-  const rows=document.getElementById("rows");
-  rows.innerHTML=
-    renderRow("Latest Movies", allPosts.slice(0,15)) +
-    renderRow("Telugu Movies", allPosts.filter(p=>p.language==="Telugu")) +
-    renderRow("Hindi Movies", allPosts.filter(p=>p.language==="Hindi")) +
-    renderRow("English Movies", allPosts.filter(p=>p.language==="English"));
+  renderHome();
 })();
 </script>
 
