@@ -215,7 +215,7 @@ function renderRow(title,list){
 }
 
 /* =====================
-   SEARCH SUGGEST
+   SEARCH SUGGESTIONS
 ===================== */
 const searchInput=document.getElementById("searchInput");
 const suggestBox=document.getElementById("suggestBox");
@@ -226,7 +226,10 @@ searchInput.oninput=function(){
     suggestBox.style.display="none";
     return;
   }
-  const matches=allPosts.filter(p=>p.heading.toLowerCase().includes(q)).slice(0,8);
+  const matches=allPosts
+    .filter(p=>p.heading.toLowerCase().includes(q))
+    .slice(0,8);
+
   if(!matches.length){
     suggestBox.style.display="none";
     return;
@@ -248,9 +251,13 @@ document.onclick=e=>{
 ===================== */
 (async function(){
   allPosts=await loadPosts();
+
+  /* 🔥 SORT BY ID DESC (BIG → SMALL) */
+  allPosts.sort((a,b)=>parseInt(b.id)-parseInt(a.id));
+
   if(!allPosts.length) return;
 
-  /* HERO */
+  /* HERO = LATEST MOVIE */
   const hero=allPosts[0];
   document.getElementById("hero-bg").style.backgroundImage=`url('${hero.poster}')`;
   document.getElementById("hero-title").textContent=hero.heading;
