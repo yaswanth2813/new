@@ -77,10 +77,6 @@ body{
   align-items:center;
   margin:20px 20px 10px;
 }
-.row-header h4{
-  margin:0;
-  font-size:18px;
-}
 .view-all{
   font-size:14px;
   color:#bbb;
@@ -107,21 +103,29 @@ body{
   border-radius:10px;
 }
 
-/* ===== CARD ===== */
-.ott-card{
+/* ===== VIDEO PREVIEW CARD ===== */
+.preview-card{
+  position:relative;
   min-width:160px;
   cursor:pointer;
-  transition:transform .3s ease;
 }
-.ott-card:hover{
-  transform:scale(1.08);
-}
-.ott-card img{
+.preview-card img,
+.preview-card video{
   width:100%;
   height:240px;
   object-fit:cover;
   border-radius:14px;
 }
+.preview-card video{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease;
+}
+.preview-card:hover video{ opacity:1; }
+.preview-card:hover img{ opacity:0; }
+
 .ott-title{
   font-size:14px;
   text-align:center;
@@ -180,18 +184,13 @@ footer{
 <footer>Data provided by YASH</footer>
 
 <script>
-/* =====================
-   CONFIG + CACHE
-===================== */
 const POSTS_JSON_URL="posts.json";
 const CACHE_TTL=24*60*60*1000;
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 let allPosts=[];
-let currentViewAll=null;
 
-/* =====================
-   CACHE UTILS
-===================== */
+/* ===== CACHE ===== */
 function getCache(k){
   try{
     const r=localStorage.getItem(k);
@@ -209,9 +208,7 @@ function setCache(k,d){
   }catch{}
 }
 
-/* =====================
-   LOAD POSTS
-===================== */
+/* ===== LOAD POSTS ===== */
 async function loadPosts(){
   const c=getCache("posts_cache");
   if(c) return c;
@@ -223,9 +220,7 @@ async function loadPosts(){
   }catch{return[]}
 }
 
-/* =====================
-   VIEW ALL MODE
-===================== */
+/* ===== VIEW ALL ===== */
 function showViewAll(title,list){
   const rows=document.getElementById("rows");
   rows.innerHTML=`
@@ -234,19 +229,31 @@ function showViewAll(title,list){
       <span class="view-all" onclick="renderHome()">⬅ Back</span>
     </div>
     <div class="view-all-grid">
-      ${list.map(p=>`
-        <div class="ott-card" onclick="location.href='post.html?id=${p.id}'">
-          <img src="${p.poster}" onerror="this.src='https://via.placeholder.com/300x450'">
-          <div class="ott-title">${p.heading}</div>
-        </div>
-      `).join("")}
+      ${list.map(p=>cardHTML(p)).join("")}
     </div>
   `;
 }
 
-/* =====================
-   RENDER ROW
-===================== */
+/* ===== CARD HTML ===== */
+function cardHTML(p){
+  return `
+    <div class="preview-card"
+      onclick="location.href='post.html?id=${p.id}'"
+      ${!isTouchDevice ? `
+      onmouseenter="let v=this.querySelector('video'); if(v){v.currentTime=10; v.play();}"
+      onmouseleave="let v=this.querySelector('video'); if(v){v.pause();}"` : ``}
+    >
+      <img src="${p.poster}" onerror="this.src='https://via.placeholder.com/300x450'">
+      ${!isTouchDevice ? `
+      <video muted loop preload="metadata">
+        <source src="${p.videoUrl}" type="video/mp4">
+      </video>` : ``}
+      <div class="ott-title">${p.heading}</div>
+    </div>
+  `;
+}
+
+/* ===== RENDER ROW ===== */
 function renderRow(title,list,key){
   if(!list.length) return "";
   return `
@@ -257,58 +264,44 @@ function renderRow(title,list,key){
       </span>
     </div>
     <div class="ott-row">
-      ${list.slice(0,15).map(p=>`
-        <div class="ott-card" onclick="location.href='post.html?id=${p.id}'">
-          <img src="${p.poster}" onerror="this.src='https://via.placeholder.com/300x450'">
-          <div class="ott-title">${p.heading}</div>
-        </div>
-      `).join("")}
+      ${list.slice(0,15).map(p=>cardHTML(p)).join("")}
     </div>
   `;
 }
 
-/* =====================
-   SEARCH SUGGESTIONS
-===================== */
+/* ===== SEARCH ===== */
 const searchInput=document.getElementById("searchInput");
 const suggestBox=document.getElementById("suggestBox");
 
 searchInput.oninput=function(){
   const q=this.value.toLowerCase();
   if(!q){
-    suggestBox.style.display="none";
-    return;
+    suggestBox.style.display="none"; return;
   }
-  const matches=allPosts.filter(p=>p.heading.toLowerCase().includes(q)).slice(0,8);
-  if(!matches.length){
-    suggestBox.style.display="none";
-    return;
+  const m=allPosts.filter(p=>p.heading.toLowerCase().includes(q)).slice(0,8);
+  if(!m.length){
+    suggestBox.style.display="none"; return;
   }
-  suggestBox.innerHTML=matches.map(p=>`
+  suggestBox.innerHTML=m.map(p=>`
     <div onclick="location.href='post.html?id=${p.id}'">${p.heading}</div>
   `).join("");
   suggestBox.style.display="block";
 };
-
 document.onclick=e=>{
   if(!searchInput.contains(e.target)){
     suggestBox.style.display="none";
   }
 };
 
-/* =====================
-   HOME RENDER
-===================== */
+/* ===== HOME ===== */
 function renderHome(){
-  const rows=document.getElementById("rows");
-
   window.rowData={
     latest: allPosts,
     telugu: allPosts.filter(p=>p.language==="Telugu"),
     hindi: allPosts.filter(p=>p.language==="Hindi"),
     english: allPosts.filter(p=>p.language==="English")
   };
-
+  const rows=document.getElementById("rows");
   rows.innerHTML=
     renderRow("Latest Movies", rowData.latest, "latest") +
     renderRow("Telugu Movies", rowData.telugu, "telugu") +
@@ -316,13 +309,11 @@ function renderHome(){
     renderRow("English Movies", rowData.english, "english");
 }
 
-/* =====================
-   INIT
-===================== */
+/* ===== INIT ===== */
 (async function(){
   allPosts=await loadPosts();
 
-  /* SORT BIG → SMALL */
+  /* SORT ID BIG → SMALL */
   allPosts.sort((a,b)=>parseInt(b.id)-parseInt(a.id));
 
   if(!allPosts.length) return;
