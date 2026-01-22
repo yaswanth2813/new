@@ -1,227 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Yash - Movie Gallery</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yash OTT</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
 
-  <style>
-    body { background-color: #f0f4f8; }
+<style>
+body{
+  background:#0f1115;
+  color:#fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+}
 
-    .card {
-      transition: transform .3s ease, box-shadow .3s ease;
-      border-radius: 16px;
-      overflow: hidden;
-      cursor: pointer;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
+/* ===== HERO ===== */
+.hero{
+  position:relative;
+  height:60vh;
+  border-radius:18px;
+  overflow:hidden;
+  margin-bottom:30px;
+}
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  filter:blur(22px) brightness(.55);
+  transform:scale(1.2);
+}
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,.2),rgba(0,0,0,.95));
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+  padding:40px;
+  max-width:600px;
+}
 
-    .card:hover {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 12px 24px rgba(0,0,0,.15);
-    }
+/* ===== SEARCH ===== */
+.search-wrap{
+  position:relative;
+  max-width:500px;
+}
+.search-suggest{
+  position:absolute;
+  top:100%;
+  left:0;
+  right:0;
+  background:#1a1d24;
+  border-radius:10px;
+  max-height:300px;
+  overflow-y:auto;
+  display:none;
+  z-index:50;
+}
+.search-suggest div{
+  padding:10px;
+  cursor:pointer;
+  border-bottom:1px solid #2a2e38;
+}
+.search-suggest div:hover{
+  background:#2a2e38;
+}
 
-    .poster-img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
+/* ===== ROWS ===== */
+.row-title{
+  margin:20px 0 10px;
+  font-size:18px;
+}
+.ott-row{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  padding-bottom:10px;
+  scroll-behavior:smooth;
+}
+.ott-row::-webkit-scrollbar{
+  height:6px;
+}
+.ott-row::-webkit-scrollbar-thumb{
+  background:#333;
+  border-radius:10px;
+}
 
-    .card-body {
-      padding: 10px;
-      flex-grow: 1;
-    }
+/* ===== CARD ===== */
+.ott-card{
+  min-width:160px;
+  cursor:pointer;
+  transition:transform .3s ease;
+}
+.ott-card:hover{
+  transform:scale(1.08);
+}
+.ott-card img{
+  width:100%;
+  height:240px;
+  object-fit:cover;
+  border-radius:14px;
+}
+.ott-title{
+  font-size:14px;
+  text-align:center;
+  margin-top:6px;
+  color:#ccc;
+}
 
-    footer {
-      background: linear-gradient(to right, #4a90e2, #50e3c2);
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      margin-top: 50px;
-    }
+/* ===== FADE ===== */
+.fade-in{
+  opacity:0;
+  animation:fade .6s ease forwards;
+}
+@keyframes fade{to{opacity:1}}
 
-    .actor {
-      width: 100px;
-      height: auto;
-    }
-
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn .6s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-  </style>
+footer{
+  text-align:center;
+  color:#777;
+  margin:30px 0;
+}
+</style>
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-  <div class="container">
-    <a class="navbar-brand fs-4" href="#">Yash's Movie Collection</a>
+<div class="container mt-4">
+
+  <!-- HERO -->
+  <div class="hero fade-in">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-content">
+      <h1 id="hero-title">Loading…</h1>
+      <p class="text-muted">Watch movies OTT style</p>
+      <a id="hero-link" class="btn btn-light">Watch Now</a>
+    </div>
   </div>
-</nav>
 
-<!-- ACTOR LINKS -->
-<div class="d-flex p-2 gap-2">
-  <a href="mb/mb.html"><img class="actor border border-2" src="https://imgs.search.brave.com/ZOoMF0zfd1xtDk_32J_kryiWl_vg9X0RU54B5nhJl5E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzcwL2Iw/LzM5LzcwYjAzOTcx/OTE1NWFhNTFhMjE1/MjhjOGI2ZGE2NjRkLmpwZw"/></a>
-  <a href="ka/ka.html"><img class="actor border border-2" src="https://images.filmibeat.com/img/popcorn/profile_photos/kiran-abbavaram-20200908103724-46359.jpg"/></a>
-  <a href="pb/pb.html"><img class="actor border border-2" src="https://m.sakshipost.com/sites/default/files/styles/storypage_main/public/gallery_images/2025/10/22/Prabhas4-1729598340.jpg"/></a>
+  <!-- SEARCH -->
+  <div class="search-wrap mb-4">
+    <input id="searchInput" class="form-control" placeholder="Search movies…">
+    <div class="search-suggest" id="suggestBox"></div>
+  </div>
+
+  <!-- ROWS -->
+  <div id="rows"></div>
+
 </div>
 
-<!-- FILTER -->
-<div class="container mt-3">
-  <select class="form-select mb-3" id="languageSelect">
-    <option value="All">All Languages</option>
-    <option value="Live">Live</option>
-    <option value="Telugu">Telugu</option>
-    <option value="Hindi">Hindi</option>
-    <option value="English">English</option>
-    <option value="Requested">Requested</option>
-  </select>
-
-  <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search by Movie..." />
-</div>
-
-<!-- POSTS -->
-<div class="container-fluid py-4">
-  <div class="row g-3 fade-in" id="posts-container"></div>
-</div>
-
-<footer>
-  © 2025 My Movies. Data provided by YASH.
-</footer>
+<footer>Data provided by YASH</footer>
 
 <script>
 /* =====================
    CONFIG + CACHE
 ===================== */
-const POSTS_JSON_URL = "posts.json";
-const CACHE_TTL = 24 * 60 * 60 * 1000;
+const POSTS_JSON_URL="posts.json";
+const CACHE_TTL=24*60*60*1000;
 
-const container = document.getElementById("posts-container");
-const searchInput = document.getElementById("searchInput");
-const languageSelect = document.getElementById("languageSelect");
-
-let allPosts = [];
-let selectedLanguage = "All";
+let allPosts=[];
 
 /* =====================
    CACHE UTILS
 ===================== */
-function getCache(key) {
-  try {
-    const raw = localStorage.getItem(key);
-    if (!raw) return null;
-    const obj = JSON.parse(raw);
-    if (Date.now() - obj.time > CACHE_TTL) {
-      localStorage.removeItem(key);
-      return null;
+function getCache(k){
+  try{
+    const r=localStorage.getItem(k);
+    if(!r) return null;
+    const o=JSON.parse(r);
+    if(Date.now()-o.time>CACHE_TTL){
+      localStorage.removeItem(k); return null;
     }
-    return obj.data;
-  } catch { return null; }
+    return o.data;
+  }catch{return null}
 }
-
-function setCache(key, data) {
-  try {
-    localStorage.setItem(key, JSON.stringify({
-      time: Date.now(),
-      data
-    }));
-  } catch {}
+function setCache(k,d){
+  try{
+    localStorage.setItem(k,JSON.stringify({time:Date.now(),data:d}));
+  }catch{}
 }
 
 /* =====================
-   LOAD POSTS (JSON FIRST)
+   LOAD POSTS
 ===================== */
-async function loadPosts() {
-  const cacheKey = "posts_cache";
-  const cached = getCache(cacheKey);
-  if (cached) return cached;
-
-  try {
-    const res = await fetch(POSTS_JSON_URL);
-    const data = await res.json();
-    const cleaned = data.filter(p => p.heading).map(p => ({
-      ...p,
-      id: parseInt(p.id)
-    }));
-    setCache(cacheKey, cleaned);
-    return cleaned;
-  } catch {
-    return [];
-  }
+async function loadPosts(){
+  const c=getCache("posts_cache");
+  if(c) return c;
+  try{
+    const r=await fetch(POSTS_JSON_URL);
+    const d=(await r.json()).filter(p=>p.heading);
+    setCache("posts_cache",d);
+    return d;
+  }catch{return[]}
 }
 
 /* =====================
-   CARD CREATION
+   RENDER ROW
 ===================== */
-function createCard(post) {
-  const col = document.createElement("div");
-  col.className = "col-6 col-md-4 col-lg-2 d-flex";
-
-  col.innerHTML = `
-    <div class="card shadow-sm">
-      <img src="${post.poster}" class="poster-img"
-        onerror="this.src='https://via.placeholder.com/200x300?text=No+Image'">
-      <div class="card-body">
-        <h6 class="d-flex justify-content-between">
-          <span>${post.heading}</span>
-          <span class="badge bg-success">${post.language}</span>
-        </h6>
-      </div>
+function renderRow(title,list){
+  if(!list.length) return "";
+  return `
+    <div class="row-title">${title}</div>
+    <div class="ott-row">
+      ${list.map(p=>`
+        <div class="ott-card" onclick="location.href='post.html?id=${p.id}'">
+          <img src="${p.poster}" onerror="this.src='https://via.placeholder.com/300x450'">
+          <div class="ott-title">${p.heading}</div>
+        </div>
+      `).join("")}
     </div>
   `;
-
-  col.onclick = () => {
-    window.location.href = `post.html?id=${post.id}`;
-  };
-
-  return col;
 }
 
 /* =====================
-   FILTER + RENDER
+   SEARCH SUGGEST
 ===================== */
-function filterAndRender() {
-  const q = searchInput.value.toLowerCase();
+const searchInput=document.getElementById("searchInput");
+const suggestBox=document.getElementById("suggestBox");
 
-  const filtered = allPosts.filter(p => {
-    const matchText = p.heading.toLowerCase().includes(q);
-    const matchLang = selectedLanguage === "All" || p.language === selectedLanguage;
-    return matchText && matchLang;
-  });
-
-  filtered.sort((a, b) => b.id - a.id);
-
-  container.innerHTML = "";
-  if (!filtered.length) {
-    container.innerHTML = "<p class='text-center text-muted'>No movies found.</p>";
+searchInput.oninput=function(){
+  const q=this.value.toLowerCase();
+  if(!q){
+    suggestBox.style.display="none";
     return;
   }
+  const matches=allPosts.filter(p=>p.heading.toLowerCase().includes(q)).slice(0,8);
+  if(!matches.length){
+    suggestBox.style.display="none";
+    return;
+  }
+  suggestBox.innerHTML=matches.map(p=>`
+    <div onclick="location.href='post.html?id=${p.id}'">${p.heading}</div>
+  `).join("");
+  suggestBox.style.display="block";
+};
 
-  filtered.forEach(p => container.appendChild(createCard(p)));
-}
+document.onclick=e=>{
+  if(!searchInput.contains(e.target)){
+    suggestBox.style.display="none";
+  }
+};
 
 /* =====================
    INIT
 ===================== */
-(async function init() {
-  allPosts = await loadPosts();
-  filterAndRender();
-})();
+(async function(){
+  allPosts=await loadPosts();
+  if(!allPosts.length) return;
 
-searchInput.oninput = filterAndRender;
-languageSelect.onchange = e => {
-  selectedLanguage = e.target.value;
-  filterAndRender();
-};
+  /* HERO */
+  const hero=allPosts[0];
+  document.getElementById("hero-bg").style.backgroundImage=`url('${hero.poster}')`;
+  document.getElementById("hero-title").textContent=hero.heading;
+  document.getElementById("hero-link").href=`post.html?id=${hero.id}`;
+
+  /* ROWS */
+  const rows=document.getElementById("rows");
+  rows.innerHTML=
+    renderRow("Latest Movies", allPosts.slice(0,15)) +
+    renderRow("Telugu Movies", allPosts.filter(p=>p.language==="Telugu")) +
+    renderRow("Hindi Movies", allPosts.filter(p=>p.language==="Hindi")) +
+    renderRow("English Movies", allPosts.filter(p=>p.language==="English"));
+})();
 </script>
 
 </body>
