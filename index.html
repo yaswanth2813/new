@@ -339,7 +339,16 @@ function renderHome(){
   if(!allPosts.length) return;
 
   /* HERO */
-  const hero=allPosts[0];
+  /* ===== HERO (RANDOM MOVIE EACH REFRESH) ===== */
+const hero = allPosts[Math.floor(Math.random() * allPosts.length)];
+
+document.getElementById("hero-bg").style.backgroundImage =
+  `url('${hero.poster}')`;
+
+document.getElementById("hero-title").textContent = hero.heading;
+
+document.getElementById("hero-link").href =
+  `post.html?id=${hero.id}`;
   document.getElementById("hero-bg").style.backgroundImage=`url('${hero.poster}')`;
   document.getElementById("hero-title").textContent=hero.heading;
   document.getElementById("hero-link").href=`post.html?id=${hero.id}`;
