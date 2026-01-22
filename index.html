@@ -13,7 +13,27 @@ body{
   color:#fff;
   font-family: system-ui, -apple-system, BlinkMacSystemFont;
 }
+grid-template-columns: repeat(auto-fill, minmax(160px,1fr));
+  /* ===== VIEW ALL GRID (RESPONSIVE OTT STYLE) ===== */
+.view-all-grid{
+  display: grid;
+  gap: 18px;
+  padding: 20px;
+}
 
+/* 📱 Mobile: 2 cards per row */
+@media (max-width: 575px) {
+  .view-all-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 📲 Tablet & Desktop: 3 cards per row */
+@media (min-width: 576px) {
+  .view-all-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 /* ===== HERO ===== */
 .hero{
   position:relative;
