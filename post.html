@@ -181,21 +181,29 @@ function setCache(key, data) {
 /* =====================
    FETCH POSTS (JSON FIRST)
 ===================== */
+
 async function fetchPosts() {
-  const cacheKey = `posts_${POSTS_JSON_URL}`;
-  const cached = getCache(cacheKey);
-  if (cached) return cached;
+  const cacheKey = "posts_cache";
 
   try {
-    const res = await fetch(POSTS_JSON_URL);
-    const data = await res.json();
-    setCache(cacheKey, data);
-    return data;
+    // 🔥 Always try fresh JSON
+    const res = await fetch(POSTS_JSON_URL, { cache: "no-store" });
+    const freshData = (await res.json()).filter(p => p.heading);
+
+    const cached = getCache(cacheKey);
+
+    // 🔁 Update cache if data changed
+    if (!cached || cached.length !== freshData.length) {
+      setCache(cacheKey, freshData);
+      return freshData;
+    }
+
+    return cached;
   } catch {
-    return [];
+    // Offline fallback
+    return getCache(cacheKey) || [];
   }
 }
-
 /* =====================
    OPTIONAL OMDB (SAFE)
 ===================== */
