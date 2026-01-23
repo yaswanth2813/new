@@ -258,14 +258,23 @@ function setCache(k,d){
 
 /* ========== LOAD POSTS ========== */
 async function loadPosts(){
-  const c=getCache("posts_cache");
-  if(c) return c;
-  try{
-    const r=await fetch(POSTS_JSON_URL);
-    const d=(await r.json()).filter(p=>p.heading);
-    setCache("posts_cache",d);
-    return d;
-  }catch{return[]}
+  const cacheKey = "posts_cache";
+
+  try {
+    const res = await fetch(POSTS_JSON_URL, { cache: "no-store" });
+    const freshData = (await res.json()).filter(p => p.heading);
+
+    // 🔥 Compare cache vs fresh length
+    const cached = getCache(cacheKey);
+    if (!cached || cached.length !== freshData.length) {
+      setCache(cacheKey, freshData);
+      return freshData;
+    }
+
+    return cached;
+  } catch {
+    return getCache(cacheKey) || [];
+  }
 }
 
 /* ========== HERO COLOR GLOW ========== */
