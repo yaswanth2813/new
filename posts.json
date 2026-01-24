@@ -90,7 +90,7 @@
   {
     "id": 9,
     "heading": "Khaleja",
-    "poster": "",
+    "poster": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/khaleja-et00005145-1747465177.jpg",
     "backdrop": "",
     "year": 2010,
     "genre": "Fantasy, Comedy",
@@ -112,7 +112,7 @@
   {
     "id": 11,
     "heading": "They Call Him OG",
-    "poster": "",
+    "poster": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/they-call-him-og-et00369074-1758290791.jpg",
     "backdrop": "",
     "year": 2025,
     "genre": "Action, Crime",
@@ -123,7 +123,7 @@
   {
     "id": 12,
     "heading": "Vikram",
-    "poster": "",
+    "poster": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/vikram-et00138591-22-07-2021-11-45-18.jpg",
     "backdrop": "",
     "year": 2022,
     "genre": "Action, Thriller",
@@ -134,7 +134,7 @@
   {
     "id": 13,
     "heading": "Hi Nanna",
-    "poster": "https://survi.in/wp-content/uploads/2023/12/Hi-Nanna-Review-e1701953882869.jpeg",
+    "poster": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/hi-nanna-et00364503-1701678655.jpg",
     "backdrop": "",
     "year": 2023,
     "genre": "Romantic Drama",
@@ -1100,6 +1100,7 @@
     "videoUrl": ""
   }
 ]
+
 
 
 
