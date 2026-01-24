@@ -164,6 +164,8 @@ const id = parseInt(params.get("id"));
 const src = params.get("src");
 const POSTS_JSON_URL = src ? src + "/" + src + ".json" : "posts.json";
 const container = document.getElementById("movie-container");
+const stars = Math.round(rating / 2); // TMDB 10 → 5 stars
+const starHTML = "⭐".repeat(stars) + "☆".repeat(5 - stars);
 
 async function fetchPosts(){
   const r = await fetch(POSTS_JSON_URL);
@@ -221,14 +223,8 @@ async function fetchCredits(id){
 
     <div class="hero-text">
       <h4>${post.heading} (${post.year})</h4>
-      <p class="text-muted rating">
-  ${Array.from({ length: 5 }, (_, i) =>
-    i < Math.round(rating / 2)
-      ? '<i class="fa fa-star"></i>'
-      : '<i class="fa fa-star-o"></i>'
-  ).join('')}
-  <span>${rating}</span>
-</p>
+      <p class="text-muted">${starHTML} <span>${rating}/10</span></p>
+
 
     </div>
   </div>
