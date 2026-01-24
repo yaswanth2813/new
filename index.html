@@ -61,8 +61,8 @@ body{
   position:absolute;
   inset:0;
   background-size:cover;
-  background-position:center;
-  filter:blur(9px) brightness(.55);
+  background-position:top;
+  filter:blur(1px) brightness(.55);
   transform:scale(1.2);
 }
 #hero-video{
@@ -153,6 +153,9 @@ body{
 }
 @media(max-width:575px){.view-all-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:576px){.view-all-grid{grid-template-columns:repeat(3,1fr)}}
+
+
+
 </style>
 </head>
 
@@ -191,6 +194,46 @@ const POSTS_JSON_URL="posts.json";
 const isTouch=('ontouchstart'in window)||navigator.maxTouchPoints>0;
 const isLowEnd=navigator.hardwareConcurrency<=4||navigator.deviceMemory<=4;
 let allPosts=[];
+/* ===== TMDB CONFIG ===== */
+const TMDB_API_KEY = "532a88c1ce983a87d6b28e49ad40a68e";
+const TMDB_IMG = "https://image.tmdb.org/t/p/original";
+const BACKDROP_TTL = 24 * 60 * 60 * 1000;
+
+/* ===== TMDB CACHE ===== */
+function getBackdropCache(key){
+  try{
+    const c = JSON.parse(localStorage.getItem(key));
+    if(c && Date.now() - c.time < BACKDROP_TTL) return c.url;
+  }catch{}
+  return null;
+}
+function setBackdropCache(key, url){
+  try{
+    localStorage.setItem(key, JSON.stringify({ url, time: Date.now() }));
+  }catch{}
+}
+
+/* ===== FETCH TMDB BACKDROP ===== */
+async function fetchBackdrop(title){
+  const key = "bd_" + title.toLowerCase();
+  const cached = getBackdropCache(key);
+  if(cached) return cached;
+
+  try{
+    const res = await fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}`
+    );
+    const data = await res.json();
+    const movie = data.results?.find(m => m.backdrop_path);
+    if(movie){
+      const url = TMDB_IMG + movie.backdrop_path;
+      setBackdropCache(key, url);
+      return url;
+    }
+  }catch(e){}
+  return null;
+}
+
 
 /* ========== AUDIO FADE ========== */
 function fadeInAudio(v){
@@ -323,7 +366,8 @@ allPosts.sort((a,b)=>b.id-a.id);
 
 /* HERO */
 const hero=allPosts[Math.floor(Math.random()*allPosts.length)];
-document.getElementById("hero-bg").style.backgroundImage=`url('${hero.poster}')`;
+const backdrop = await fetchBackdrop(hero.heading);
+document.getElementById("hero-bg").style.backgroundImage =`url('${backdrop || hero.poster}')`;
 document.getElementById("hero-title").textContent=hero.heading;
 document.getElementById("hero-link").href=`post.html?id=${hero.id}`;
 
