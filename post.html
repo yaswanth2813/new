@@ -40,7 +40,7 @@ body{
   );
 }
 .hero-poster{
-  position:absolute;
+  position:relative;
   bottom:-80px;
   left:24px;
   width:220px;
@@ -140,6 +140,9 @@ video{
   display:inline-block;
   font-size:13px;
 }
+.text-muted{
+  color:white;
+}
 </style>
 </head>
 
@@ -222,7 +225,7 @@ async function fetchCredits(id){
   <div class="content">
     <div class="info-box">
       <strong>Director:</strong> ${director}<br>
-      <strong>Cast:</strong> ${post.starring}
+      
     </div>
 
     <div class="info-box"><strong>Plot:</strong> ${plot}</div>
