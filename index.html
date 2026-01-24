@@ -11,18 +11,52 @@
 body{
   background:#0f1115;
   color:#fff;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont;
+}
+
+/* ================= SKELETON ================= */
+.skeleton{
+  background:#1a1d24;
+  border-radius:14px;
+  position:relative;
+  overflow:hidden;
+}
+.skeleton::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    110deg,
+    rgba(255,255,255,0) 30%,
+    rgba(255,255,255,.08) 45%,
+    rgba(255,255,255,0) 60%
+  );
+  animation:shimmer 1.2s infinite;
+}
+@keyframes shimmer{
+  from{transform:translateX(-100%)}
+  to{transform:translateX(100%)}
+}
+.hero-skeleton{
+  height:60vh;
+  margin:20px;
+  border-radius:18px;
+}
+.card-skeleton{
+  min-width:160px;
+  height:240px;
+  flex:0 0 auto;
 }
 
 /* ================= HERO ================= */
 .hero{
+  display:none;
   position:relative;
   height:60vh;
   border-radius:18px;
   overflow:hidden;
   margin:20px;
 }
-
 .hero-bg{
   position:absolute;
   inset:0;
@@ -30,23 +64,7 @@ body{
   background-position:center;
   filter:blur(9px) brightness(.55);
   transform:scale(1.2);
-  z-index:0;
 }
-
-/* 🎨 Dynamic glow */
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:-20%;
-  background:radial-gradient(
-    circle at center,
-    var(--hero-glow, rgba(0,0,0,.4)) 0%,
-    rgba(0,0,0,0) 70%
-  );
-  z-index:0;
-}
-
-/* 🎬 Hero video */
 #hero-video{
   position:absolute;
   inset:0;
@@ -54,77 +72,35 @@ body{
   height:100%;
   object-fit:cover;
   opacity:0;
-  transition:opacity .6s ease;
-  z-index:1;
+  transition:opacity .6s;
 }
-
-.hero.video-active #hero-video{
-  opacity:1;
-}
-
+.hero.video-active #hero-video{opacity:1}
 .hero::after{
   content:"";
   position:absolute;
   inset:0;
   background:linear-gradient(to bottom,rgba(0,0,0,.2),rgba(0,0,0,.95));
-  z-index:2;
 }
-
 .hero-content{
   position:relative;
-  z-index:3;
+  z-index:2;
   padding:40px;
   max-width:600px;
 }
 
-/* ================= SEARCH ================= */
-.search-wrap{
-  position:relative;
-  max-width:500px;
-  margin:0 20px 30px;
-}
-
-.search-suggest{
-  position:absolute;
-  top:100%;
-  left:0;
-  right:0;
-  background:#1a1d24;
-  border-radius:10px;
-  max-height:300px;
-  overflow-y:auto;
-  display:none;
-  z-index:50;
-}
-
-.search-suggest div{
-  padding:10px;
-  cursor:pointer;
-  border-bottom:1px solid #2a2e38;
-}
-
-.search-suggest div:hover{
-  background:#2a2e38;
-}
-
-/* ================= ROWS ================= */
+/* ================= ROWS / CAROUSEL ================= */
 .row-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
   margin:20px 20px 10px;
 }
-
 .view-all{
   font-size:14px;
   color:#bbb;
   cursor:pointer;
 }
-
-.view-all:hover{
-  color:#fff;
-  text-decoration:underline;
-}
+.view-all:hover{color:#fff;text-decoration:underline}
 
 .ott-row{
   display:flex;
@@ -133,22 +109,18 @@ body{
   padding:0 20px 10px;
   scroll-behavior:smooth;
 }
-
-.ott-row::-webkit-scrollbar{
-  height:6px;
-}
+.ott-row::-webkit-scrollbar{height:6px}
 .ott-row::-webkit-scrollbar-thumb{
   background:#333;
   border-radius:10px;
 }
 
-/* ================= CARD + VIDEO HOVER ================= */
+/* ================= CARD ================= */
 .preview-card{
   position:relative;
   min-width:160px;
   cursor:pointer;
 }
-
 .preview-card img,
 .preview-card video{
   width:100%;
@@ -156,17 +128,15 @@ body{
   object-fit:cover;
   border-radius:14px;
 }
-
 .preview-card video{
   position:absolute;
   inset:0;
   opacity:0;
   pointer-events:none;
-  transition:opacity .3s ease;
+  transition:opacity .3s;
 }
-
-.preview-card:hover video{ opacity:1; }
-.preview-card:hover img{ opacity:0; }
+.preview-card:hover video{opacity:1}
+.preview-card:hover img{opacity:0}
 
 .ott-title{
   font-size:14px;
@@ -181,26 +151,8 @@ body{
   gap:18px;
   padding:20px;
 }
-
-@media (max-width:575px){
-  .view-all-grid{ grid-template-columns:repeat(2,1fr); }
-}
-@media (min-width:576px){
-  .view-all-grid{ grid-template-columns:repeat(3,1fr); }
-}
-
-/* ================= MISC ================= */
-.fade-in{
-  opacity:0;
-  animation:fade .6s ease forwards;
-}
-@keyframes fade{ to{opacity:1} }
-
-footer{
-  text-align:center;
-  color:#777;
-  margin:30px 0;
-}
+@media(max-width:575px){.view-all-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:576px){.view-all-grid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 
@@ -208,118 +160,131 @@ footer{
 
 <div class="container-fluid">
 
-  <!-- HERO -->
-  <div class="hero fade-in">
-    <div class="hero-bg" id="hero-bg"></div>
-    <video id="hero-video" muted loop playsinline></video>
+<!-- HERO SKELETON -->
+<div class="skeleton hero-skeleton" id="hero-skeleton"></div>
 
-    <div class="hero-content">
-      <h1 id="hero-title">Loading…</h1>
-      <p class="text-muted">Watch movies OTT style</p>
-      <a id="hero-link" class="btn btn-light">Watch Now</a>
-    </div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg" id="hero-bg"></div>
+  <video id="hero-video" muted loop playsinline preload="metadata"></video>
+  <div class="hero-content">
+    <h1 id="hero-title"></h1>
+    <a id="hero-link" class="btn btn-light">Watch Now</a>
   </div>
+</div>
 
-  <!-- SEARCH -->
-  <div class="search-wrap">
-    <input id="searchInput" class="form-control" placeholder="Search movies…">
-    <div class="search-suggest" id="suggestBox"></div>
+<!-- ROWS -->
+<div id="rows">
+  <div class="row-header"><h4>Loading…</h4></div>
+  <div class="ott-row">
+    <div class="skeleton card-skeleton"></div>
+    <div class="skeleton card-skeleton"></div>
+    <div class="skeleton card-skeleton"></div>
+    <div class="skeleton card-skeleton"></div>
   </div>
-
-  <!-- ROWS -->
-  <div id="rows"></div>
+</div>
 
 </div>
 
-<footer>Data provided by YASH</footer>
-
 <script>
 const POSTS_JSON_URL="posts.json";
-const CACHE_TTL=24*60*60*1000;
-const isTouchDevice=('ontouchstart' in window)||navigator.maxTouchPoints>0;
-
+const isTouch=('ontouchstart'in window)||navigator.maxTouchPoints>0;
+const isLowEnd=navigator.hardwareConcurrency<=4||navigator.deviceMemory<=4;
 let allPosts=[];
 
-/* ========== CACHE ========== */
-function getCache(k){
-  try{
-    const r=localStorage.getItem(k);
-    if(!r) return null;
-    const o=JSON.parse(r);
-    if(Date.now()-o.time>CACHE_TTL){
-      localStorage.removeItem(k); return null;
+/* ========== AUDIO FADE ========== */
+function fadeInAudio(v){
+  v.muted=false;v.volume=0;
+  let vol=0;
+  v._fade=setInterval(()=>{
+    vol+=0.1;
+    v.volume=Math.min(vol,0.6);
+    if(vol>=0.6) clearInterval(v._fade);
+  },80);
+}
+
+/* ========== AUTO PAUSE OFFSCREEN ========== */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting){
+      const v=e.target.querySelector("video");
+      if(v){
+        clearInterval(v._loopTimer);
+        v.pause();
+      }
     }
-    return o.data;
-  }catch{return null}
-}
-function setCache(k,d){
-  try{ localStorage.setItem(k,JSON.stringify({time:Date.now(),data:d})); }catch{}
-}
-
-/* ========== LOAD POSTS ========== */
-async function loadPosts(){
-  const cacheKey = "posts_cache";
-
-  try {
-    const res = await fetch(POSTS_JSON_URL, { cache: "no-store" });
-    const freshData = (await res.json()).filter(p => p.heading);
-
-    // 🔥 Compare cache vs fresh length
-    const cached = getCache(cacheKey);
-    if (!cached || cached.length !== freshData.length) {
-      setCache(cacheKey, freshData);
-      return freshData;
-    }
-
-    return cached;
-  } catch {
-    return getCache(cacheKey) || [];
-  }
-}
-
-/* ========== HERO COLOR GLOW ========== */
-function applyHeroGlow(imgUrl){
-  const img=new Image();
-  img.crossOrigin="anonymous";
-  img.src=imgUrl;
-  img.onload=()=>{
-    const c=document.createElement("canvas");
-    const x=c.getContext("2d");
-    c.width=c.height=10;
-    x.drawImage(img,0,0,10,10);
-    const d=x.getImageData(0,0,10,10).data;
-    let r=0,g=0,b=0,n=0;
-    for(let i=0;i<d.length;i+=4){
-      r+=d[i]; g+=d[i+1]; b+=d[i+2]; n++;
-    }
-    r=Math.floor(r/n); g=Math.floor(g/n); b=Math.floor(b/n);
-    document.documentElement.style.setProperty(
-      "--hero-glow",`rgba(${r},${g},${b},0.45)`
-    );
-  };
-}
+  });
+},{threshold:.3});
 
 /* ========== CARD HTML ========== */
 function cardHTML(p){
-  return `
-    <div class="preview-card"
-      onclick="location.href='post.html?id=${p.id}'"
-      ${!isTouchDevice?`
-      onmouseenter="let v=this.querySelector('video');if(v){v.currentTime=8;v.play();}"
-      onmouseleave="let v=this.querySelector('video');if(v){v.pause();}"`:""}
-    >
-      <img src="${p.poster}" onerror="this.src='https://via.placeholder.com/300x450'">
-      ${!isTouchDevice && p.videoUrl?`
-      <video muted loop preload="metadata">
-        <source src="${p.videoUrl}" type="video/mp4">
-      </video>`:""}
-      <div class="ott-title">${p.heading}</div>
-    </div>
-  `;
+return `
+<div class="preview-card"
+${isTouch?`
+onclick="
+  const v=this.querySelector('video');
+  if(!v){location.href='post.html?id=${p.id}';return;}
+  if(!v._playing){
+    const play=()=>{
+      v.currentTime=Math.random()*(v.duration-4);
+      v.play();v._playing=true;
+    };
+    v.muted=true;
+    if(v.readyState>=1) play();
+    else v.onloadedmetadata=play;
+  }else location.href='post.html?id=${p.id}';
+"`:`
+onmouseenter="
+  if(${isLowEnd})return;
+  const card=this,v=card.querySelector('video');
+  card._hover=setTimeout(()=>{
+    const play=()=>{
+      const seg=3.5;
+      const start=Math.random()*(v.duration-seg-1);
+      v.currentTime=start;
+      v.play();fadeInAudio(v);
+      v._loopTimer=setInterval(()=>{
+        if(v.currentTime>=start+seg)v.currentTime=start;
+      },200);
+    };
+    if(v.readyState>=1) play();
+    else v.onloadedmetadata=play;
+  },300);
+"
+onmouseleave="
+  clearTimeout(this._hover);
+  const v=this.querySelector('video');
+  if(v){
+    clearInterval(v._loopTimer);
+    clearInterval(v._fade);
+    v.muted=true;v.volume=0;
+    v.pause();
+  }
+"`}>
+<img src="${p.poster}" class="skeleton"
+onload="this.classList.remove('skeleton')">
+${!isTouch && p.videoUrl?`
+<video muted preload="none" playsinline>
+  <source src="${p.videoUrl}" type="video/mp4">
+</video>`:""}
+<div class="ott-title">${p.heading}</div>
+</div>`;
 }
 
-/* ========== VIEW ALL ========== */
-function showViewAll(title,list){
+/* ========== ROWS ========== */
+function renderRow(title,list,key){
+  if(!list.length) return "";
+  return `
+  <div class="row-header">
+    <h4>${title}</h4>
+    <span class="view-all" onclick="showViewAll('${title}','${key}')">View All</span>
+  </div>
+  <div class="ott-row">
+    ${list.slice(0,15).map(p=>cardHTML(p)).join("")}
+  </div>`;
+}
+
+function showViewAll(title,key){
   const rows=document.getElementById("rows");
   rows.innerHTML=`
     <div class="row-header">
@@ -327,49 +292,11 @@ function showViewAll(title,list){
       <span class="view-all" onclick="renderHome()">⬅ Back</span>
     </div>
     <div class="view-all-grid">
-      ${list.map(p=>cardHTML(p)).join("")}
-    </div>
-  `;
+      ${rowData[key].map(p=>cardHTML(p)).join("")}
+    </div>`;
+  document.querySelectorAll(".preview-card").forEach(c=>observer.observe(c));
 }
 
-/* ========== ROW ========== */
-function renderRow(title,list,key){
-  if(!list.length) return "";
-  return `
-    <div class="row-header">
-      <h4>${title}</h4>
-      <span class="view-all" onclick="showViewAll('${title}',rowData['${key}'])">
-        View All
-      </span>
-    </div>
-    <div class="ott-row">
-      ${list.slice(0,15).map(p=>cardHTML(p)).join("")}
-    </div>
-  `;
-}
-
-/* ========== SEARCH ========== */
-const searchInput=document.getElementById("searchInput");
-const suggestBox=document.getElementById("suggestBox");
-
-searchInput.oninput=function(){
-  const q=this.value.toLowerCase();
-  if(!q){suggestBox.style.display="none";return;}
-  const m=allPosts.filter(p=>p.heading.toLowerCase().includes(q)).slice(0,8);
-  if(!m.length){suggestBox.style.display="none";return;}
-  suggestBox.innerHTML=m.map(p=>`
-    <div onclick="location.href='post.html?id=${p.id}'">${p.heading}</div>
-  `).join("");
-  suggestBox.style.display="block";
-};
-
-document.onclick=e=>{
-  if(!searchInput.contains(e.target)){
-    suggestBox.style.display="none";
-  }
-};
-
-/* ========== HOME ========== */
 function renderHome(){
   window.rowData={
     latest:allPosts,
@@ -384,39 +311,40 @@ function renderHome(){
     renderRow("Telugu Movies",rowData.telugu,"telugu")+
     renderRow("Hindi Movies",rowData.hindi,"hindi")+
     renderRow("English Movies",rowData.english,"english");
+
+  document.querySelectorAll(".preview-card").forEach(c=>observer.observe(c));
 }
 
 /* ========== INIT ========== */
-(async function(){
-  allPosts=await loadPosts();
+(async()=>{
+const res=await fetch(POSTS_JSON_URL);
+allPosts=(await res.json()).filter(p=>p.heading);
+allPosts.sort((a,b)=>b.id-a.id);
 
-  /* SORT ID BIG → SMALL */
-  allPosts.sort((a,b)=>parseInt(b.id)-parseInt(a.id));
-  if(!allPosts.length) return;
+/* HERO */
+const hero=allPosts[Math.floor(Math.random()*allPosts.length)];
+document.getElementById("hero-bg").style.backgroundImage=`url('${hero.poster}')`;
+document.getElementById("hero-title").textContent=hero.heading;
+document.getElementById("hero-link").href=`post.html?id=${hero.id}`;
 
-  /* RANDOM HERO */
-  const hero=allPosts[Math.floor(Math.random()*allPosts.length)];
+const heroVideo=document.getElementById("hero-video");
+if(hero.videoUrl){
+  heroVideo.src=hero.videoUrl;
+  heroVideo.onloadedmetadata=()=>{
+    const s=heroVideo.duration*.4;
+    const e=heroVideo.duration*.6;
+    heroVideo.currentTime=s+Math.random()*(e-s);
+    heroVideo.play();
+    document.querySelector(".hero").classList.add("video-active");
+  };
+}
 
-  const heroEl=document.querySelector(".hero");
-  const heroBg=document.getElementById("hero-bg");
-  const heroVideo=document.getElementById("hero-video");
+/* SHOW HERO */
+document.getElementById("hero-skeleton").remove();
+document.querySelector(".hero").style.display="block";
 
-  heroBg.style.backgroundImage=`url('${hero.poster}')`;
-  applyHeroGlow(hero.poster);
-
-  document.getElementById("hero-title").textContent=hero.heading;
-  document.getElementById("hero-link").href=`post.html?id=${hero.id}`;
-
-  if(!isTouchDevice && hero.videoUrl){
-    heroVideo.src=hero.videoUrl;
-    heroVideo.onloadeddata=()=>{
-      heroVideo.currentTime=8;
-      heroVideo.play();
-      heroEl.classList.add("video-active");
-    };
-  }
-
-  renderHome();
+/* HOME */
+renderHome();
 })();
 </script>
 
