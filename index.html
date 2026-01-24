@@ -234,85 +234,111 @@ footer{
 <footer>Data provided by YASH</footer>
 
 <script>
-const POSTS_JSON_URL="posts.json";
-const CACHE_TTL=24*60*60*1000;
-const isTouchDevice=('ontouchstart' in window)||navigator.maxTouchPoints>0;
+const TMDB_API_KEY = "532a88c1ce983a87d6b28e49ad40a68e";
+const TMDB_BASE = "https://api.themoviedb.org/3";
+const IMG_BASE = "https://image.tmdb.org/t/p/w500";
 
-let allPosts=[];
+const CACHE_TTL = 24 * 60 * 60 * 1000;
+const isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+
+let allPosts = [];
 
 /* ========== CACHE ========== */
 function getCache(k){
   try{
-    const r=localStorage.getItem(k);
+    const r = localStorage.getItem(k);
     if(!r) return null;
-    const o=JSON.parse(r);
-    if(Date.now()-o.time>CACHE_TTL){
-      localStorage.removeItem(k); return null;
+    const o = JSON.parse(r);
+    if(Date.now() - o.time > CACHE_TTL){
+      localStorage.removeItem(k);
+      return null;
     }
     return o.data;
-  }catch{return null}
+  }catch{ return null }
 }
 function setCache(k,d){
-  try{ localStorage.setItem(k,JSON.stringify({time:Date.now(),data:d})); }catch{}
+  try{
+    localStorage.setItem(k, JSON.stringify({ time: Date.now(), data: d }));
+  }catch{}
 }
 
-/* ========== LOAD POSTS ========== */
+/* ========== TMDB → YOUR FORMAT ========== */
+function mapMovie(m){
+  return {
+    id: m.id,
+    heading: m.title || m.name,
+    poster: m.poster_path ? IMG_BASE + m.poster_path : "",
+    language:
+      m.original_language === "te" ? "Telugu" :
+      m.original_language === "hi" ? "Hindi" :
+      "English",
+    videoUrl: "" // trailers handled later if you want
+  };
+}
+
+/* ========== LOAD FROM TMDB ========== */
 async function loadPosts(){
-  const cacheKey = "posts_cache";
+  const cacheKey = "tmdb_cache";
+  const cached = getCache(cacheKey);
+  if(cached) return cached;
 
-  try {
-    const res = await fetch(POSTS_JSON_URL, { cache: "no-store" });
-    const freshData = (await res.json()).filter(p => p.heading);
+  const urls = [
+    `${TMDB_BASE}/trending/movie/week?api_key=${TMDB_API_KEY}`,
+    `${TMDB_BASE}/discover/movie?api_key=${TMDB_API_KEY}&with_original_language=te`,
+    `${TMDB_BASE}/discover/movie?api_key=${TMDB_API_KEY}&with_original_language=hi`
+  ];
 
-    // 🔥 Compare cache vs fresh length
-    const cached = getCache(cacheKey);
-    if (!cached || cached.length !== freshData.length) {
-      setCache(cacheKey, freshData);
-      return freshData;
+  try{
+    const results = [];
+    for(const u of urls){
+      const r = await fetch(u);
+      const j = await r.json();
+      if(j.results) results.push(...j.results);
     }
 
-    return cached;
-  } catch {
-    return getCache(cacheKey) || [];
+    const mapped = results
+      .filter(m => m.poster_path)
+      .map(mapMovie);
+
+    setCache(cacheKey, mapped);
+    return mapped;
+  }catch{
+    return cached || [];
   }
 }
 
-/* ========== HERO COLOR GLOW ========== */
+/* ========== HERO GLOW ========== */
 function applyHeroGlow(imgUrl){
-  const img=new Image();
-  img.crossOrigin="anonymous";
-  img.src=imgUrl;
-  img.onload=()=>{
-    const c=document.createElement("canvas");
-    const x=c.getContext("2d");
-    c.width=c.height=10;
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.src = imgUrl;
+  img.onload = () => {
+    const c = document.createElement("canvas");
+    const x = c.getContext("2d");
+    c.width = c.height = 10;
     x.drawImage(img,0,0,10,10);
-    const d=x.getImageData(0,0,10,10).data;
+    const d = x.getImageData(0,0,10,10).data;
     let r=0,g=0,b=0,n=0;
     for(let i=0;i<d.length;i+=4){
       r+=d[i]; g+=d[i+1]; b+=d[i+2]; n++;
     }
-    r=Math.floor(r/n); g=Math.floor(g/n); b=Math.floor(b/n);
     document.documentElement.style.setProperty(
-      "--hero-glow",`rgba(${r},${g},${b},0.45)`
+      "--hero-glow",
+      `rgba(${r/n|0},${g/n|0},${b/n|0},0.45)`
     );
   };
 }
 
-/* ========== CARD HTML ========== */
+/* ========== CARD ========== */
 function cardHTML(p){
   return `
     <div class="preview-card"
       onclick="location.href='post.html?id=${p.id}'"
-      ${!isTouchDevice?`
-      onmouseenter="let v=this.querySelector('video');if(v){v.currentTime=8;v.play();}"
-      onmouseleave="let v=this.querySelector('video');if(v){v.pause();}"`:""}
+      ${!isTouchDevice ? `
+      onmouseenter="let v=this.querySelector('video');if(v){v.play();}"
+      onmouseleave="let v=this.querySelector('video');if(v){v.pause();}"` : ""}
     >
       <img src="${p.poster}" onerror="this.src='https://via.placeholder.com/300x450'">
-      ${!isTouchDevice && p.videoUrl?`
-      <video muted loop preload="metadata">
-        <source src="${p.videoUrl}" type="video/mp4">
-      </video>`:""}
       <div class="ott-title">${p.heading}</div>
     </div>
   `;
@@ -320,14 +346,13 @@ function cardHTML(p){
 
 /* ========== VIEW ALL ========== */
 function showViewAll(title,list){
-  const rows=document.getElementById("rows");
-  rows.innerHTML=`
+  rows.innerHTML = `
     <div class="row-header">
       <h4>${title}</h4>
       <span class="view-all" onclick="renderHome()">⬅ Back</span>
     </div>
     <div class="view-all-grid">
-      ${list.map(p=>cardHTML(p)).join("")}
+      ${list.map(cardHTML).join("")}
     </div>
   `;
 }
@@ -343,82 +368,62 @@ function renderRow(title,list,key){
       </span>
     </div>
     <div class="ott-row">
-      ${list.slice(0,15).map(p=>cardHTML(p)).join("")}
+      ${list.slice(0,15).map(cardHTML).join("")}
     </div>
   `;
 }
 
 /* ========== SEARCH ========== */
-const searchInput=document.getElementById("searchInput");
-const suggestBox=document.getElementById("suggestBox");
+searchInput.oninput = function(){
+  const q = this.value.toLowerCase();
+  if(!q){ suggestBox.style.display="none"; return; }
 
-searchInput.oninput=function(){
-  const q=this.value.toLowerCase();
-  if(!q){suggestBox.style.display="none";return;}
-  const m=allPosts.filter(p=>p.heading.toLowerCase().includes(q)).slice(0,8);
-  if(!m.length){suggestBox.style.display="none";return;}
-  suggestBox.innerHTML=m.map(p=>`
-    <div onclick="location.href='post.html?id=${p.id}'">${p.heading}</div>
-  `).join("");
+  const m = allPosts
+    .filter(p => p.heading.toLowerCase().includes(q))
+    .slice(0,8);
+
+  if(!m.length){ suggestBox.style.display="none"; return; }
+
+  suggestBox.innerHTML = m.map(p =>
+    `<div onclick="location.href='post.html?id=${p.id}'">${p.heading}</div>`
+  ).join("");
+
   suggestBox.style.display="block";
-};
-
-document.onclick=e=>{
-  if(!searchInput.contains(e.target)){
-    suggestBox.style.display="none";
-  }
 };
 
 /* ========== HOME ========== */
 function renderHome(){
-  window.rowData={
-    latest:allPosts,
-    telugu:allPosts.filter(p=>p.language==="Telugu"),
-    hindi:allPosts.filter(p=>p.language==="Hindi"),
-    english:allPosts.filter(p=>p.language==="English")
+  window.rowData = {
+    latest: allPosts,
+    telugu: allPosts.filter(p => p.language==="Telugu"),
+    hindi: allPosts.filter(p => p.language==="Hindi"),
+    english: allPosts.filter(p => p.language==="English")
   };
 
-  const rows=document.getElementById("rows");
-  rows.innerHTML=
-    renderRow("Latest Movies",rowData.latest,"latest")+
-    renderRow("Telugu Movies",rowData.telugu,"telugu")+
-    renderRow("Hindi Movies",rowData.hindi,"hindi")+
+  rows.innerHTML =
+    renderRow("Latest Movies",rowData.latest,"latest") +
+    renderRow("Telugu Movies",rowData.telugu,"telugu") +
+    renderRow("Hindi Movies",rowData.hindi,"hindi") +
     renderRow("English Movies",rowData.english,"english");
 }
 
 /* ========== INIT ========== */
 (async function(){
-  allPosts=await loadPosts();
-
-  /* SORT ID BIG → SMALL */
-  allPosts.sort((a,b)=>parseInt(b.id)-parseInt(a.id));
+  allPosts = await loadPosts();
   if(!allPosts.length) return;
 
-  /* RANDOM HERO */
-  const hero=allPosts[Math.floor(Math.random()*allPosts.length)];
+  const hero = allPosts[Math.floor(Math.random()*allPosts.length)];
 
-  const heroEl=document.querySelector(".hero");
-  const heroBg=document.getElementById("hero-bg");
-  const heroVideo=document.getElementById("hero-video");
-
-  heroBg.style.backgroundImage=`url('${hero.poster}')`;
+  heroBg.style.backgroundImage = `url('${hero.poster}')`;
   applyHeroGlow(hero.poster);
 
-  document.getElementById("hero-title").textContent=hero.heading;
-  document.getElementById("hero-link").href=`post.html?id=${hero.id}`;
-
-  if(!isTouchDevice && hero.videoUrl){
-    heroVideo.src=hero.videoUrl;
-    heroVideo.onloadeddata=()=>{
-      heroVideo.currentTime=8;
-      heroVideo.play();
-      heroEl.classList.add("video-active");
-    };
-  }
+  heroTitle.textContent = hero.heading;
+  heroLink.href = `post.html?id=${hero.id}`;
 
   renderHome();
 })();
 </script>
+
 
 </body>
 </html>
