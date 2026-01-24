@@ -164,8 +164,7 @@ const id = parseInt(params.get("id"));
 const src = params.get("src");
 const POSTS_JSON_URL = src ? src + "/" + src + ".json" : "posts.json";
 const container = document.getElementById("movie-container");
-const stars = Math.round(rating / 2); // TMDB 10 → 5 stars
-const starHTML = "⭐".repeat(stars) + "☆".repeat(5 - stars);
+
 
 async function fetchPosts(){
   const r = await fetch(POSTS_JSON_URL);
@@ -192,7 +191,8 @@ async function fetchCredits(id){
   let backdrop = post.poster, hasBackdrop=false;
   let plot="No plot available", rating="N/A", director=post.director||"N/A";
   let castHTML="";
-
+const stars = Math.round(rating / 2); // TMDB 10 → 5 stars
+const starHTML = "⭐".repeat(stars) + "☆".repeat(5 - stars);
   const movie = await fetchTMDBMovie(post.heading, post.year);
   if(movie){
     if(movie.backdrop_path){
