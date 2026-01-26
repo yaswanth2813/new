@@ -915,7 +915,7 @@
     "id": 77,
     "tmdbid": null,
     "heading": "Cheekatilo",
-    "poster": "",
+    "poster": "https://resizing.flixster.com/bFeY3wFMjCGCZEVbIrU4ahnCSJI=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzU1YTEzOWRkLTRkZDYtNDYxNi05YzE2LTg0Mzk5ZTRkNGNkMC5qcGc=",
     "backdrop": "",
     "year": "",
     "language": "Telugu",
@@ -1200,4 +1200,5 @@
     "videoUrl": ""
   }
 ]
+
 
