@@ -14,6 +14,49 @@ body{
   font-family:system-ui,-apple-system,BlinkMacSystemFont;
 }
 
+/* ================= SEARCH ================= */
+.search-wrap{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  padding:15px 20px;
+  background:#0f1115;
+}
+#searchInput{
+  width:100%;
+  padding:12px 16px;
+  border-radius:30px;
+  border:none;
+  outline:none;
+  background:#1a1d24;
+  color:#fff;
+}
+#searchInput::placeholder{color:#888}
+#searchSuggestions{
+  position:absolute;
+  left:20px;
+  right:20px;
+  top:65px;
+  background:#151821;
+  border-radius:14px;
+  max-height:360px;
+  overflow-y:auto;
+  display:none;
+}
+.suggestion{
+  display:flex;
+  gap:12px;
+  padding:10px;
+  cursor:pointer;
+}
+.suggestion:hover{background:#1f2330}
+.suggestion img{
+  width:50px;
+  height:70px;
+  border-radius:8px;
+  object-fit:cover;
+}
+
 /* ================= SKELETON ================= */
 .skeleton{
   background:#1a1d24;
@@ -87,8 +130,10 @@ body{
   padding:40px;
   max-width:600px;
 }
+.hero:hover #hero-video { opacity: 1 !important; }
 
-/* ================= ROWS / CAROUSEL ================= */
+
+/* ================= ROWS ================= */
 .row-header{
   display:flex;
   justify-content:space-between;
@@ -101,18 +146,11 @@ body{
   cursor:pointer;
 }
 .view-all:hover{color:#fff;text-decoration:underline}
-
 .ott-row{
   display:flex;
   gap:14px;
   overflow-x:auto;
   padding:0 20px 10px;
-  scroll-behavior:smooth;
-}
-.ott-row::-webkit-scrollbar{height:6px}
-.ott-row::-webkit-scrollbar-thumb{
-  background:#333;
-  border-radius:10px;
 }
 
 /* ================= CARD ================= */
@@ -133,27 +171,54 @@ body{
   inset:0;
   opacity:0;
   pointer-events:none;
-  transition:opacity .3s;
 }
-.preview-card:hover video{opacity:1}
-.preview-card:hover img{opacity:0}
-
+    
+.preview-card:hover img{opacity:100%}
 .ott-title{
   font-size:14px;
   text-align:center;
   margin-top:6px;
   color:#ccc;
 }
-
-/* ================= VIEW ALL GRID ================= */
+/* ===== VIEW ALL GRID RESPONSIVE FIX ===== */
 .view-all-grid{
   display:grid;
   gap:18px;
   padding:20px;
 }
-@media(max-width:575px){.view-all-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:576px){.view-all-grid{grid-template-columns:repeat(3,1fr)}}
 
+/* Mobile (2 columns) */
+@media (max-width:575px){
+  .view-all-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+/* Tablet (3 columns) */
+@media (min-width:576px) and (max-width:991px){
+  .view-all-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+/* Desktop / Large screens (5 columns) */
+@media (min-width:992px){
+  .view-all-grid{
+    grid-template-columns:repeat(5,1fr);
+  }
+}
+/* ================= HERO ================= */
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(0,0,0,.2),
+    rgba(0,0,0,.95)
+  );
+  pointer-events: none; /* 🔑 IMPORTANT */
+}
 
 
 </style>
@@ -162,6 +227,12 @@ body{
 <body>
 
 <div class="container-fluid">
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <input id="searchInput" placeholder="Search movies..." autocomplete="off">
+  <div id="searchSuggestions"></div>
+</div>
 
 <!-- HERO SKELETON -->
 <div class="skeleton hero-skeleton" id="hero-skeleton"></div>
@@ -190,50 +261,23 @@ body{
 </div>
 
 <script>
+  
 const POSTS_JSON_URL="posts.json";
 const isTouch=('ontouchstart'in window)||navigator.maxTouchPoints>0;
 const isLowEnd=navigator.hardwareConcurrency<=4||navigator.deviceMemory<=4;
 let allPosts=[];
+const heroBg = document.getElementById("hero-bg");
+const heroTitle = document.getElementById("hero-title");
+const heroLink = document.getElementById("hero-link");
+const heroSkeleton = document.getElementById("hero-skeleton");
+const heroBox = document.querySelector(".hero");
+const rows = document.getElementById("rows");
+
+
 /* ===== TMDB CONFIG ===== */
-const TMDB_API_KEY = "532a88c1ce983a87d6b28e49ad40a68e";
-const TMDB_IMG = "https://image.tmdb.org/t/p/original";
-const BACKDROP_TTL = 24 * 60 * 60 * 1000;
-
-/* ===== TMDB CACHE ===== */
-function getBackdropCache(key){
-  try{
-    const c = JSON.parse(localStorage.getItem(key));
-    if(c && Date.now() - c.time < BACKDROP_TTL) return c.url;
-  }catch{}
-  return null;
-}
-function setBackdropCache(key, url){
-  try{
-    localStorage.setItem(key, JSON.stringify({ url, time: Date.now() }));
-  }catch{}
-}
-
-/* ===== FETCH TMDB BACKDROP ===== */
-async function fetchBackdrop(title){
-  const key = "bd_" + title.toLowerCase();
-  const cached = getBackdropCache(key);
-  if(cached) return cached;
-
-  try{
-    const res = await fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}`
-    );
-    const data = await res.json();
-    const movie = data.results?.find(m => m.backdrop_path);
-    if(movie){
-      const url = TMDB_IMG + movie.backdrop_path;
-      setBackdropCache(key, url);
-      return url;
-    }
-  }catch(e){}
-  return null;
-}
-
+const TMDB_API_KEY="532a88c1ce983a87d6b28e49ad40a68e";
+const TMDB_IMG="https://image.tmdb.org/t/p/original";
+const BACKDROP_TTL=86400000;
 
 /* ========== AUDIO FADE ========== */
 function fadeInAudio(v){
@@ -259,53 +303,37 @@ const observer=new IntersectionObserver(entries=>{
   });
 },{threshold:.3});
 
-/* ========== CARD HTML ========== */
+
+
+
+/* ===== FETCH BACKDROP ===== */
+async function fetchBackdrop(title){
+  try{
+    const res=await fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}`
+    );
+    const data=await res.json();
+    const movie=data.results?.find(m=>m.backdrop_path);
+    return movie?TMDB_IMG+movie.backdrop_path:null;
+  }catch{return null;}
+}
+
+/* ===== CARD HTML ===== */
 function cardHTML(p){
 return `
-<div class="preview-card"
+<div class="preview-card" data-id="${p.id}"
 ${isTouch?`
 onclick="
   const v=this.querySelector('video');
   if(!v){location.href='post.html?id=${p.id}';return;}
   if(!v._playing){
-    const play=()=>{
-      v.currentTime=Math.random()*(v.duration-4);
-      v.play();v._playing=true;
-    };
     v.muted=true;
-    if(v.readyState>=1) play();
-    else v.onloadedmetadata=play;
+    v.currentTime=Math.random()*(v.duration-4);
+    v.play();v._playing=true;
   }else location.href='post.html?id=${p.id}';
-"`:`
-onmouseenter="
-  if(${isLowEnd})return;
-  const card=this,v=card.querySelector('video');
-  card._hover=setTimeout(()=>{
-    const play=()=>{
-      const seg=3.5;
-      const start=Math.random()*(v.duration-seg-1);
-      v.currentTime=start;
-      v.play();fadeInAudio(v);
-      v._loopTimer=setInterval(()=>{
-        if(v.currentTime>=start+seg)v.currentTime=start;
-      },200);
-    };
-    if(v.readyState>=1) play();
-    else v.onloadedmetadata=play;
-  },300);
-"
-onmouseleave="
-  clearTimeout(this._hover);
-  const v=this.querySelector('video');
-  if(v){
-    clearInterval(v._loopTimer);
-    clearInterval(v._fade);
-    v.muted=true;v.volume=0;
-    v.pause();
-  }
-"`}>
+"`:""}>
 <img src="${p.poster}" class="skeleton"
-onload="this.classList.remove('skeleton')">
+ onload="this.classList.remove('skeleton')">
 ${!isTouch && p.videoUrl?`
 <video muted preload="none" playsinline>
   <source src="${p.videoUrl}" type="video/mp4">
@@ -314,7 +342,7 @@ ${!isTouch && p.videoUrl?`
 </div>`;
 }
 
-/* ========== ROWS ========== */
+/* ===== ROWS ===== */
 function renderRow(title,list,key){
   if(!list.length) return "";
   return `
@@ -323,54 +351,113 @@ function renderRow(title,list,key){
     <span class="view-all" onclick="showViewAll('${title}','${key}')">View All</span>
   </div>
   <div class="ott-row">
-    ${list.slice(0,15).map(p=>cardHTML(p)).join("")}
+    ${list.slice(0,15).map(cardHTML).join("")}
   </div>`;
 }
 
 function showViewAll(title,key){
-  const rows=document.getElementById("rows");
   rows.innerHTML=`
     <div class="row-header">
       <h4>${title}</h4>
       <span class="view-all" onclick="renderHome()">⬅ Back</span>
     </div>
     <div class="view-all-grid">
-      ${rowData[key].map(p=>cardHTML(p)).join("")}
+      ${rowData[key].map(cardHTML).join("")}
     </div>`;
-  document.querySelectorAll(".preview-card").forEach(c=>observer.observe(c));
 }
 
 function renderHome(){
   window.rowData={
-    latest:allPosts,
-    telugu:allPosts.filter(p=>p.language==="Telugu"),
-    hindi:allPosts.filter(p=>p.language==="Hindi"),
-    english:allPosts.filter(p=>p.language==="English")
-  };
+  latest:[...allPosts].sort((a,b)=>b.id-a.id),
+  telugu:allPosts.filter(p=>p.language==="Telugu"),
+  hindi:allPosts.filter(p=>p.language==="Hindi"),
+  english:allPosts.filter(p=>p.language==="English")
+};
 
-  const rows=document.getElementById("rows");
+
   rows.innerHTML=
     renderRow("Latest Movies",rowData.latest,"latest")+
     renderRow("Telugu Movies",rowData.telugu,"telugu")+
     renderRow("Hindi Movies",rowData.hindi,"hindi")+
     renderRow("English Movies",rowData.english,"english");
-
-  document.querySelectorAll(".preview-card").forEach(c=>observer.observe(c));
 }
 
-/* ========== INIT ========== */
+/* ===== DESKTOP CLICK FIX ===== */
+document.addEventListener("click",e=>{
+  const card=e.target.closest(".preview-card");
+  if(card && !isTouch){
+    location.href=`post.html?id=${card.dataset.id}`;
+  }
+});
+
+
+
+/* ===== SEARCH ===== */
+const searchInput=document.getElementById("searchInput");
+const suggestions=document.getElementById("searchSuggestions");
+
+searchInput.addEventListener("input",()=>{
+  const q=searchInput.value.toLowerCase().trim();
+  if(!q){suggestions.style.display="none";return;}
+  const res=allPosts.filter(p=>p.heading.toLowerCase().includes(q)).slice(0,8);
+  if(!res.length){suggestions.style.display="none";return;}
+  suggestions.innerHTML=res.map(p=>`
+    <div class="suggestion" onclick="location.href='post.html?id=${p.id}'">
+      <img src="${p.poster}"><div>${p.heading}</div>
+    </div>`).join("");
+  suggestions.style.display="block";
+});
+
+/* ===== ADVANCED 3D TILT (OPTIONAL) ===== */
+if(!isTouch){
+  document.addEventListener("mousemove", e=>{
+    const card = e.target.closest(".preview-card");
+    if(!card) return;
+
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+
+    const rx = ((y / r.height) - 0.5) * -10;
+    const ry = ((x / r.width) - 0.5) * 10;
+
+    card.style.transform =
+      `perspective(900px)
+       translateY(-10px)
+       rotateX(${rx}deg)
+       rotateY(${ry}deg)
+       scale(1.04)`;
+  });
+
+  document.addEventListener("mouseleave", e=>{
+    const card = e.target.closest(".preview-card");
+    if(card){
+      card.style.transform="";
+    }
+  }, true);
+}
+const heroVideo = document.getElementById('hero-video');
+
+// Hero video hover
+
+
+
+/* ===== INIT (SAFE) ===== */
 (async()=>{
-const res=await fetch(POSTS_JSON_URL);
-allPosts=(await res.json()).filter(p=>p.heading);
-allPosts.sort((a,b)=>b.id-a.id);
+try{
+  const res=await fetch(POSTS_JSON_URL);
+  if(!res.ok) throw new Error("posts.json missing");
+  allPosts=(await res.json()).filter(p=>p.heading);
+  if(!allPosts.length) throw new Error("No posts");
 
-/* HERO */
-const hero=allPosts[Math.floor(Math.random()*allPosts.length)];
+const hero = allPosts[Math.floor(Math.random()*allPosts.length)];
 const backdrop = await fetchBackdrop(hero.heading);
-document.getElementById("hero-bg").style.backgroundImage =`url('${backdrop || hero.poster}')`;
-document.getElementById("hero-title").textContent=hero.heading;
-document.getElementById("hero-link").href=`post.html?id=${hero.id}`;
 
+heroBg.style.backgroundImage = `url('${backdrop || hero.poster}')`;
+heroTitle.textContent = hero.heading;
+heroLink.href = `post.html?id=${hero.id}`;
+
+// ADD THESE 3 LINES - loads videoUrl into hero
 const heroVideo=document.getElementById("hero-video");
 if(hero.videoUrl){
   heroVideo.src=hero.videoUrl;
@@ -383,12 +470,16 @@ if(hero.videoUrl){
   };
 }
 
-/* SHOW HERO */
 document.getElementById("hero-skeleton").remove();
-document.querySelector(".hero").style.display="block";
+document.querySelector(".hero").style.display = "block";
 
-/* HOME */
-renderHome();
+
+  renderHome();
+}catch(err){
+  console.error(err);
+  document.getElementById("hero-skeleton").innerHTML=
+    "<h3 style='padding:40px'>Failed to load content</h3>";
+}
 })();
 </script>
 
