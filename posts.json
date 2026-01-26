@@ -914,14 +914,14 @@
   {
     "id": 77,
     "tmdbid": null,
-    "heading": "",
+    "heading": "Cheekatilo",
     "poster": "",
     "backdrop": "",
     "year": "",
-    "language": "",
+    "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": ""
+    "videoUrl": "https://cdn.telugudub.store/Cheekatilo_2026_Telugu_1080p.mkv"
   },
   {
     "id": 78,
@@ -1200,3 +1200,4 @@
     "videoUrl": ""
   }
 ]
+
