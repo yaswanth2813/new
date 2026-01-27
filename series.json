@@ -1,0 +1,16 @@
+[
+  {
+    "id": 201,
+    "type": "series",
+    "tmdbid": 1399,
+    "heading": "Game of Thrones",
+    "language": "English"
+  },
+  {
+    "id": 202,
+    "type": "series",
+    "tmdbid": 157374,
+    "heading": "Stranger Things",
+    "language": "English"
+  }
+]

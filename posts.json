@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+  "type": "movie",
     "tmdbid": null,
     "heading": "War 2",
     "poster": "https://imgs.search.brave.com/u-inBUGbdOBuART01ZX5rM68DTd3yhP_ITWbCvm6p1w/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wcmV2/aWV3LnJlZGQuaXQv/d2FyLTItbmV3LXBv/c3Rlci12MC10NWti/MG90NXg2ZGYxLnBu/Zz93aWR0aD02NDAm/Y3JvcD1zbWFydCZh/dXRvPXdlYnAmcz0x/Mjg5MmE2ZDBhYTgy/ZDRhYmE5MmU3ZTE4/MzQ5ZGI1MTdhYWU1/MmRl",
@@ -13,6 +14,7 @@
   },
   {
     "id": 2,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Mirai",
     "poster": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/listing/xxlarge/mirai-et00395402-1757419467.jpg",
@@ -25,6 +27,7 @@
   },
   {
     "id": 3,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Junior",
     "poster": "https://cdn.district.in/movies-assets/images/cinema/Junior-cover-7b1a9a70-6242-11f0-a47d-892349f87030.jpg",
@@ -37,6 +40,7 @@
   },
   {
     "id": 4,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Little Hearts",
     "poster": "https://cdn.district.in/movies-assets/images/cinema/C%20little-hearts-e2c735c0-8713-11f0-9002-a1c7d0720be7.jpg",
@@ -49,6 +53,7 @@
   },
   {
     "id": 5,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Madharasi",
     "poster": "https://www.deccanchronicle.com/h-upload/2025/09/06/1954963-madharasi-collections.jpg",
@@ -61,6 +66,7 @@
   },
   {
     "id": 6,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Kishkindhapuri",
     "poster": "https://m.media-amazon.com/images/M/MV5BODIyOTE5NTEtODkwNi00NmQxLTkxMDctODVmZDFjM2Y4Y2Y4XkEyXkFqcGc@._V1_FMjpg_UX1024_.jpg",
@@ -73,6 +79,7 @@
   },
   {
     "id": 7,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Sammathame",
     "poster": "https://www.acmodasi.in/amdb/images/movie/3/t/sammathame-2022-DTY1ms.jpg",
@@ -85,6 +92,7 @@
   },
   {
     "id": 8,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Salaar",
     "poster": "https://pbs.twimg.com/media/F-vfwtdaMAENLjr?format=jpg&name=4096x4096",
@@ -97,6 +105,7 @@
   },
   {
     "id": 9,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Khaleja",
     "poster": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/khaleja-et00005145-1747465177.jpg",
@@ -109,6 +118,7 @@
   },
   {
     "id": 10,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Sr Kalyanamandapam",
     "poster": "https://imgs.search.brave.com/1ZUVo6S1x58gpQijQkIIqs3m0ch1HID_Mw7aQy5aQdo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk1qWmlaVGc0/TTJVdFlqTXlOQzAw/T0daa0xUZ3hObUl0/TVdJM1kyTTROREUw/T1dWbVhrRXlYa0Zx/Y0djQC5qcGc",
@@ -121,6 +131,7 @@
   },
   {
     "id": 11,
+  "type": "movie",
     "tmdbid": null,
     "heading": "They Call Him OG",
     "poster": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/they-call-him-og-et00369074-1758290791.jpg",
@@ -133,6 +144,7 @@
   },
   {
     "id": 12,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Vikram",
     "poster": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/vikram-et00138591-22-07-2021-11-45-18.jpg",
@@ -145,6 +157,7 @@
   },
   {
     "id": 13,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Hi Nanna",
     "poster": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/hi-nanna-et00364503-1701678655.jpg",
@@ -157,6 +170,7 @@
   },
   {
     "id": 14,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Baahubali",
     "poster": "https://play-lh.googleusercontent.com/proxy/7HmkIYyPhpS3ILgO7n_ej_i8rBW4X-oBi9JCFvc9x6wtskCRJ3vexdZjkixhHwSx789Hmg8FKKAYmaQArACqD9XVMhRIEREwqmyDb9p9GGzlS1Uq3kEctGWpig=s1920-w1920-h1080",
@@ -169,6 +183,7 @@
   },
   {
     "id": 15,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Baahubali 2: The Conclusion",
     "poster": "https://media.cinemaexpress.com/cinemaexpress%2F2025-08-24%2F89a3plbd%2FBaahubali-epic.jpg?w=480&auto=format%2Ccompress",
@@ -181,6 +196,7 @@
   },
   {
     "id": 16,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Idly Kadai",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB8NGhgTtET9RjQ2sli-whe95pSVp7FYyuDBTnDlaib29iXCmwd6wce5E&s=10",
@@ -193,6 +209,7 @@
   },
   {
     "id": 17,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Our Fault",
     "poster": "https://www.acmodasi.in/amdb/images/movie/j/e/my-fault-2023-3981.jpg",
@@ -205,6 +222,7 @@
   },
   {
     "id": 18,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Lokah Chapter One: Chandra",
     "poster": "https://idiva-media.ilnmedia.com/content/2025/Oct/social---2025-10-13T150234947_68ecc75617f7e.jpg",
@@ -217,6 +235,7 @@
   },
   {
     "id": 19,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Kantara A Legend: Chapter 1",
     "poster": "https://4kwallpapers.com/images/walls/thumbs_3t/19889.jpg",
@@ -229,6 +248,7 @@
   },
   {
     "id": 20,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Veera Dheera Sooran",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXbu08sIxppSoKV1bZHZGiOeRLox8Pv9NA18Ji7ZDeiqvL4fRtlb9RcFih&s=10",
@@ -241,6 +261,7 @@
   },
   {
     "id": 21,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Andala Rakshasi",
     "poster": "https://morningshow.in/wp-content/uploads/2025/06/Andala-Rakshasi-e1749107501497.jpg",
@@ -253,6 +274,7 @@
   },
   {
     "id": 22,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Arjun Reddy",
     "poster": "https://mrwallpaper.com/images/high/arjun-reddy-driving-with-shalini-l8w7l2ytpvl53f00.webp",
@@ -265,6 +287,7 @@
   },
   {
     "id": 23,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Animal",
     "poster": "https://wallpapercave.com/wp/wp13286331.jpg",
@@ -277,9 +300,10 @@
   },
   {
     "id": 24,
-    "tmdbid": null,
+  "type": "movie",
+    "tmdbid": 927342,
     "heading": "Amaran",
-    "poster": "https://imgs.search.brave.com/Ru_bubmNH83A4Eq3fqujRfHMp3KtmW1AnHCx7RTQkHY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDE0Nzc0/MzI4LmpwZw",
+    "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/jPU2db0fPSlpfxzXRo3f0joXvdm.jpg",
     "backdrop": "",
     "year": 2024,
     "genre": "Action, Biographical",
@@ -289,6 +313,7 @@
   },
   {
     "id": 25,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Jai Bhim",
     "poster": "https://m.media-amazon.com/images/S/pv-target-images/7b1d792e911d6009c926195ae3d66ddf8dba4a0b6e37ae3781f0a14176311dfd.png",
@@ -301,6 +326,7 @@
   },
   {
     "id": 26,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Beast",
     "poster": "https://wallpapers.com/images/hd/beast-vijay-pointing-gun-34p8mo6m8ajjjsh2.jpg",
@@ -313,9 +339,10 @@
   },
   {
     "id": 27,
-    "tmdbid": null,
+  "type": "movie",
+    "tmdbid": 937020,
     "heading": "Jailer",
-    "poster": "https://wallpapercave.com/wp/wp13392500.jpg",
+    "poster": "https://image.tmdb.org/t/p/original/xAiHMfEaltGG0PL5sfi5V6J5BjC.jpg",
     "backdrop": "",
     "year": 2023,
     "genre": "Action, Crime",
@@ -325,6 +352,7 @@
   },
   {
     "id": 28,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Mithra Mandali",
     "poster": "https://images.moneycontrol.com/static-mcnews/2025/10/20251016084846_mithra-mandali.jpg?impolicy=website&width=770&height=431",
@@ -337,6 +365,7 @@
   },
   {
     "id": 29,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Veera Simha Reddy",
     "poster": "https://img.airtel.tv/unsafe/fit-in/1600x0/filters:format(webp)/https://xstreamcp-assets-msp.streamready.in/assets/HOTSTAR_DTH/MOVIE/68beb78702d0fd22daacf017/images/LANDSCAPE_169/1712686034766-h?o=production",
@@ -349,6 +378,7 @@
   },
   {
     "id": 30,
+  "type": "movie",
     "tmdbid": 1153399,
     "heading": "Coolie",
     "poster": "https://static.toiimg.com/thumb/msid-123303912,width-1280,height-720,resizemode-4/123303912.jpg",
@@ -361,6 +391,7 @@
   },
   {
     "id": 31,
+  "type": "movie",
     "tmdbid": null,
     "heading": "KGF",
     "poster": "https://wallpapers.com/images/featured/kgf-4k-6fypj1jk472hjau5.jpg",
@@ -373,6 +404,7 @@
   },
   {
     "id": 32,
+  "type": "movie",
     "tmdbid": null,
     "heading": "KGF-2",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWxWbmhhFwGerIymtUGSHTjGbQTN71CEU2csIe7AQaJ_KYJY3Exu61_zA&s=10",
@@ -385,9 +417,10 @@
   },
   {
     "id": 33,
-    "tmdbid": null,
+  "type": "movie",
+    "tmdbid": 1321108,
     "heading": "Dude",
-    "poster": "https://images.moneycontrol.com/static-mcnews/2025/10/20251017025934_dude-.jpg?impolicy=website&width=770&height=431",
+    "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/6s5SigXKo6KQt8hy7wdeaQXrXLP.jpg",
     "backdrop": "",
     "year": "",
     "language": "Telugu",
@@ -397,6 +430,7 @@
   },
   {
     "id": 34,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Telusu Kada",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl9jEabNZ6Y0v1L9TnBKkyebSzu_RVRKtlZjNKLoigGiE9k3tr4fFiyHBI&s=10",
@@ -409,6 +443,7 @@
   },
   {
     "id": 35,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Devara",
     "poster": "https://assets.timelinedaily.com/w/1203x902/2024/09/devara-1-1200x900.jpeg.webp",
@@ -421,6 +456,7 @@
   },
   {
     "id": 36,
+  "type": "movie",
     "tmdbid": null,
     "heading": "K Ramp",
     "poster": "https://i.ytimg.com/vi/lrX7TFjBeF4/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBHQc97QNGkI9_l9kOPQKW6EAgEZg",
@@ -433,6 +469,7 @@
   },
   {
     "id": 37,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Jawan",
     "poster": "https://www.bollywoodhungama.com/wp-content/uploads/2021/07/Jawan-cover-image1.jpg",
@@ -445,6 +482,7 @@
   },
   {
     "id": 38,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Pathaan",
     "poster": "https://www.bollywoodhungama.com/wp-content/uploads/2020/08/Pathaan-cover-news.jpg",
@@ -457,6 +495,7 @@
   },
   {
     "id": 39,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Jabilamma Neeku Antha Kopama",
     "poster": "https://m.media-amazon.com/images/S/pv-target-images/9c4dcb082415a707a81dfdce619e13a0d85d67c91bc00a3194f1299f7b4b746a.png",
@@ -469,9 +508,10 @@
   },
   {
     "id": 40,
-    "tmdbid": null,
+  "type": "movie",
+    "tmdbid": 1257957,
     "heading": "Bison",
-    "poster": "https://static.moviecrow.com/marquee/tn-rights-alert-dhruv-vikrams-bison-kaalamaadan-seals-deal-with-five-star-creations/248635_thumb_665.jpg",
+    "poster": "https://image.tmdb.org/t/p/original/33wxgncstrIzPXsJiAFuDmpZK5m.jpg",
     "backdrop": "",
     "year": "",
     "language": "Telugu",
@@ -481,6 +521,7 @@
   },
   {
     "id": 41,
+  "type": "movie",
     "tmdbid": 626392,
     "heading": "Master",
     "poster": "https://live.staticflickr.com/65535/50810211222_89ed40f6ac_w.jpg",
@@ -493,6 +534,7 @@
   },
   {
     "id": 42,
+  "type": "movie",
     "tmdbid": null,
     "heading": "RRR",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9QWXg597ibW16RcOEAMj58Cc2oArXyHhNApW6trQzOFi-4tRwVIJ6lrPx&s=10",
@@ -505,6 +547,7 @@
   },
   {
     "id": 43,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Mass Jathara",
     "poster": "https://tenvow.com/wp-content/uploads/2025/10/Mass-Jathara-1024x576.webp",
@@ -517,6 +560,7 @@
   },
   {
     "id": 44,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Thamma",
     "poster": "https://variety.com/wp-content/uploads/2025/10/Thama-collage.jpg?w=1000&h=667&crop=1",
@@ -529,6 +573,7 @@
   },
   {
     "id": 45,
+  "type": "movie",
     "tmdbid": null,
     "heading": "The Great Pre-wedding Show",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf6QpdtXr15HjnelbphNB8N78WI0B4OdYjbfXL31HohQ&s=10",
@@ -541,6 +586,7 @@
   },
   {
     "id": 46,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Jatadhara",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGGXjPd6MMf_kh10YFs4UJDB6e8DvAXBRoYsc-bFr_Tw&s=10",
@@ -553,6 +599,7 @@
   },
   {
     "id": 47,
+  "type": "movie",
     "tmdbid": null,
     "heading": "The Girlfriend",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWYBKVs6WUUf-C6xPCDLvv8twDQGKWwVeA-YFu5Rdqa_QwXlZULsLZ_cYx&s=10",
@@ -565,6 +612,7 @@
   },
   {
     "id": 48,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Yatra",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2xHYEv7fk-lpWWf4JE4LZFJbwjJX6bZMfzO0CYVXgDg&s=10",
@@ -577,9 +625,10 @@
   },
   {
     "id": 49,
-    "tmdbid": null,
+  "type": "movie",
+    "tmdbid": 955496,
     "heading": "Fateh",
-    "poster": "https://upload.wikimedia.org/wikipedia/en/2/2f/Fateh_film_poster.jpg",
+    "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/koj6YOGltFo8L42NFldJMw5M0dU.jpg",
     "backdrop": "",
     "year": "",
     "language": "Hindi",
@@ -589,6 +638,7 @@
   },
   {
     "id": 50,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Raayan",
     "poster": "https://i.scdn.co/image/ab67616d0000b273c55687b6cdba45d13ff07c91",
@@ -601,6 +651,7 @@
   },
   {
     "id": 51,
+  "type": "movie",
     "tmdbid": null,
     "heading": "12A Railway Colony",
     "poster": "https://cdn.telugu360.com/wp-content/uploads/2025/03/12A-Railway-Colony-Teaser.jpg",
@@ -613,6 +664,7 @@
   },
   {
     "id": 52,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Kaantha",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSirCprAx6hauaqID3ir-f-Y6d7E9Xlpf1cOiM16Y0PznTB1mVPkxQ2yeet&s=10",
@@ -625,6 +677,7 @@
   },
   {
     "id": 53,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Raju weds Rambai",
     "poster": "https://static.wixstatic.com/media/794122_a78ded59fbaa4dac8b64f4a5a91e4bdb~mv2.jpg/v1/fill/w_568,h_320,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/794122_a78ded59fbaa4dac8b64f4a5a91e4bdb~mv2.jpg",
@@ -637,9 +690,10 @@
   },
   {
     "id": 54,
+  "type": "movie",
     "tmdbid": 1223601,
     "heading": "SISU",
-    "poster": "https://m.imdb.com/title/tt31844586/mediaviewer/rm1172943874/?ref_=ttmi_mi_4_1",
+    "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/jNsttCWZyPtW66MjhUozBzVsRb7.jpg",
     "backdrop": "",
     "year": "",
     "language": "English",
@@ -649,6 +703,7 @@
   },
   {
     "id": 55,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Andhra King Taluka",
     "poster": "https://www.ntvenglish.com/wp-content/uploads/2025/08/Andhra-King-Taluka.jpg",
@@ -661,6 +716,7 @@
   },
   {
     "id": 56,
+  "type": "movie",
     "tmdbid": null,
     "heading": "GEMINI HD",
     "poster": "https://sund-images.sunnxt.com/194392/1000x1000_GeminiTVHD_194392_0a146256-5869-40c5-89de-2fbb9ad6b0ce.png",
@@ -673,6 +729,7 @@
   },
   {
     "id": 57,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Etv HD",
     "poster": "https://jiotvimages.cdn.jio.com/dare_images/images/ETV_HD.png",
@@ -685,6 +742,7 @@
   },
   {
     "id": 58,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Ayalaan",
     "poster": "https://cdn.123telugu.com/content/wp-content/uploads/2025/12/Ayalaan.webp",
@@ -697,6 +755,7 @@
   },
   {
     "id": 59,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Bahubali The Epic",
     "poster": "https://akm-img-a-in.tosshub.com/indiatoday/images/story/202512/bahubali-the-epic-242628858-16x9_0.jpg?VersionId=BRCA8fQigQ5KYMN6ETJrJ0Jvjizg4JkO&size=690:388",
@@ -709,6 +768,7 @@
   },
   {
     "id": 60,
+  "type": "movie",
     "tmdbid": 1195394,
     "heading": "Turbo",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7riDg6WyWJjLZlOanPUyhJPhdcI3r-DUK6UIYxGGC9gu7GG42-9UOjNOB&s=10",
@@ -721,6 +781,7 @@
   },
   {
     "id": 61,
+  "type": "movie",
     "tmdbid": 1239511,
     "heading": "Lucky Bhaskar",
     "poster": "https://filmfare.wwmindia.com/content/2024/feb/dulquersalmaan41707044732.jpg",
@@ -733,6 +794,7 @@
   },
   {
     "id": 62,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Akhanda 2",
     "poster": "https://assets-in.bmscdn.com/discovery-catalog/events/et00416621-krezapsdbj-landscape.jpg",
@@ -745,6 +807,7 @@
   },
   {
     "id": 63,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Dhandora",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4pRqWKr4CNA_m-1mwNrMFTqOC7hI53CRadMtH6zPpjg&s=10",
@@ -757,6 +820,7 @@
   },
   {
     "id": 64,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Gurram Paapi Reddy",
     "poster": "https://cdn.district.in/movies-assets/images/cinema/Gurram-Paapi-Reddy-cover%20(1)-0ae17b20-db19-11f0-b15e-d357a5863f21.jpg",
@@ -769,6 +833,7 @@
   },
   {
     "id": 65,
+  "type": "movie",
     "tmdbid": null,
     "heading": "C/o Kancharapalem",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFMdeFEsW81e-3AiZD8VKNz0YFx89oa506hP9PgvPp0gUMARF34PDFLII&s=10",
@@ -781,6 +846,7 @@
   },
   {
     "id": 66,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Awe!",
     "poster": "https://i.ytimg.com/vi/xOEscQChX7M/maxresdefault.jpg",
@@ -793,6 +859,7 @@
   },
   {
     "id": 67,
+  "type": "movie",
     "tmdbid": null,
     "heading": "A (Ad Infinitum)",
     "poster": "https://static.toiimg.com/thumb/msid-81274259,width-1070,height-580,imgsize-23416,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg",
@@ -805,6 +872,7 @@
   },
   {
     "id": 68,
+  "type": "movie",
     "tmdbid": 1150478,
     "heading": "Eagle",
     "poster": "https://jiotvimages.cdn.jio.com/imagespublic/8/72/369101be36ef5831a0e1447c1c04b85f_1722860319466_l_medium.jpg",
@@ -817,6 +885,7 @@
   },
   {
     "id": 69,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Sita Ramam",
     "poster": "https://wallpaperaccess.com/full/8407020.jpg",
@@ -829,6 +898,7 @@
   },
   {
     "id": 70,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Balagam",
     "poster": "https://m.media-amazon.com/images/S/pv-target-images/2329c1b4a6f24fbd6a5bf658f8246b7994b3590ee12d11e0ec20cb7801a935f6.jpg",
@@ -841,6 +911,7 @@
   },
   {
     "id": 71,
+  "type": "movie",
     "tmdbid": 1424217,
     "heading": "Court",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUEfD2WEh8qIyiw-JFPZ6jLNAeMAPXxoy6cnvVXvSoGEZ5OHeR_7XG5hk&s=10",
@@ -853,6 +924,7 @@
   },
   {
     "id": 72,
+  "type": "movie",
     "tmdbid": 1558468,
     "heading": "Shambhala",
     "poster": "https://cdn.district.in/movies-assets/images/cinema/SHAMBHALA-600X800-6c207840-a433-11f0-8e0c-51e530df5bbe.jpg",
@@ -865,6 +937,7 @@
   },
   {
     "id": 73,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Aquaman",
     "poster": "https://w0.peakpx.com/wallpaper/905/1/HD-wallpaper-aquaman-1-aquaman-movie-aquaman-movies-2018-movies-1-jason-momoa.jpg",
@@ -877,6 +950,7 @@
   },
   {
     "id": 74,
+  "type": "movie",
     "tmdbid": 463476,
     "heading": "Lie",
     "poster": "https://m.media-amazon.com/images/S/pv-target-images/407f938de8299f7ece42a2b648b4df663269eee7f3973e33778ccefd4ad4bc83.jpg",
@@ -889,6 +963,7 @@
   },
   {
     "id": 75,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Tere Ishq Mein",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqJ6k0of7b-J3KVrJfKCVr91TfEXCYjncIMF7b8gQBoZyzwl5O7aiegmNa&s=10",
@@ -901,6 +976,7 @@
   },
   {
     "id": 76,
+  "type": "movie",
     "tmdbid": 1510339,
     "heading": "Mark",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfrtqCGURLgXd9t5EGYjewhVEjME146YNKXyeYsoju8X_qGykKbLKJle1h&s=10",
@@ -913,6 +989,7 @@
   },
   {
     "id": 77,
+  "type": "movie",
     "tmdbid": null,
     "heading": "Cheekatilo",
     "poster": "https://resizing.flixster.com/bFeY3wFMjCGCZEVbIrU4ahnCSJI=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzU1YTEzOWRkLTRkZDYtNDYxNi05YzE2LTg0Mzk5ZTRkNGNkMC5qcGc=",
@@ -925,18 +1002,20 @@
   },
   {
     "id": 78,
-    "tmdbid": 360814,
-    "heading": "Dangal",
-    "poster": "https://image.tmdb.org/t/p/original/inegkAmoMmvsmJaMOR3ulPUyfTk.jpg",
+  "type": "movie",
+    "tmdbid": null,
+    "heading": "",
+    "poster": "",
     "backdrop": "",
     "year": "",
-    "language": "Telugu",
+    "language": "",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Dangal_%282016%29_Telugu_1080p.mkv"
+    "videoUrl": ""
   },
   {
     "id": 79,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -949,6 +1028,7 @@
   },
   {
     "id": 80,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -961,6 +1041,7 @@
   },
   {
     "id": 81,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -973,6 +1054,7 @@
   },
   {
     "id": 82,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -985,6 +1067,7 @@
   },
   {
     "id": 83,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -997,6 +1080,7 @@
   },
   {
     "id": 84,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1009,6 +1093,7 @@
   },
   {
     "id": 85,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1021,6 +1106,7 @@
   },
   {
     "id": 86,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1033,6 +1119,7 @@
   },
   {
     "id": 87,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1045,6 +1132,7 @@
   },
   {
     "id": 88,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1057,6 +1145,7 @@
   },
   {
     "id": 89,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1069,6 +1158,7 @@
   },
   {
     "id": 90,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1081,6 +1171,7 @@
   },
   {
     "id": 91,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1093,6 +1184,7 @@
   },
   {
     "id": 92,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1105,6 +1197,7 @@
   },
   {
     "id": 93,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1117,6 +1210,7 @@
   },
   {
     "id": 94,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1129,6 +1223,7 @@
   },
   {
     "id": 95,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1141,6 +1236,7 @@
   },
   {
     "id": 96,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1153,6 +1249,7 @@
   },
   {
     "id": 97,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1165,6 +1262,7 @@
   },
   {
     "id": 98,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1177,6 +1275,7 @@
   },
   {
     "id": 99,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1189,6 +1288,7 @@
   },
   {
     "id": 100,
+  "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1200,6 +1300,5 @@
     "videoUrl": ""
   }
 ]
-
 
 
