@@ -925,15 +925,15 @@
   },
   {
     "id": 78,
-    "tmdbid": null,
-    "heading": "",
-    "poster": "",
+    "tmdbid": 360814,
+    "heading": "Dangal",
+    "poster": "https://image.tmdb.org/t/p/original/inegkAmoMmvsmJaMOR3ulPUyfTk.jpg",
     "backdrop": "",
     "year": "",
-    "language": "",
+    "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": ""
+    "videoUrl": "https://cdn.telugudub.store/Dangal_%282016%29_Telugu_1080p.mkv"
   },
   {
     "id": 79,
@@ -1200,5 +1200,6 @@
     "videoUrl": ""
   }
 ]
+
 
 
