@@ -3,14 +3,22 @@
     "id": 201,
     "type": "series",
     "tmdbid": 1399,
-    "heading": "Game of Thrones",
-    "language": "English"
-  },
-  {
-    "id": 202,
-    "type": "series",
-    "tmdbid": 157374,
-    "heading": "Stranger Things",
-    "language": "English"
+    "language": "English",
+
+    "seasons": [
+      {
+        "season": 1,
+        "videos": [
+          "https://cdn.example.com/got/s1e1.mp4",
+          "https://cdn.example.com/got/s1e2.mp4"
+        ]
+      },
+      {
+        "season": 2,
+        "videos": [
+          "https://cdn.example.com/got/s2e1.m3u8"
+        ]
+      }
+    ]
   }
 ]

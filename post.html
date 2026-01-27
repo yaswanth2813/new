@@ -15,6 +15,41 @@ body{
 }
 .container{margin-top:20px}
 
+
+/* vide loader css */
+
+/* ===== NETFLIX NAME LOADER (ADD-ON ONLY) ===== */
+#name-loader{
+  position:absolute;
+  inset:0;
+  background:#000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:56px;
+  font-weight:900;
+  letter-spacing:8px;
+  color:#e50914;
+  font-family:Arial Black, Impact, sans-serif;
+  z-index:9999;
+  pointer-events:none;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{opacity:.4}
+  50%{opacity:1}
+  100%{opacity:.4}
+}
+
+@media(max-width:768px){
+  #name-loader{
+    font-size:38px;
+    letter-spacing:6px;
+  }
+}
+
+
 /* ===== HERO ===== */
 .hero{
   position:relative;
@@ -287,11 +322,20 @@ function renderStars(rating10){
     `:""}
 
     ${post.videoUrl ? `
+    
+
       <video controls>
+        
         <source src="${post.videoUrl}" type="application/vnd.apple.mpegurl">
         <source src="${post.videoUrl}" type="video/mp4">
+        <div id="name-loader">
+  <div class="netflix-text">YASH</div>
+</div>
       </video>
+      
     `:""}
+    
+    
 
     <div class="btn-wrap">
       ${post.videoUrl ? `<a href="${post.videoUrl}" class="btn-grad" target="_blank">Download</a>`:""}
@@ -299,7 +343,29 @@ function renderStars(rating10){
     </div>
   </div>
   `;
+  
 })();
+/* ===== VIDEO NAME LOADER ADD-ON ===== */
+const video = document.querySelector("video");
+const loader = document.getElementById("name-loader");
+
+if(video && loader){
+  loader.style.display = "flex";
+
+  video.addEventListener("playing", () => {
+    loader.style.display = "none";
+  });
+
+  video.addEventListener("waiting", () => {
+    loader.style.display = "flex";
+  });
+
+  video.addEventListener("stalled", () => {
+    loader.style.display = "flex";
+  });
+}
+
+
 </script>
 
 </body>

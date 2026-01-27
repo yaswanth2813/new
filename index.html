@@ -255,8 +255,8 @@ body{
     <div class="skeleton card-skeleton"></div>
     <div class="skeleton card-skeleton"></div>
     <div class="skeleton card-skeleton"></div>
+    <div class="skeleton card-skeleton"></div>
   </div>
-</div>
 
 </div>
 
@@ -272,6 +272,7 @@ const heroLink = document.getElementById("hero-link");
 const heroSkeleton = document.getElementById("hero-skeleton");
 const heroBox = document.querySelector(".hero");
 const rows = document.getElementById("rows");
+
 
 
 /* ===== TMDB CONFIG ===== */
@@ -307,16 +308,41 @@ const observer=new IntersectionObserver(entries=>{
 
 
 /* ===== FETCH BACKDROP ===== */
-async function fetchBackdrop(title){
+
+async function fetchBackdropSmart(post){
   try{
-    const res=await fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(title)}`
-    );
-    const data=await res.json();
-    const movie=data.results?.find(m=>m.backdrop_path);
-    return movie?TMDB_IMG+movie.backdrop_path:null;
-  }catch{return null;}
+    let movie = null;
+
+    /* ========= 1. IF TMDB ID EXISTS ========= */
+    if(post.tmdbid){
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${post.tmdbid}?api_key=${TMDB_API_KEY}`
+      );
+      if(res.ok){
+        movie = await res.json();
+      }
+    }
+
+    /* ========= 2. FALLBACK TO SEARCH ========= */
+    if(!movie){
+      const res = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(post.heading)}`
+      );
+      const data = await res.json();
+      movie = data.results?.find(m => m.backdrop_path);
+    }
+
+    return movie?.backdrop_path
+      ? TMDB_IMG + movie.backdrop_path
+      : null;
+
+  }catch(err){
+    console.error("TMDB error:", err);
+    return null;
+  }
 }
+
+
 
 /* ===== CARD HTML ===== */
 function cardHTML(p){
@@ -365,6 +391,7 @@ function showViewAll(title,key){
       ${rowData[key].map(cardHTML).join("")}
     </div>`;
 }
+
 
 function renderHome(){
   window.rowData={
@@ -451,7 +478,7 @@ try{
   if(!allPosts.length) throw new Error("No posts");
 
 const hero = allPosts[Math.floor(Math.random()*allPosts.length)];
-const backdrop = await fetchBackdrop(hero.heading);
+const backdrop = await fetchBackdropSmart(hero);
 
 heroBg.style.backgroundImage = `url('${backdrop || hero.poster}')`;
 heroTitle.textContent = hero.heading;
@@ -481,6 +508,8 @@ document.querySelector(".hero").style.display = "block";
     "<h3 style='padding:40px'>Failed to load content</h3>";
 }
 })();
+
+
 </script>
 
 </body>

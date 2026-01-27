@@ -14,7 +14,6 @@ body{
   font-family:system-ui,-apple-system,BlinkMacSystemFont;
 }
 
-/* HERO */
 .hero{
   position:relative;
   height:45vh;
@@ -48,7 +47,6 @@ body{
   box-shadow:0 25px 50px rgba(0,0,0,.7);
 }
 
-/* SEASONS */
 .seasons{
   display:flex;
   gap:10px;
@@ -67,7 +65,6 @@ body{
   color:#000;
 }
 
-/* EPISODES */
 .episodes{
   padding:20px;
   display:grid;
@@ -81,7 +78,6 @@ body{
   display:flex;
   gap:14px;
 }
-.episode:hover{background:#1f2330}
 .ep-thumb{
   width:140px;
   height:80px;
@@ -91,81 +87,58 @@ body{
 .ep-title{font-weight:600}
 .ep-desc{font-size:13px;color:#aaa}
 
-/* PLAYER */
 video{
   width:calc(100% - 40px);
   margin:20px;
   border-radius:14px;
-  display:none;
-}
-
-.back-btn{
-  margin:20px;
-  display:inline-block;
-  padding:8px 20px;
-  border-radius:20px;
-  background:#fff;
-  color:#000;
-  text-decoration:none;
 }
 </style>
 </head>
 
 <body>
 
-<a href="index.html" class="back-btn">⬅ Back</a>
+<a href="index.html" class="btn btn-light m-3">⬅ Back</a>
 
 <div id="app"></div>
-<video id="player" controls></video>
+<video id="player" controls playsinline></video>
 
 <script>
-/* ===== CONFIG ===== */
-const TMDB_KEY = "532a88c1ce983a87d6b28e49ad40a68e";
-const TMDB = "https://api.themoviedb.org/3";
-const IMG  = "https://image.tmdb.org/t/p/original";
-const SERIES_JSON = "series.json";
+const TMDB_KEY="532a88c1ce983a87d6b28e49ad40a68e";
+const TMDB="https://api.themoviedb.org/3";
+const IMG="https://image.tmdb.org/t/p/original";
 
-/* ===== PARAMS ===== */
-const params = new URLSearchParams(location.search);
-const id = parseInt(params.get("id"));
-const resumeFlag = params.get("resume")==="1";
+const params=new URLSearchParams(location.search);
+const id=parseInt(params.get("id"));
 
-/* ===== ELEMENTS ===== */
-const app = document.getElementById("app");
-const player = document.getElementById("player");
+const app=document.getElementById("app");
+const player=document.getElementById("player");
 
-let SERIES = null;
+let SERIES=null;
+let SERIES_META=null;
 
 /* ===== INIT ===== */
 (async()=>{
-  const list = await (await fetch(SERIES_JSON)).json();
-  const item = list.find(s => Number(s.id) === id);
+  const list=await (await fetch("series.json")).json();
+  SERIES=list.find(s=>s.id===id);
+  if(!SERIES){app.innerHTML="<h3>Series not found</h3>";return;}
 
-
-  if(!item || !item.tmdbid){
-    app.innerHTML="<h3 class='m-4'>Series not found</h3>";
-    return;
-  }
-
-  const res = await fetch(`${TMDB}/tv/${item.tmdbid}?api_key=${TMDB_KEY}`);
-  SERIES = await res.json();
+  SERIES_META=await (await fetch(`${TMDB}/tv/${SERIES.tmdbid}?api_key=${TMDB_KEY}`)).json();
 
   renderHero();
   renderSeasons();
-  loadSeason(SERIES.seasons[0].season_number);
-
-  handleResume();
+  loadSeason(SERIES.seasons[0].season);
+  resumePlayback();
 })();
 
 /* ===== HERO ===== */
 function renderHero(){
-  app.innerHTML = `
+  app.innerHTML=`
     <div class="hero">
-      <div class="hero-bg" style="background-image:url('${IMG+SERIES.backdrop_path}')"></div>
+      <div class="hero-bg" style="background-image:url('${IMG+SERIES_META.backdrop_path}')"></div>
       <div class="hero-content">
-        <img src="${IMG+SERIES.poster_path}" class="hero-poster mb-3">
-        <h2>${SERIES.name}</h2>
-        <p class="text-muted">${SERIES.overview}</p>
+        <img src="${IMG+SERIES_META.poster_path}" class="hero-poster mb-3">
+        <h2>${SERIES_META.name}</h2>
+        <p class="text-muted">${SERIES_META.overview}</p>
       </div>
     </div>
     <div class="seasons" id="seasons"></div>
@@ -175,11 +148,11 @@ function renderHero(){
 
 /* ===== SEASONS ===== */
 function renderSeasons(){
-  document.getElementById("seasons").innerHTML =
+  document.getElementById("seasons").innerHTML=
     SERIES.seasons.map((s,i)=>`
       <div class="season ${i===0?'active':''}"
-        onclick="loadSeason(${s.season_number},this)">
-        Season ${s.season_number}
+        onclick="loadSeason(${s.season},this)">
+        Season ${s.season}
       </div>
     `).join("");
 }
@@ -189,60 +162,47 @@ async function loadSeason(num,el){
   document.querySelectorAll(".season").forEach(s=>s.classList.remove("active"));
   if(el) el.classList.add("active");
 
-  const res = await fetch(`${TMDB}/tv/${SERIES.id}/season/${num}?api_key=${TMDB_KEY}`);
-  const data = await res.json();
+  const seasonData=SERIES.seasons.find(s=>s.season===num);
+  const tmdbSeason=await (await fetch(`${TMDB}/tv/${SERIES.tmdbid}/season/${num}?api_key=${TMDB_KEY}`)).json();
 
-  document.getElementById("episodes").innerHTML =
-    data.episodes.map(e=>`
-      <div class="episode" onclick="playEpisode(${num},${e.episode_number})">
-        <img class="ep-thumb"
-          src="${e.still_path ? IMG+e.still_path : IMG+SERIES.poster_path}">
+  document.getElementById("episodes").innerHTML=
+    tmdbSeason.episodes.map((ep,i)=>{
+      const url=seasonData.videos[i];
+      if(!url) return "";
+      return `
+      <div class="episode" onclick="play('${url}',${num},${i})">
+        <img class="ep-thumb" src="${ep.still_path?IMG+ep.still_path:IMG+SERIES_META.poster_path}">
         <div>
-          <div class="ep-title">EP ${e.episode_number} · ${e.name}</div>
-          <div class="ep-desc">${e.overview || "No description"}</div>
+          <div class="ep-title">EP ${ep.episode_number} · ${ep.name}</div>
+          <div class="ep-desc">${ep.overview||""}</div>
         </div>
-      </div>
-    `).join("");
+      </div>`;
+    }).join("");
 }
 
 /* ===== PLAYER + RESUME ===== */
-function playEpisode(season,episode){
-  const url = getStreamUrl(season,episode);
-  player.style.display="block";
+function play(url,season,index){
   player.src=url;
   player.play();
 
-  const key = `series_progress_${SERIES.id}`;
-  player.ontimeupdate = ()=>{
-    localStorage.setItem(key, JSON.stringify({
-      season,
-      episode,
-      time: player.currentTime
+  player.ontimeupdate=()=>{
+    localStorage.setItem(`series_resume_${SERIES.id}`,JSON.stringify({
+      season,index,time:player.currentTime
     }));
   };
-
   player.scrollIntoView({behavior:"smooth"});
 }
 
-function handleResume(){
-  if(!resumeFlag) return;
-
-  const saved = localStorage.getItem(`series_progress_${SERIES.id}`);
+function resumePlayback(){
+  const saved=localStorage.getItem(`series_resume_${SERIES.id}`);
   if(!saved) return;
 
-  const p = JSON.parse(saved);
+  const p=JSON.parse(saved);
   loadSeason(p.season);
   setTimeout(()=>{
-    player.style.display="block";
-    player.src = getStreamUrl(p.season,p.episode);
-    player.currentTime = p.time || 0;
-    player.play();
+    play(SERIES.seasons.find(s=>s.season===p.season).videos[p.index],p.season,p.index);
+    player.currentTime=p.time;
   },800);
-}
-
-/* ===== STREAM MAP ===== */
-function getStreamUrl(season,episode){
-  return `https://yourcdn.com/${SERIES.id}/S${season}E${episode}.m3u8`;
 }
 </script>
 
