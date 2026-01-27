@@ -272,7 +272,37 @@ const heroLink = document.getElementById("hero-link");
 const heroSkeleton = document.getElementById("hero-skeleton");
 const heroBox = document.querySelector(".hero");
 const rows = document.getElementById("rows");
+const ENABLE_TMDB_POSTER_FILL = true;
 
+
+
+
+
+
+
+
+/*globally adding */
+async function fetchTMDBDetails(tmdbid){
+  try{
+    const res = await fetch(
+      `https://api.themoviedb.org/3/movie/${tmdbid}?api_key=${TMDB_API_KEY}`
+    );
+    if(!res.ok) return null;
+    return await res.json();
+  }catch{
+    return null;
+  }
+}
+
+async function resolvePoster(post){
+  if(post.poster) return post.poster;              // JSON wins
+  if(!ENABLE_TMDB_POSTER_FILL || !post.tmdbid) return null;
+
+  const movie = await fetchTMDBDetails(post.tmdbid);
+  return movie?.poster_path
+    ? TMDB_IMG + movie.poster_path
+    : null;
+}
 
 
 /* ===== TMDB CONFIG ===== */
@@ -304,7 +334,72 @@ const observer=new IntersectionObserver(entries=>{
   });
 },{threshold:.3});
 
+/* ===== RELEASE DATE CACHE ===== */
+const RELEASE_CACHE_KEY = "releaseDateCache_v1";
 
+function getReleaseCache(){
+  try{
+    return JSON.parse(localStorage.getItem(RELEASE_CACHE_KEY)) || {};
+  }catch{
+    return {};
+  }
+}
+
+function setReleaseCache(cache){
+  localStorage.setItem(RELEASE_CACHE_KEY, JSON.stringify(cache));
+}
+
+function getCacheKey(post){
+  return post.tmdbid
+    ? `tmdb_${post.tmdbid}`
+    : `title_${post.heading.toLowerCase()}`;
+}
+
+/* ===== FETCH RELEASE DATE (SMART + CACHE) ===== */
+async function fetchReleaseDateSmart(post){
+  try{
+    if(post.release_date) return post.release_date;
+
+    const cache = getReleaseCache();
+    const cacheKey = getCacheKey(post);
+
+    // ✅ 1. CACHE HIT
+    if(cache[cacheKey]) return cache[cacheKey];
+
+    let movie = null;
+
+    // 2️⃣ TMDB by ID
+    if(post.tmdbid){
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${post.tmdbid}?api_key=${TMDB_API_KEY}`
+      );
+      if(res.ok) movie = await res.json();
+    }
+
+    // 3️⃣ Fallback search
+    if(!movie){
+      const res = await fetch(
+        `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(post.heading)}`
+      );
+      const data = await res.json();
+      movie = data.results?.[0];
+    }
+
+    const date = movie?.release_date || null;
+
+    // ✅ SAVE TO CACHE
+    if(date){
+      cache[cacheKey] = date;
+      setReleaseCache(cache);
+    }
+
+    return date;
+
+  }catch(e){
+    console.warn("Release date fetch failed:", post.heading);
+    return null;
+  }
+}
 
 
 /* ===== FETCH BACKDROP ===== */
@@ -322,6 +417,8 @@ async function fetchBackdropSmart(post){
         movie = await res.json();
       }
     }
+
+
 
     /* ========= 2. FALLBACK TO SEARCH ========= */
     if(!movie){
@@ -358,8 +455,7 @@ onclick="
     v.play();v._playing=true;
   }else location.href='post.html?id=${p.id}';
 "`:""}>
-<img src="${p.poster}" class="skeleton"
- onload="this.classList.remove('skeleton')">
+<img src="${p.poster || p.__poster}" class="skeleton">
 ${!isTouch && p.videoUrl?`
 <video muted preload="none" playsinline>
   <source src="${p.videoUrl}" type="video/mp4">
@@ -395,7 +491,9 @@ function showViewAll(title,key){
 
 function renderHome(){
   window.rowData={
-  latest:[...allPosts].sort((a,b)=>b.id-a.id),
+latest:[...allPosts].sort(
+  (a,b)=> b.__releaseDate - a.__releaseDate
+),
   telugu:allPosts.filter(p=>p.language==="Telugu"),
   hindi:allPosts.filter(p=>p.language==="Hindi"),
   english:allPosts.filter(p=>p.language==="English")
@@ -430,7 +528,7 @@ searchInput.addEventListener("input",()=>{
   if(!res.length){suggestions.style.display="none";return;}
   suggestions.innerHTML=res.map(p=>`
     <div class="suggestion" onclick="location.href='post.html?id=${p.id}'">
-      <img src="${p.poster}"><div>${p.heading}</div>
+      <img src="${p.poster || p.__poster}"><div>${p.heading}</div>
     </div>`).join("");
   suggestions.style.display="block";
 });
@@ -472,9 +570,23 @@ const heroVideo = document.getElementById('hero-video');
 /* ===== INIT (SAFE) ===== */
 (async()=>{
 try{
+  for(const post of allPosts){
+  await enrichMeta(post);
+}
+
   const res=await fetch(POSTS_JSON_URL);
+  // ===== AUTO-FILL POSTERS FROM TMDB =====
+for (const post of allPosts) {
+  if (!post.poster && post.tmdbid) {
+    const movie = await fetchTMDBDetails(post.tmdbid);
+    if (movie?.poster_path) {
+      post.__poster = TMDB_IMG + movie.poster_path;
+    }
+  }
+}
+
   if(!res.ok) throw new Error("posts.json missing");
-  allPosts=(await res.json()).filter(p=>p.heading);
+  allPosts = (await res.json()).filter(p => p.heading || p.tmdbid);
   if(!allPosts.length) throw new Error("No posts");
 
 const hero = allPosts[Math.floor(Math.random()*allPosts.length)];
@@ -483,6 +595,7 @@ const backdrop = await fetchBackdropSmart(hero);
 heroBg.style.backgroundImage = `url('${backdrop || hero.poster}')`;
 heroTitle.textContent = hero.heading;
 heroLink.href = `post.html?id=${hero.id}`;
+
 
 // ADD THESE 3 LINES - loads videoUrl into hero
 const heroVideo=document.getElementById("hero-video");
@@ -500,6 +613,20 @@ if(hero.videoUrl){
 document.getElementById("hero-skeleton").remove();
 document.querySelector(".hero").style.display = "block";
 
+// ===== PREPARE RELEASE DATES FOR LATEST MOVIES =====
+for (const post of allPosts) {
+  if (!post.release_date || post.release_date.trim() === "") {
+    const apiDate = await fetchReleaseDateSmart(post);
+    post.__releaseDate = apiDate ? new Date(apiDate) : new Date(0);
+  } else {
+    post.__releaseDate = new Date(post.release_date);
+  }
+}
+for(const post of allPosts){
+  if(!post.poster){
+    post.__poster = await resolvePoster(post);
+  }
+}
 
   renderHome();
 }catch(err){
