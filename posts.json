@@ -1081,15 +1081,15 @@
   {
     "id": 84,
   "type": "movie",
-    "tmdbid": null,
+    "tmdbid": 1112564,
     "heading": "",
     "poster": "",
     "backdrop": "",
     "year": "",
-    "language": "",
+    "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": ""
+    "videoUrl": "https://cdn.telugudub.store/Vaa_Vaathiyaar_2026_Telugu_1080p.mkv"
   },
   {
     "id": 85,
@@ -1300,4 +1300,5 @@
     "videoUrl": ""
   }
 ]
+
 
