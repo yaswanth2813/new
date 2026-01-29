@@ -1107,15 +1107,15 @@
   {
     "id": 86,
   "type": "movie",
-    "tmdbid": null,
-    "heading": "",
+    "tmdbid": 325699,
+    "heading": "Temper",
     "poster": "",
     "backdrop": "",
     "year": "",
     "language": "",
     "starring": "",
     "director": "",
-    "videoUrl": ""
+    "videoUrl": "https://cdn.telugudub.store/Temper_%282015%29_Telugu_1080p.mkv"
   },
   {
     "id": 87,
@@ -1300,6 +1300,7 @@
     "videoUrl": ""
   }
 ]
+
 
 
 
