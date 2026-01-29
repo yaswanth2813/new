@@ -1094,15 +1094,15 @@
   {
     "id": 85,
   "type": "movie",
-    "tmdbid": null,
-    "heading": "",
+    "tmdbid": 1448170,
+    "heading": "Champion",
     "poster": "",
     "backdrop": "",
     "year": "",
-    "language": "",
+    "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": ""
+    "videoUrl": "https://cdn.telugudub.store/Champion_2025_Telugu_1080p.mkv"
   },
   {
     "id": 86,
@@ -1300,5 +1300,6 @@
     "videoUrl": ""
   }
 ]
+
 
 
