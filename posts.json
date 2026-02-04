@@ -1146,15 +1146,15 @@
   {
     "id": 89,
   "type": "movie",
-    "tmdbid": null,
-    "heading": "",
+    "tmdbid": 1417849,
+    "heading": "Nari Nari Naduma Murari",
     "poster": "",
     "backdrop": "",
     "year": "",
     "language": "",
     "starring": "",
     "director": "",
-    "videoUrl": ""
+    "videoUrl": "https://cdn.telugudub.store/Nari_Nari_Naduma_Murari_2026_Telugu_1080p.mkv"
   },
   {
     "id": 90,
@@ -1300,6 +1300,7 @@
     "videoUrl": ""
   }
 ]
+
 
 
 
