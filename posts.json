@@ -1185,15 +1185,15 @@
   {
     "id": 92,
   "type": "movie",
-    "tmdbid": null,
-    "heading": "",
+    "tmdbid": 989017,
+    "heading": "Waltair Veerayya",
     "poster": "",
     "backdrop": "",
     "year": "",
     "language": "",
     "starring": "",
     "director": "",
-    "videoUrl": ""
+    "videoUrl": "https://cdn.telugudub.store/Waltair_Veerayya_%282023%29_Telugu_1080p.mkv"
   },
   {
     "id": 93,
@@ -1300,6 +1300,7 @@
     "videoUrl": ""
   }
 ]
+
 
 
 
