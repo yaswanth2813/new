@@ -1211,15 +1211,15 @@
   {
     "id": 94,
   "type": "movie",
-    "tmdbid": null,
-    "heading": "",
+    "tmdbid": 1407432,
+    "heading": "Anaganaga Oka Raju",
     "poster": "",
     "backdrop": "",
     "year": "",
     "language": "",
     "starring": "",
     "director": "",
-    "videoUrl": ""
+    "videoUrl": "https://cdn.telugudub.store/AOR_2026_Telugu_1080p.mkv"
   },
   {
     "id": 95,
@@ -1300,6 +1300,7 @@
     "videoUrl": ""
   }
 ]
+
 
 
 
