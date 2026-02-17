@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1109086,
     "heading": "War 2",
     "poster": "",
@@ -10,11 +10,11 @@
     "genre": "Action, Thriller",
     "starring": "Hrithik Roshan, Jr NTR, Kiara Advani",
     "director": "Ayan Mukerji",
-    "videoUrl": "https://cdn.telugudub.store/War_2_(2025)_Telugu_HQ_HD_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/War_2_(2025)_Telugu_HQ_HD_1080p.mkv"
   },
   {
     "id": 2,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1222479,
     "heading": "Mirai",
     "poster": "",
@@ -23,11 +23,11 @@
     "genre": "Drama, Fantasy",
     "starring": "Haruka Ayase, Moka Kamishiraishi",
     "director": "Mamoru Hosoda",
-    "videoUrl": "https://cdn.telugudub.store/Mirai_(2025)_Teluug_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Mirai_(2025)_Teluug_1080p.mkv"
   },
   {
     "id": 3,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1446056,
     "heading": "Junior",
     "poster": "",
@@ -36,11 +36,11 @@
     "genre": "Romantic Comedy",
     "starring": "Kiran Abbavaram, Neha Shetty",
     "director": "Trivikram Srinivas",
-    "videoUrl": "https://cdn.telugudub.store/Juniior_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Juniior_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 4,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1440700,
     "heading": "Little Hearts",
     "poster": "",
@@ -49,11 +49,11 @@
     "genre": "Romance, Drama",
     "starring": "Shane Nigam, Mahima Nambiar",
     "director": "Antony Sony",
-    "videoUrl": "https://cdn.telugudub.store/Little_Hearts_(2025)_Telugu_HD_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Little_Hearts_(2025)_Telugu_HD_1080p.mkv"
   },
   {
     "id": 5,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Madharasi",
     "poster": "https://www.deccanchronicle.com/h-upload/2025/09/06/1954963-madharasi-collections.jpg",
@@ -62,11 +62,11 @@
     "genre": "Action, Drama",
     "starring": "Nayanthara, Arjun Sarja",
     "director": "Vinoth Kumar",
-    "videoUrl": "https://cdn.telugudub.store/Madharasi_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Madharasi_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 6,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Kishkindhapuri",
     "poster": "https://m.media-amazon.com/images/M/MV5BODIyOTE5NTEtODkwNi00NmQxLTkxMDctODVmZDFjM2Y4Y2Y4XkEyXkFqcGc@._V1_FMjpg_UX1024_.jpg",
@@ -75,11 +75,11 @@
     "genre": "Fantasy, Adventure",
     "starring": "Rakshit Shetty, Rishab Shetty",
     "director": "Ravikanth Perepu",
-    "videoUrl": "https://cdn.telugudub.store/Kishkindhapuri_(2025)_Telugu_HD_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Kishkindhapuri_(2025)_Telugu_HD_1080p.mkv"
   },
   {
     "id": 7,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Sammathame",
     "poster": "https://www.acmodasi.in/amdb/images/movie/3/t/sammathame-2022-DTY1ms.jpg",
@@ -88,11 +88,11 @@
     "genre": "Romantic Comedy",
     "starring": "Kiran Abbavaram, Chandini Chowdary",
     "director": "Gopinath Reddy",
-    "videoUrl": "https://cdn.telugudub.store/Sammathame_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Sammathame_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 8,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Salaar",
     "poster": "https://pbs.twimg.com/media/F-vfwtdaMAENLjr?format=jpg&name=4096x4096",
@@ -101,11 +101,11 @@
     "genre": "Action, Thriller",
     "starring": "Prabhas, Prithviraj Sukumaran, Shruti Haasan",
     "director": "Prashanth Neel",
-    "videoUrl": "https://cdn.telugudub.store/Salaar_(2023)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Salaar_(2023)_Telugu_1080p.mkv"
   },
   {
     "id": 9,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Khaleja",
     "poster": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/khaleja-et00005145-1747465177.jpg",
@@ -114,11 +114,11 @@
     "genre": "Fantasy, Comedy",
     "starring": "Mahesh Babu, Anushka Shetty",
     "director": "Trivikram Srinivas",
-    "videoUrl": "https://cdn.telugudub.store/Khaleja_(2010)_Telugu_HD_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Khaleja_(2010)_Telugu_HD_1080p.mkv"
   },
   {
     "id": 10,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Sr Kalyanamandapam",
     "poster": "https://imgs.search.brave.com/1ZUVo6S1x58gpQijQkIIqs3m0ch1HID_Mw7aQy5aQdo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk1qWmlaVGc0/TTJVdFlqTXlOQzAw/T0daa0xUZ3hObUl0/TVdJM1kyTTROREUw/T1dWbVhrRXlYa0Zx/Y0djQC5qcGc",
@@ -127,11 +127,11 @@
     "genre": "Drama, Romance",
     "starring": "Kiran Abbavaram, Priyanka Jawalkar",
     "director": "Sridhar Gade",
-    "videoUrl": "https://cdn.telugudub.store/SR_Kalyanamandapam_(2021)_720p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/SR_Kalyanamandapam_(2021)_720p.mkv"
   },
   {
     "id": 11,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "They Call Him OG",
     "poster": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/they-call-him-og-et00369074-1758290791.jpg",
@@ -140,11 +140,11 @@
     "genre": "Action, Crime",
     "starring": "Pawan Kalyan, Emraan Hashmi, Priyanka Mohan",
     "director": "Sujeeth",
-    "videoUrl": "https://cdn.telugudub.store/They_Call_Him_OG_(2025)_Telugu_HD_720p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/They_Call_Him_OG_(2025)_Telugu_HD_720p.mkv"
   },
   {
     "id": 12,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Vikram",
     "poster": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/vikram-et00138591-22-07-2021-11-45-18.jpg",
@@ -153,11 +153,11 @@
     "genre": "Action, Thriller",
     "starring": "Kamal Haasan, Vijay Sethupathi, Fahadh Faasil",
     "director": "Lokesh Kanagaraj",
-    "videoUrl": "https://cdn.telugudub.store/Vikram_(2022)_Telugu_1080p_BluRay.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Vikram_(2022)_Telugu_1080p_BluRay.mkv"
   },
   {
     "id": 13,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Hi Nanna",
     "poster": "https://assets-in.bmscdn.com/iedb/movies/images/mobile/thumbnail/xlarge/hi-nanna-et00364503-1701678655.jpg",
@@ -166,11 +166,11 @@
     "genre": "Romantic Drama",
     "starring": "Nani, Mrunal Thakur, Baby Kiara Khanna",
     "director": "Shouryuv",
-    "videoUrl": "https://cdn.telugudub.store/Hi_Nanna_(2023)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Hi_Nanna_(2023)_Telugu_1080p.mkv"
   },
   {
     "id": 14,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Baahubali",
     "poster": "https://play-lh.googleusercontent.com/proxy/7HmkIYyPhpS3ILgO7n_ej_i8rBW4X-oBi9JCFvc9x6wtskCRJ3vexdZjkixhHwSx789Hmg8FKKAYmaQArACqD9XVMhRIEREwqmyDb9p9GGzlS1Uq3kEctGWpig=s1920-w1920-h1080",
@@ -179,11 +179,11 @@
     "genre": "Action, Historical Fiction",
     "starring": "Prabhas, Rana Daggubati, Anushka Shetty, Tamannaah",
     "director": "S. S. Rajamouli",
-    "videoUrl": "https://cdn.telugudub.store/Baahubali_(2015)_Telugu_Bluray_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Baahubali_(2015)_Telugu_Bluray_1080p.mkv"
   },
   {
     "id": 15,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Baahubali 2: The Conclusion",
     "poster": "https://media.cinemaexpress.com/cinemaexpress%2F2025-08-24%2F89a3plbd%2FBaahubali-epic.jpg?w=480&auto=format%2Ccompress",
@@ -192,11 +192,11 @@
     "genre": "Action, Epic Drama",
     "starring": "Prabhas, Anushka Shetty, Rana Daggubati",
     "director": "S. S. Rajamouli",
-    "videoUrl": "https://cdn.telugudub.store/Baahubali_2_The_Conclusion_(2017)_Telugu_1080p_BluRay.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Baahubali_2_The_Conclusion_(2017)_Telugu_1080p_BluRay.mkv"
   },
   {
     "id": 16,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Idly Kadai",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB8NGhgTtET9RjQ2sli-whe95pSVp7FYyuDBTnDlaib29iXCmwd6wce5E&s=10",
@@ -205,11 +205,11 @@
     "genre": "Comedy, Drama",
     "starring": "Yogi Babu, Anandhi",
     "director": "Sabarish K. Ram",
-    "videoUrl": "https://cdn.telugudub.store/Idli_Kottu_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Idli_Kottu_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 17,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Our Fault",
     "poster": "https://www.acmodasi.in/amdb/images/movie/j/e/my-fault-2023-3981.jpg",
@@ -217,12 +217,12 @@
     "year": 2023,
     "genre": "Romantic Drama",
     "starring": "Nicole Wallace, Gabriel Guevara",
-    "director": "Domingo Gonz\u00e1lez",
+    "director": "Domingo González",
     "videoUrl": "https://dingtezuni.com/stream/FG-CrixVd6FNYCtu1Y3G7Q/hjkrhuihghfvu/1761894401/32736917/index-f3-v1-a1.m3u8"
   },
   {
     "id": 18,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Lokah Chapter One: Chandra",
     "poster": "https://idiva-media.ilnmedia.com/content/2025/Oct/social---2025-10-13T150234947_68ecc75617f7e.jpg",
@@ -231,11 +231,11 @@
     "genre": "Science Fiction, Action",
     "starring": "Tovino Thomas, Shruti Haasan",
     "director": "Rajeev Chilaka",
-    "videoUrl": "https://cdn.telugudub.store/Lokah_Chapter_1_Chandra_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Lokah_Chapter_1_Chandra_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 19,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Kantara A Legend: Chapter 1",
     "poster": "https://4kwallpapers.com/images/walls/thumbs_3t/19889.jpg",
@@ -244,11 +244,11 @@
     "genre": "Mythological, Drama",
     "starring": "Rishab Shetty, Sapthami Gowda",
     "director": "Rishab Shetty",
-    "videoUrl": "https://cdn.telugudub.store/Kantara_A_Legend_Chapter_1_(2025)_Telugu_HQ_HD_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Kantara_A_Legend_Chapter_1_(2025)_Telugu_HQ_HD_1080p.mkv"
   },
   {
     "id": 20,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Veera Dheera Sooran",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXbu08sIxppSoKV1bZHZGiOeRLox8Pv9NA18Ji7ZDeiqvL4fRtlb9RcFih&s=10",
@@ -257,11 +257,11 @@
     "genre": "Action, Historical Fiction",
     "starring": "Dhanush, Priyanka Mohan",
     "director": "Mithran R. Jawahar",
-    "videoUrl": "https://cdn.telugudub.store/Veera_Dheera_Sooran_(2025)_Telugu_Proper_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Veera_Dheera_Sooran_(2025)_Telugu_Proper_1080p.mkv"
   },
   {
     "id": 21,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Andala Rakshasi",
     "poster": "https://morningshow.in/wp-content/uploads/2025/06/Andala-Rakshasi-e1749107501497.jpg",
@@ -270,11 +270,11 @@
     "genre": "Romance, Fantasy",
     "starring": "Rahul Ravindran, Lavanya Tripathi, Naveen Chandra",
     "director": "Hanu Raghavapudi",
-    "videoUrl": "https://cdn.telugudub.store/Andala_Rakshasi_(2012)_720p_Telugu_Tamil.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Andala_Rakshasi_(2012)_720p_Telugu_Tamil.mkv"
   },
   {
     "id": 22,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Arjun Reddy",
     "poster": "https://mrwallpaper.com/images/high/arjun-reddy-driving-with-shalini-l8w7l2ytpvl53f00.webp",
@@ -283,11 +283,11 @@
     "genre": "Romantic Drama",
     "starring": "Vijay Deverakonda, Shalini Pandey",
     "director": "Sandeep Reddy Vanga",
-    "videoUrl": "https://cdn.telugudub.store/Arjun_Reddy_(2017)_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Arjun_Reddy_(2017)_1080p.mkv"
   },
   {
     "id": 23,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Animal",
     "poster": "https://wallpapercave.com/wp/wp13286331.jpg",
@@ -296,11 +296,11 @@
     "genre": "Action, Drama",
     "starring": "Ranbir Kapoor, Rashmika Mandanna, Anil Kapoor",
     "director": "Sandeep Reddy Vanga",
-    "videoUrl": "https://cdn.telugudub.store/Animal_(2023)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Animal_(2023)_Telugu_1080p.mkv"
   },
   {
     "id": 24,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 927342,
     "heading": "Amaran",
     "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/jPU2db0fPSlpfxzXRo3f0joXvdm.jpg",
@@ -309,11 +309,11 @@
     "genre": "Action, Biographical",
     "starring": "Sivakarthikeyan, Sai Pallavi",
     "director": "Rajkumar Periasamy",
-    "videoUrl": "https://cdn.telugudub.store/AMARAN_(2024)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/AMARAN_(2024)_Telugu_1080p.mkv"
   },
   {
     "id": 25,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 855400,
     "heading": "Jai Bhim",
     "poster": "",
@@ -322,11 +322,11 @@
     "genre": "Drama, Legal",
     "starring": "Suriya, Lijomol Jose, Manikandan",
     "director": "T. J. Gnanavel",
-    "videoUrl": "https://cdn.telugudub.store/Jai_Bhim_(2021)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Jai_Bhim_(2021)_Telugu_1080p.mkv"
   },
   {
     "id": 26,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 800383,
     "heading": "Beast",
     "poster": "",
@@ -335,11 +335,11 @@
     "genre": "Action, Comedy",
     "starring": "Vijay, Pooja Hegde",
     "director": "Nelson Dilipkumar",
-    "videoUrl": "https://cdn.telugudub.store/Beast_(2022)_Telugu_4k.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Beast_(2022)_Telugu_4k.mkv"
   },
   {
     "id": 27,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 937020,
     "heading": "Jailer",
     "poster": "https://image.tmdb.org/t/p/original/xAiHMfEaltGG0PL5sfi5V6J5BjC.jpg",
@@ -348,11 +348,11 @@
     "genre": "Action, Crime",
     "starring": "Rajinikanth, Tamannaah Bhatia, Vinayakan",
     "director": "Nelson Dilipkumar",
-    "videoUrl": "https://cdn.telugudub.store/Jailer_(2023)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Jailer_(2023)_Telugu_1080p.mkv"
   },
   {
     "id": 28,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Mithra Mandali",
     "poster": "https://images.moneycontrol.com/static-mcnews/2025/10/20251016084846_mithra-mandali.jpg?impolicy=website&width=770&height=431",
@@ -361,11 +361,11 @@
     "genre": "Drama, Mystery",
     "starring": "Nani, Keerthy Suresh",
     "director": "Sagar Chandra",
-    "videoUrl": "https://cdn.telugudub.store/Mithra_Mandali_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Mithra_Mandali_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 29,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Veera Simha Reddy",
     "poster": "https://img.airtel.tv/unsafe/fit-in/1600x0/filters:format(webp)/https://xstreamcp-assets-msp.streamready.in/assets/HOTSTAR_DTH/MOVIE/68beb78702d0fd22daacf017/images/LANDSCAPE_169/1712686034766-h?o=production",
@@ -374,11 +374,11 @@
     "genre": "Action, Family Drama",
     "starring": "Nandamuri Balakrishna, Shruti Haasan",
     "director": "Gopichand Malineni",
-    "videoUrl": "https://cdn.telugudub.store/Veera_Simha_Reddy_(2023)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Veera_Simha_Reddy_(2023)_Telugu_1080p.mkv"
   },
   {
     "id": 30,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1153399,
     "heading": "Coolie",
     "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/oCBafjgkm98MfzNt6QwzHDslsR7.jpg",
@@ -387,11 +387,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Coolie_(2025)_Telugu_HQ_HD_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Coolie_(2025)_Telugu_HQ_HD_1080p.mkv"
   },
   {
     "id": 31,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 564147,
     "heading": "KGF",
     "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/aSkQZ0NNHuDpeasX9CubfoJlky8.jpg",
@@ -400,11 +400,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/KGF_(2018)_1080p_Telugu.mkv"
+    "videoUrl": "https://cdn.cdngo.site/KGF_(2018)_1080p_Telugu.mkv"
   },
   {
     "id": 32,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 587412,
     "heading": "KGF-2",
     "poster": "https://image.tmdb.org/t/p/original/7qrViIiYfE79RYEYYaPt9eX3QE1.jpg",
@@ -413,11 +413,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/KGF_Chapter-2_(2022)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/KGF_Chapter-2_(2022)_Telugu_1080p.mkv"
   },
   {
     "id": 33,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1321108,
     "heading": "Dude",
     "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/6s5SigXKo6KQt8hy7wdeaQXrXLP.jpg",
@@ -426,11 +426,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Dude_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Dude_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 34,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Telusu Kada",
     "poster": "https://image.tmdb.org/t/p/original/pEwKtx0EAttFi4kuj5x1QlkYYIw.jpg",
@@ -439,11 +439,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Telusu_Kada_(2025)_telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Telusu_Kada_(2025)_telugu_1080p.mkv"
   },
   {
     "id": 35,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Devara",
     "poster": "https://image.tmdb.org/t/p/original/tPzDi6RDypbjlxgQYz8Tl5m0lt2.jpg",
@@ -452,11 +452,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Devara_(2024)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Devara_(2024)_Telugu_1080p.mkv"
   },
   {
     "id": 36,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "K Ramp",
     "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/lJ7dyxc7g7dsaSoL6Wn3aGMuLuE.jpg",
@@ -465,11 +465,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/K-Ramp_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/K-Ramp_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 37,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Jawan",
     "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/vWrUxKrOPOU6hxSAThAZw1CgZP5.jpg",
@@ -478,11 +478,11 @@
     "language": "Telugu",
     "starring": "Shah Rukh Khan, Nayanthara, Vijay Sethupathi",
     "director": "Atlee",
-    "videoUrl": "https://cdn.telugudub.store/Jawan_(2023)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Jawan_(2023)_Telugu_1080p.mkv"
   },
   {
     "id": 38,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Pathaan",
     "poster": "https://image.tmdb.org/t/p/original/7s23ZHJ4NzA1bCdwwlVH1kU0bwR.jpg",
@@ -491,11 +491,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Pathaan_(2023)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Pathaan_(2023)_Telugu_1080p.mkv"
   },
   {
     "id": 39,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Jabilamma Neeku Antha Kopama",
     "poster": "https://m.media-amazon.com/images/S/pv-target-images/9c4dcb082415a707a81dfdce619e13a0d85d67c91bc00a3194f1299f7b4b746a.png",
@@ -504,11 +504,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Jabilamma_Neeku_Antha_Kopama_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Jabilamma_Neeku_Antha_Kopama_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 40,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1257957,
     "heading": "Bison",
     "poster": "https://image.tmdb.org/t/p/original/33wxgncstrIzPXsJiAFuDmpZK5m.jpg",
@@ -517,11 +517,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Bison_Kaalamaadan_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Bison_Kaalamaadan_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 41,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 626392,
     "heading": "Master",
     "poster": "",
@@ -530,11 +530,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Master_(2021)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Master_(2021)_Telugu_1080p.mkv"
   },
   {
     "id": 42,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 579974,
     "heading": "RRR",
     "poster": "",
@@ -543,11 +543,11 @@
     "language": "Telugu",
     "starring": "N. T. Rama Rao Jr., Ram Charan, Alia Bhatt",
     "director": "S. S. Rajamouli",
-    "videoUrl": "https://cdn.telugudub.store/RRR_(2022)_Telugu_1080p__H265_DD5_1_ATMOS.mkv"
+    "videoUrl": "https://cdn.cdngo.site/RRR_(2022)_Telugu_1080p__H265_DD5_1_ATMOS.mkv"
   },
   {
     "id": 43,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1381405,
     "heading": "Mass Jathara",
     "poster": "",
@@ -556,11 +556,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Mass_Jathara_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Mass_Jathara_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 44,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1196364,
     "heading": "Thamma",
     "poster": "",
@@ -569,11 +569,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Thamma_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Thamma_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 45,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1574296,
     "heading": "The Great Pre-wedding Show",
     "poster": "",
@@ -582,11 +582,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/The_Great_Pre-Wedding_Show_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/The_Great_Pre-Wedding_Show_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 46,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1444973,
     "heading": "Jatadhara",
     "poster": "",
@@ -595,11 +595,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Jatadhara_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Jatadhara_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 47,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "The Girlfriend",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWYBKVs6WUUf-C6xPCDLvv8twDQGKWwVeA-YFu5Rdqa_QwXlZULsLZ_cYx&s=10",
@@ -608,11 +608,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/The_Girlfriend_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/The_Girlfriend_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 48,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Yatra",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2xHYEv7fk-lpWWf4JE4LZFJbwjJX6bZMfzO0CYVXgDg&s=10",
@@ -621,11 +621,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Yatra_(2019)_720p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Yatra_(2019)_720p.mkv"
   },
   {
     "id": 49,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 955496,
     "heading": "Fateh",
     "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/koj6YOGltFo8L42NFldJMw5M0dU.jpg",
@@ -634,11 +634,11 @@
     "language": "Hindi",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Fateh_(2025)_Hindi_720p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Fateh_(2025)_Hindi_720p.mkv"
   },
   {
     "id": 50,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Raayan",
     "poster": "https://i.scdn.co/image/ab67616d0000b273c55687b6cdba45d13ff07c91",
@@ -647,11 +647,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Raayan_(2024)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Raayan_(2024)_Telugu_1080p.mkv"
   },
   {
     "id": 51,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1450340,
     "heading": "12A Railway Colony",
     "poster": "",
@@ -660,11 +660,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/12A_Railway_Colony_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/12A_Railway_Colony_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 52,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1250508,
     "heading": "Kaantha",
     "poster": "",
@@ -673,11 +673,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Kaantha_(2025)_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Kaantha_(2025)_Telugu_1080p.mkv"
   },
   {
     "id": 53,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1580640,
     "heading": "Raju weds Rambai",
     "poster": "",
@@ -686,11 +686,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Raju_Weds_Rambai_%282025%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Raju_Weds_Rambai_%282025%29_Telugu_1080p.mkv"
   },
   {
     "id": 54,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1223601,
     "heading": "SISU",
     "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/jNsttCWZyPtW66MjhUozBzVsRb7.jpg",
@@ -699,11 +699,11 @@
     "language": "English",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Sisu_Road_to_Revenge_(2025)_1080p_Tel_Tam_hin_Eng.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Sisu_Road_to_Revenge_(2025)_1080p_Tel_Tam_hin_Eng.mkv"
   },
   {
     "id": 55,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1407437,
     "heading": "Andhra King Taluka",
     "poster": "",
@@ -712,11 +712,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Andhra_King_Taluka_%282025%29_Telugu_720p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Andhra_King_Taluka_%282025%29_Telugu_720p.mkv"
   },
   {
     "id": 56,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "GEMINI HD",
     "poster": "https://sund-images.sunnxt.com/194392/1000x1000_GeminiTVHD_194392_0a146256-5869-40c5-89de-2fbb9ad6b0ce.png",
@@ -729,7 +729,7 @@
   },
   {
     "id": 57,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Etv HD",
     "poster": "https://jiotvimages.cdn.jio.com/dare_images/images/ETV_HD.png",
@@ -742,7 +742,7 @@
   },
   {
     "id": 58,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Ayalaan",
     "poster": "https://cdn.123telugu.com/content/wp-content/uploads/2025/12/Ayalaan.webp",
@@ -751,11 +751,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Ayalaan_%282024%29_telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Ayalaan_%282024%29_telugu_1080p.mkv"
   },
   {
     "id": 59,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1511417,
     "heading": "Bahubali The Epic",
     "poster": "",
@@ -764,11 +764,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Baahubali_The_Epic_%282025%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Baahubali_The_Epic_%282025%29_Telugu_1080p.mkv"
   },
   {
     "id": 60,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1195394,
     "heading": "Turbo",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7riDg6WyWJjLZlOanPUyhJPhdcI3r-DUK6UIYxGGC9gu7GG42-9UOjNOB&s=10",
@@ -777,11 +777,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Turbo_%282024%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Turbo_%282024%29_Telugu_1080p.mkv"
   },
   {
     "id": 61,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1239511,
     "heading": "Lucky Bhaskar",
     "poster": "",
@@ -790,11 +790,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Lucky_Baskhar_%282024%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Lucky_Baskhar_%282024%29_Telugu_1080p.mkv"
   },
   {
     "id": 62,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Akhanda 2",
     "poster": "https://assets-in.bmscdn.com/discovery-catalog/events/et00416621-krezapsdbj-landscape.jpg",
@@ -803,11 +803,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Akhanda_2_%282025%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Akhanda_2_%282025%29_Telugu_1080p.mkv"
   },
   {
     "id": 63,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Dhandora",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4pRqWKr4CNA_m-1mwNrMFTqOC7hI53CRadMtH6zPpjg&s=10",
@@ -816,11 +816,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Dhandoraa_%282025%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Dhandoraa_%282025%29_Telugu_1080p.mkv"
   },
   {
     "id": 64,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Gurram Paapi Reddy",
     "poster": "https://cdn.district.in/movies-assets/images/cinema/Gurram-Paapi-Reddy-cover%20(1)-0ae17b20-db19-11f0-b15e-d357a5863f21.jpg",
@@ -829,11 +829,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Gurram_Paapi_Reddy_%282025%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Gurram_Paapi_Reddy_%282025%29_Telugu_1080p.mkv"
   },
   {
     "id": 65,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "C/o Kancharapalem",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFMdeFEsW81e-3AiZD8VKNz0YFx89oa506hP9PgvPp0gUMARF34PDFLII&s=10",
@@ -842,11 +842,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Co_Kancharapalem_%282018%29_720p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Co_Kancharapalem_%282018%29_720p.mkv"
   },
   {
     "id": 66,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Awe!",
     "poster": "https://i.ytimg.com/vi/xOEscQChX7M/maxresdefault.jpg",
@@ -855,11 +855,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Awe_%282018%29_720p.mp4"
+    "videoUrl": "https://cdn.cdngo.site/Awe_%282018%29_720p.mp4"
   },
   {
     "id": 67,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "A (Ad Infinitum)",
     "poster": "https://static.toiimg.com/thumb/msid-81274259,width-1070,height-580,imgsize-23416,resizemode-75,overlay-toi_sw,pt-32,y_pad-40/photo.jpg",
@@ -868,11 +868,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/A-Ad_Infinitum_%282021%29_Telugu_720p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/A-Ad_Infinitum_%282021%29_Telugu_720p.mkv"
   },
   {
     "id": 68,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1150478,
     "heading": "Eagle",
     "poster": "https://jiotvimages.cdn.jio.com/imagespublic/8/72/369101be36ef5831a0e1447c1c04b85f_1722860319466_l_medium.jpg",
@@ -881,11 +881,11 @@
     "language": "Requested",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Eagle_%282024%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Eagle_%282024%29_Telugu_1080p.mkv"
   },
   {
     "id": 69,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Sita Ramam",
     "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/g3hk2wEeIsTGhh7JvK8yWFVR7ue.jpg",
@@ -894,11 +894,11 @@
     "language": "Requested",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Sita_Ramam_%282022%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Sita_Ramam_%282022%29_Telugu_1080p.mkv"
   },
   {
     "id": 70,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Balagam",
     "poster": "https://media.themoviedb.org/t/p/w440_and_h660_face/oupQ1zJhAExprW6ykxSK4vWdT1V.jpg",
@@ -907,11 +907,11 @@
     "language": "Requested",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Balagam_%282023%29_Tel_Tam_Mal_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Balagam_%282023%29_Tel_Tam_Mal_1080p.mkv"
   },
   {
     "id": 71,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1424217,
     "heading": "Court",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUEfD2WEh8qIyiw-JFPZ6jLNAeMAPXxoy6cnvVXvSoGEZ5OHeR_7XG5hk&s=10",
@@ -920,11 +920,11 @@
     "language": "Requested",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Court_-_State_vs_A_Nobody_%C2%A0%282025%29_Telugu_HQ_HD_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Court_-_State_vs_A_Nobody_%C2%A0%282025%29_Telugu_HQ_HD_1080p.mkv"
   },
   {
     "id": 72,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1558468,
     "heading": "Shambhala",
     "poster": "https://cdn.district.in/movies-assets/images/cinema/SHAMBHALA-600X800-6c207840-a433-11f0-8e0c-51e530df5bbe.jpg",
@@ -933,11 +933,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Aadi_Shambhala_%282025%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Aadi_Shambhala_%282025%29_Telugu_1080p.mkv"
   },
   {
     "id": 73,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Aquaman",
     "poster": "https://w0.peakpx.com/wallpaper/905/1/HD-wallpaper-aquaman-1-aquaman-movie-aquaman-movies-2018-movies-1-jason-momoa.jpg",
@@ -946,11 +946,11 @@
     "language": "English",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Aquaman_(2018)_Tel_Tam_Hin_Eng_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Aquaman_(2018)_Tel_Tam_Hin_Eng_1080p.mkv"
   },
   {
     "id": 74,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 463476,
     "heading": "Lie",
     "poster": "https://m.media-amazon.com/images/S/pv-target-images/407f938de8299f7ece42a2b648b4df663269eee7f3973e33778ccefd4ad4bc83.jpg",
@@ -959,11 +959,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/LIE_%282017%29_720p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/LIE_%282017%29_720p.mkv"
   },
   {
     "id": 75,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Tere Ishq Mein",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqJ6k0of7b-J3KVrJfKCVr91TfEXCYjncIMF7b8gQBoZyzwl5O7aiegmNa&s=10",
@@ -972,11 +972,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Tere_Ishk_Mein_%282025%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Tere_Ishk_Mein_%282025%29_Telugu_1080p.mkv"
   },
   {
     "id": 76,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1510339,
     "heading": "Mark",
     "poster": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfrtqCGURLgXd9t5EGYjewhVEjME146YNKXyeYsoju8X_qGykKbLKJle1h&s=10",
@@ -985,11 +985,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Mark_%282026%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Mark_%282026%29_Telugu_1080p.mkv"
   },
   {
     "id": 77,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "Cheekatilo",
     "poster": "https://resizing.flixster.com/bFeY3wFMjCGCZEVbIrU4ahnCSJI=/ems.cHJkLWVtcy1hc3NldHMvbW92aWVzLzU1YTEzOWRkLTRkZDYtNDYxNi05YzE2LTg0Mzk5ZTRkNGNkMC5qcGc=",
@@ -998,11 +998,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Cheekatilo_2026_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Cheekatilo_2026_Telugu_1080p.mkv"
   },
   {
     "id": 78,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1234821,
     "heading": "Jurasic World",
     "poster": "https://www.themoviedb.org/t/p/w1280/1RICxzeoNCAO5NpcRMIgg1XT6fm.jpg",
@@ -1011,11 +1011,11 @@
     "language": "English",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Jurassic_World_Rebirth_%282025%29_English_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Jurassic_World_Rebirth_%282025%29_English_1080p.mkv"
   },
   {
     "id": 79,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1083241,
     "heading": "Baby John",
     "poster": "",
@@ -1024,11 +1024,11 @@
     "language": "Hindi",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Baby_John_(2024)_Hindi_720p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Baby_John_(2024)_Hindi_720p.mkv"
   },
   {
     "id": 80,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1196943,
     "heading": "Chhaava",
     "poster": "",
@@ -1037,11 +1037,11 @@
     "language": "Hindi",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/ Chhaava_(2025)_Hindi_HQ_HD_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/ Chhaava_(2025)_Hindi_HQ_HD_1080p.mkv"
   },
   {
     "id": 81,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1195430,
     "heading": "Deva",
     "poster": "",
@@ -1050,11 +1050,11 @@
     "language": "Hindi",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Deva_(2025)_Hin_PHD_720p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Deva_(2025)_Hin_PHD_720p.mkv"
   },
   {
     "id": 82,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1136423,
     "heading": "Sathyam Sundharam",
     "poster": "",
@@ -1063,11 +1063,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Sathyam_Sundaram_%282024%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Sathyam_Sundaram_%282024%29_Telugu_1080p.mkv"
   },
   {
     "id": 83,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1160018,
     "heading": "Kill",
     "poster": "",
@@ -1080,7 +1080,7 @@
   },
   {
     "id": 84,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1112564,
     "heading": "",
     "poster": "",
@@ -1089,11 +1089,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Vaa_Vaathiyaar_2026_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Vaa_Vaathiyaar_2026_Telugu_1080p.mkv"
   },
   {
     "id": 85,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1448170,
     "heading": "Champion",
     "poster": "",
@@ -1102,11 +1102,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Champion_2025_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Champion_2025_Telugu_1080p.mkv"
   },
   {
     "id": 86,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 325699,
     "heading": "Temper",
     "poster": "",
@@ -1115,11 +1115,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Temper_%282015%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Temper_%282015%29_Telugu_1080p.mkv"
   },
   {
     "id": 87,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1234731,
     "heading": "Anaconda",
     "poster": "",
@@ -1128,11 +1128,11 @@
     "language": "",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Anaconda_2025_1080p_tel_Tam_Hin_Eng.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Anaconda_2025_1080p_tel_Tam_Hin_Eng.mkv"
   },
   {
     "id": 88,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1291608,
     "heading": "Dhurandhar",
     "poster": "",
@@ -1141,11 +1141,11 @@
     "language": "Telugu",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Dhurandhar_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Dhurandhar_Telugu_1080p.mkv"
   },
   {
     "id": 89,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1417849,
     "heading": "Nari Nari Naduma Murari",
     "poster": "",
@@ -1154,11 +1154,11 @@
     "language": "",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Nari_Nari_Naduma_Murari_2026_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Nari_Nari_Naduma_Murari_2026_Telugu_1080p.mkv"
   },
   {
     "id": 90,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1487142,
     "heading": "Sirai",
     "poster": "",
@@ -1167,11 +1167,11 @@
     "language": "",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Sirai_2025_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Sirai_2025_Telugu_1080p.mkv"
   },
   {
     "id": 91,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1022453,
     "heading": "The Rajasaab",
     "poster": "",
@@ -1180,11 +1180,11 @@
     "language": "",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/The_Raja_Saab_2026_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/The_Raja_Saab_2026_Telugu_1080p.mkv"
   },
   {
     "id": 92,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 989017,
     "heading": "Waltair Veerayya",
     "poster": "",
@@ -1193,11 +1193,11 @@
     "language": "",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/Waltair_Veerayya_%282023%29_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/Waltair_Veerayya_%282023%29_Telugu_1080p.mkv"
   },
   {
     "id": 93,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1439713,
     "heading": "Mana Shankar Varaprasad",
     "poster": "",
@@ -1206,11 +1206,11 @@
     "language": "",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/MSVPG_2026_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/MSVPG_2026_Telugu_1080p.mkv"
   },
   {
     "id": 94,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": 1407432,
     "heading": "Anaganaga Oka Raju",
     "poster": "",
@@ -1219,11 +1219,11 @@
     "language": "",
     "starring": "",
     "director": "",
-    "videoUrl": "https://cdn.telugudub.store/AOR_2026_Telugu_1080p.mkv"
+    "videoUrl": "https://cdn.cdngo.site/AOR_2026_Telugu_1080p.mkv"
   },
   {
     "id": 95,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1236,7 +1236,7 @@
   },
   {
     "id": 96,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1249,7 +1249,7 @@
   },
   {
     "id": 97,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1262,7 +1262,7 @@
   },
   {
     "id": 98,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1275,7 +1275,7 @@
   },
   {
     "id": 99,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1288,7 +1288,7 @@
   },
   {
     "id": 100,
-  "type": "movie",
+    "type": "movie",
     "tmdbid": null,
     "heading": "",
     "poster": "",
@@ -1300,18 +1300,3 @@
     "videoUrl": ""
   }
 ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
