@@ -118,11 +118,75 @@ body{
   margin-bottom:6px;
 }
 
-/* ===== VIDEO ===== */
-video{
+/* ===== CUSTOM VIDEO BUFFERING UI ===== */
+.player-shell{
+  position:relative;
   width:100%;
-  border-radius:12px;
   margin-top:12px;
+  overflow:hidden;
+  border-radius:14px;
+  background:#050608;
+  box-shadow:0 12px 35px rgba(0,0,0,.35);
+}
+.player-shell video{
+  display:block;
+  width:100%;
+  max-height:78vh;
+  aspect-ratio:16/9;
+  object-fit:contain;
+  background:#050608;
+}
+.buffer-overlay{
+  position:absolute;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:12px;
+  background:rgba(0,0,0,.42);
+  pointer-events:none;
+  z-index:3;
+}
+.buffer-overlay.visible{display:flex}
+.buffer-spinner{
+  width:48px;
+  height:48px;
+  border:4px solid rgba(255,255,255,.25);
+  border-top-color:#e50914;
+  border-radius:50%;
+  animation:buffer-spin .8s linear infinite;
+}
+.buffer-label{
+  color:#fff;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.3px;
+  text-shadow:0 2px 6px #000;
+}
+.buffer-track{
+  width:min(180px,55%);
+  height:3px;
+  border-radius:9px;
+  overflow:hidden;
+  background:rgba(255,255,255,.25);
+}
+.buffer-track::after{
+  content:"";
+  display:block;
+  height:100%;
+  width:38%;
+  background:#e50914;
+  border-radius:9px;
+  animation:buffer-progress 1.25s ease-in-out infinite;
+}
+@keyframes buffer-spin{to{transform:rotate(360deg)}}
+@keyframes buffer-progress{
+  0%{transform:translateX(-120%)}
+  100%{transform:translateX(360%)}
+}
+@media(prefers-reduced-motion:reduce){
+  .buffer-spinner,.buffer-track::after{animation-duration:2.5s}
 }
 
 .btn-grad{
@@ -145,170 +209,168 @@ video{
 </main>
 
 <script>
-/* ================= CONFIG ================= */
+
 const TMDB_API_KEY = "532a88c1ce983a87d6b28e49ad40a68e";
 const TMDB_BASE = "https://api.themoviedb.org/3";
-const TMDB_IMG  = "https://image.tmdb.org/t/p";
-const CACHE_TTL = 1000 * 60 * 60 * 24;
-
+const TMDB_IMG = "https://image.tmdb.org/t/p";
+const CACHE_TTL = 24 * 60 * 60 * 1000;
 const params = new URLSearchParams(location.search);
-const id = parseInt(params.get("id"));
-const POSTS_JSON_URL = "posts.json";
+const id = Number.parseInt(params.get("id"), 10);
 const container = document.getElementById("movie-container");
 
-/* ================= CACHE ================= */
-function cacheGet(key){
-  const raw = localStorage.getItem(key);
-  if(!raw) return null;
-  const obj = JSON.parse(raw);
-  if(Date.now() - obj.time > CACHE_TTL){
-    localStorage.removeItem(key);
-    return null;
-  }
-  return obj.data;
+function cacheGet(key) {
+  try {
+    const obj = JSON.parse(localStorage.getItem(key) || "null");
+    if (!obj || Date.now() - obj.time > CACHE_TTL) return null;
+    return obj.data;
+  } catch { return null; }
 }
-function cacheSet(key,data){
-  localStorage.setItem(key, JSON.stringify({time:Date.now(), data}));
+function cacheSet(key, data) {
+  try { localStorage.setItem(key, JSON.stringify({time:Date.now(), data})); } catch {}
 }
-
-/* ================= HELPERS ================= */
-async function fetchPosts(){
-  const r = await fetch(POSTS_JSON_URL);
+async function fetchTMDBSmart(post) {
+  const key = "tmdb_movie_" + (post.tmdbid || post.heading);
+  const cached = cacheGet(key);
+  if (cached) return cached;
+  try {
+    let movie = null;
+    if (post.tmdbid) {
+      const r = await fetch(`${TMDB_BASE}/movie/${post.tmdbid}?api_key=${TMDB_API_KEY}`, {signal:AbortSignal.timeout(6500)});
+      if (r.ok) movie = await r.json();
+    }
+    if (!movie && post.heading) {
+      const r = await fetch(`${TMDB_BASE}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(post.heading)}`, {signal:AbortSignal.timeout(6500)});
+      if (r.ok) { const d = await r.json(); movie = d.results?.[0] || null; }
+    }
+    if (movie) cacheSet(key, movie);
+    return movie;
+  } catch { return null; }
+}
+async function fetchCredits(movieId) {
+  const key = "tmdb_credits_" + movieId;
+  const cached = cacheGet(key);
+  if (cached) return cached;
+  try {
+    const r = await fetch(`${TMDB_BASE}/movie/${movieId}/credits?api_key=${TMDB_API_KEY}`, {signal:AbortSignal.timeout(6500)});
+    if (!r.ok) return null;
+    const data = await r.json(); cacheSet(key, data); return data;
+  } catch { return null; }
+}
+async function fetchPosts() {
+  const r = await fetch("posts.json", {cache:"no-cache", signal:AbortSignal.timeout(7000)});
+  if (!r.ok) throw new Error("posts.json unavailable");
   return (await r.json()).filter(p => p.heading || p.tmdbid);
 }
-
-/* ===== TMDB MOVIE (ID → TITLE FALLBACK) ===== */
-async function fetchTMDBSmart(post){
-  const cacheKey = "tmdb_movie_" + (post.tmdbid || post.heading);
-  const cached = cacheGet(cacheKey);
-  if(cached) return cached;
-
-  let movie = null;
-
-  if(post.tmdbid){
-    const r = await fetch(`${TMDB_BASE}/movie/${post.tmdbid}?api_key=${TMDB_API_KEY}`);
-    if(r.ok) movie = await r.json();
-  }
-
-  if(!movie && post.heading){
-    const r = await fetch(
-      `${TMDB_BASE}/search/movie?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(post.heading)}`
-    );
-    const d = await r.json();
-    movie = d.results?.[0] || null;
-  }
-
-  if(movie) cacheSet(cacheKey, movie);
-  return movie;
-}
-
-async function fetchCredits(id){
-  if(!id) return null;
-  const cacheKey = "tmdb_credits_" + id;
-  const cached = cacheGet(cacheKey);
-  if(cached) return cached;
-
-  const r = await fetch(`${TMDB_BASE}/movie/${id}/credits?api_key=${TMDB_API_KEY}`);
-  if(!r.ok) return null;
-  const data = await r.json();
-  cacheSet(cacheKey, data);
-  return data;
-}
-
-/* ================= INIT ================= */
-(async()=>{
-  const posts = await fetchPosts();
-  const post = posts.find(p => +p.id === id);
-
-  if(!post){
-    container.innerHTML="<h3>Movie not found</h3>";
-    return;
-  }
-
-  const movie = await fetchTMDBSmart(post);
-
+function render(post, movie = null, credits = null) {
   const title = post.heading || movie?.title || "Untitled";
-  const year  = post.year || movie?.release_date?.slice(0,4) || "";
-
-  const poster =
-    post.poster ||
-    (movie?.poster_path ? `${TMDB_IMG}/w500${movie.poster_path}` : "");
-
-  let backdrop = poster;
-  let hasBackdrop = false;
-  if(movie?.backdrop_path){
-    backdrop = `${TMDB_IMG}/w1280${movie.backdrop_path}`;
-    hasBackdrop = true;
-  }
-
+  const year = post.year || movie?.release_date?.slice(0,4) || "";
+  const poster = post.poster || (movie?.poster_path ? `${TMDB_IMG}/w500${movie.poster_path}` : "");
+  const backdrop = post.backdrop || (movie?.backdrop_path ? `${TMDB_IMG}/w1280${movie.backdrop_path}` : poster);
+  const director = post.director || credits?.crew?.find(c => c.job === "Director")?.name || "N/A";
+  const directorImg = credits?.crew?.find(c => c.job === "Director")?.profile_path;
+  const cast = credits?.cast?.slice(0,12) || [];
   const plot = post.plot || movie?.overview || "No plot available";
-
-  let directorName = "N/A";
-  let directorImg  = "";
-
-  let castHTML = "";
-
-  if(movie?.id){
-    const credits = await fetchCredits(movie.id);
-    if(credits){
-      const dir = credits.crew.find(c => c.job === "Director");
-      if(dir){
-        directorName = dir.name;
-        if(dir.profile_path){
-          directorImg = TMDB_IMG + "/w185" + dir.profile_path;
-        }
-      }
-
-      castHTML = credits.cast.slice(0,12).map(c=>`
-        <div class="cast-item">
-          <img src="${c.profile_path ? TMDB_IMG+'/w185'+c.profile_path : ''}">
-          <div>${c.name}</div>
-        </div>
-      `).join("");
-    }
-  }
-
   container.innerHTML = `
-  <div class="hero">
-    <div class="hero-bg ${hasBackdrop?'has-img':''}" style="background-image:url('${backdrop}')"></div>
-    <div class="hero-vignette"></div>
-
-    <img src="${poster}" class="hero-poster">
-
-    <div class="hero-text">
-      <h4>${title} ${year ? `(${year})` : ""}</h4>
+    <div class="hero">
+      <div class="hero-bg ${backdrop ? 'has-img' : ''}" style="background-image:url('${backdrop}')"></div>
+      <div class="hero-vignette"></div>
+      ${poster ? `<img src="${poster}" class="hero-poster" alt="${title}" fetchpriority="high">` : ""}
+      <div class="hero-text"><h4>${title} ${year ? `(${year})` : ""}</h4></div>
     </div>
-  </div>
-
-  <div class="content">
-    <div class="info-box">
-      <strong>Director:</strong>
-      <div class="director-box mt-2">
-        ${directorImg ? `<img src="${directorImg}">` : ""}
-        <div>${directorName}</div>
+    <div class="content">
+      <div class="info-box"><strong>Director:</strong>
+        <div class="director-box mt-2">
+          ${post.director || directorImg ? `<img src="${post.directorImage || (directorImg ? TMDB_IMG+'/w185'+directorImg : '')}" alt="" loading="lazy">` : ""}
+          <div>${director}</div>
+        </div>
       </div>
-    </div>
+      <div class="info-box"><strong>Plot:</strong> ${plot}</div>
+      ${cast.length ? `<h6 class="mt-3">Cast</h6><div class="cast-carousel">${cast.map(c=>`
+        <div class="cast-item">${c.profile_path ? `<img src="${TMDB_IMG}/w185${c.profile_path}" alt="${c.name}" loading="lazy">` : `<div style="height:70px"></div>`}<div>${c.name}</div></div>`).join("")}</div>` : ""}
+      ${post.videoUrl ? `<div class="player-shell" id="player-shell">
+        <video id="movie-player" controls playsinline preload="metadata"></video>
+        <div class="buffer-overlay" id="buffer-overlay" aria-live="polite" aria-label="Video buffering">
+          <div class="buffer-spinner"></div>
+          <div class="buffer-label" id="buffer-label">Loading video…</div>
+          <div class="buffer-track"></div>
+        </div>
+      </div>` : ""}
+      <div class="btn-wrap">
+        ${post.videoUrl ? `<a href="${post.videoUrl}" class="btn-grad" target="_blank" rel="noopener">Open video</a>` : ""}
+        <a href="index.html" class="btn-grad">Back</a>
+      </div>
+    </div>`;
+}
 
-    <div class="info-box"><strong>Plot:</strong> ${plot}</div>
+// Show the custom loader only while the player is actually waiting for data.
+function setupVideoPlayer(videoUrl) {
+  const video = document.getElementById("movie-player");
+  const overlay = document.getElementById("buffer-overlay");
+  const label = document.getElementById("buffer-label");
+  if (!video || !overlay || !videoUrl) return;
 
-    ${castHTML ? `
-      <h6 class="mt-3">Cast</h6>
-      <div class="cast-carousel">${castHTML}</div>
-    `:""}
+  let started = false;
+  let hideTimer = null;
+  const showBuffer = (message = "Buffering…") => {
+    if (!started) return;
+    clearTimeout(hideTimer);
+    label.textContent = message;
+    overlay.classList.add("visible");
+  };
+  const hideBuffer = () => {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => overlay.classList.remove("visible"), 180);
+  };
 
-    ${post.videoUrl ? `
-      <video controls>
-        <source src="${post.videoUrl}" type="video/mp4">
-      </video>
-    `:""}
+  video.addEventListener("play", () => {
+    started = true;
+    if (video.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) showBuffer("Loading video…");
+  });
+  video.addEventListener("waiting", () => showBuffer("Buffering…"));
+  video.addEventListener("stalled", () => showBuffer("Connection is slow…"));
+  video.addEventListener("seeking", () => showBuffer("Seeking…"));
+  video.addEventListener("playing", hideBuffer);
+  video.addEventListener("canplay", hideBuffer);
+  video.addEventListener("seeked", hideBuffer);
+  video.addEventListener("pause", () => {
+    clearTimeout(hideTimer);
+    overlay.classList.remove("visible");
+  });
+  video.addEventListener("ended", () => {
+    clearTimeout(hideTimer);
+    overlay.classList.remove("visible");
+  });
+  video.addEventListener("error", () => {
+    showBuffer("Unable to play — check the video link");
+  });
 
-    <div class="btn-wrap">
-      ${post.videoUrl ? `<a href="${post.videoUrl}" class="btn-grad" target="_blank">Download</a>`:""}
-      <a href="index.html" class="btn-grad">Back</a>
-    </div>
-  </div>
-  `;
+  // Set the URL after listeners are ready so initial loading is detected.
+  video.src = videoUrl;
+  video.load();
+}
+(async () => {
+  try {
+    const posts = await fetchPosts();
+    const post = posts.find(p => Number(p.id) === id);
+    if (!post) { container.innerHTML = "<h3>Movie not found</h3>"; return; }
+
+    // Render from local JSON first so the page doesn't wait for TMDB.
+    render(post);
+    setupVideoPlayer(post.videoUrl);
+    const movie = await fetchTMDBSmart(post);
+    render(post, movie);
+    setupVideoPlayer(post.videoUrl);
+    if (movie?.id) {
+      const credits = await fetchCredits(movie.id);
+      render(post, movie, credits);
+      setupVideoPlayer(post.videoUrl);
+    }
+  } catch (err) {
+    console.error(err);
+    container.innerHTML = "<h3>Unable to load movie details. Please refresh.</h3><a href='index.html'>Back</a>";
+  }
 })();
+
 </script>
 
 </body>
